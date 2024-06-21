@@ -1,18 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+// filename -App.js
+
+import React from "react";
+import "./App.css";
+import Navbar from "./components/index/NavBar_index";
+import {
+    BrowserRouter as Router,
+    Routes,
+    Route,
+} from "react-router-dom";
+import Explore from "./pages/Explore";
+import About from "./pages/About";
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Hola, plantitas del CUC :b
-        </p>
-        
-      </header>
-    </div>
-  );
+    return (
+        <Router>
+            <Navbar />
+            <Routes>
+                <Route path="/" element={<Explore />} />
+                <Route path="/about" element={<About />} />
+                
+            </Routes>
+        </Router>
+    );
 }
 
 export default App;
