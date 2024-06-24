@@ -121,3 +121,25 @@ export const DropdownItem = styled(Link)`
         border-radius: 10px;
     }
 `;
+
+export const SignInBtn = styled(Link)`
+    border-radius: 20px;
+    bottom: -100px;
+    background: #092327;
+    padding: 10px 40px;
+    color: #FFFFFF;
+    font-weight: bold;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    text-decoration: none;
+    margin-left: 80px;
+    margin-right: -200px;
+    padding-bottom: -10px;
+`;
+
+export const ShadowBoxLoginForm = styled.div`
+    border-radius: 20px;
+    background: #092327;
+`;
