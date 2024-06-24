@@ -1,18 +1,10 @@
-//Para buscar y conocer sobre las plantas de la universidad-
-
-import React from "react";
+import React from 'react';
 
 const Explore = () => {
     return (
-        <div
-            style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                height: "100vh",
-            }}
-        >
-
+        <div>
+            <h1>Explorar</h1>
+            {/* Aquí puedes agregar contenido específico para la página "Explorar" */}
         </div>
     );
 };

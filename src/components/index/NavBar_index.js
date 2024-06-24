@@ -1,40 +1,55 @@
-// components/Navbar/index.js
-
-import React from "react";
+import React, { useState } from "react";
 import {
     Nav,
     NavLink,
-    Bars,
     NavMenu,
-    NavBtn,
     NavBtnLink,
+    Logo,
+    SearchBar,
+    SearchBarWrapper,
+    SearchIcon,
+    DropdownMenu,
+    DropdownItem,
 } from "./NavBar_Elements";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons"; // Importa el icono de búsqueda de Font Awesome
 
 const Navbar = () => {
+    const [dropdown, setDropdown] = useState(false);
+
+    const toggleDropdown = () => {
+        setDropdown(!dropdown);
+    };
+
     return (
         <>
             <Nav>
-                <Bars />
+                <Logo to="/">
+                    <img src="/logoCUC.png" alt="Logo" />
+                </Logo>
+
+                <SearchBarWrapper>
+                    <SearchBar type="text" placeholder="Buscar..." />
+                    <SearchIcon>
+                        <FontAwesomeIcon icon={faSearch} />
+                    </SearchIcon>
+                </SearchBarWrapper>
 
                 <NavMenu>
-                    <NavLink to="/about" >
-                        About
-                    </NavLink>
-                    <NavLink to="/explore">
-                        Explore
-                    </NavLink>
-                    
+                    <div>
+                        <NavBtnLink to="#" onClick={toggleDropdown}>
+                            Explorar
+                        </NavBtnLink>
+                        {dropdown && (
+                            <DropdownMenu>
+                                <DropdownItem to="/glosario-botanico">Glosario Botánico</DropdownItem>
+                                <DropdownItem to="/acerca">Acerca</DropdownItem>
+                                <DropdownItem to="/signin">Sign In</DropdownItem>
+                                <DropdownItem to="/logout">Log Out</DropdownItem>
+                            </DropdownMenu>
+                        )}
+                    </div>
                 </NavMenu>
-                <NavBtn>
-                    <NavBtnLink to="/signin">
-                        Sign In
-                    </NavBtnLink>
-                </NavBtn>
-                <NavBtn>
-                    <NavBtnLink to="/log out">
-                        Log out
-                    </NavBtnLink>
-                </NavBtn>
             </Nav>
         </>
     );

@@ -2,7 +2,7 @@
 
 import React from "react";
 
-const About = () => {
+const Acerca = () => {
     return (
         <div
             style={{
@@ -19,4 +19,4 @@ const About = () => {
     );
 };
 
-export default About;
+export default Acerca;

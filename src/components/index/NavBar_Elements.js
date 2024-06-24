@@ -1,23 +1,19 @@
-// components/Navbar/navbarElements.js
-import { FaBars } from "react-icons/fa";
-import { NavLink as Link } from "react-router-dom";
 import styled from "styled-components";
+import { NavLink as Link } from "react-router-dom";
 
-// Estilo para la barra de navegación.
 export const Nav = styled.nav`
-    background: #EDF6F9;
-    height: 85px;
+    background: #FFFFFF;
+    height: 80px;
     display: flex;
     justify-content: space-between;
-    padding: 0.2rem calc((100vw - 1000px) / 2);
-    z-index: 12;
-    /* Third Nav */
-    /* justify-content: flex-start; */
+    padding: 0.5rem calc((100vw - 1000px) / 2);
+    z-index: 10;
+    align-items: center;
+    border-bottom: 1px solid black; /* Línea diferenciadora de NavBar */
 `;
 
-//Estilos para el link de la página en la que NO se esta actualmente.
 export const NavLink = styled(Link)`
-    color: #E29578; /* Cambia de color si no es la pagina seleccionada*/
+    color: #fff;
     display: flex;
     align-items: center;
     text-decoration: none;
@@ -25,69 +21,103 @@ export const NavLink = styled(Link)`
     height: 100%;
     cursor: pointer;
     &.active {
-        color: #000000;
+        color: #15cdfc;
     }
 `;
 
-export const Bars = styled(FaBars)`
-    display: none;
-    color: #1111;
-    @media screen and (max-width: 768px) {
-        display: block;
-        position: absolute;
-        top: 0;
-        right: 0;
-        transform: translate(-100%, 75%);
-        font-size: 1.8rem;
-        cursor: pointer;
+export const Logo = styled(Link)`
+    display: flex;
+    align-items: center;
+    margin-right: 100px;
+    margin-left: -180px;
+    img {
+        height: 80px;
+        width: auto;
     }
+`;
+
+
+export const SearchBarWrapper = styled.div`
+    position: relative;
+    display: flex;
+    align-items: center;
+`;
+
+export const SearchIcon = styled.div`
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #11111; /* Color del icono de búsqueda */
+    cursor: pointer;
+    background-color: #83C5BE;
+    border-radius: 50%;
+    padding: 7px 12px;
+`;
+
+export const SearchBar = styled.input`
+    width: 500px;
+    height: 42px;
+    margin-left: -450px; 
+    border: 2.5px solid black;
+    border-radius: 30px;
+    padding-left: 15px;
+    padding-right: 60px;
 `;
 
 export const NavMenu = styled.div`
     display: flex;
     align-items: center;
-    margin-right: 490px;
-
-    /* Second Nav */
-    /* margin-right: 2px; */
-
-
-
-  white-space: nowrap; */
-    @media screen and (max-width: 768px) {
-        display: none;
-    }
-`;
-
-export const NavBtn = styled.nav`
-    display: flex;
-    align-items: center;
-    margin-right: -2px;
-    /* Third Nav */
-    /* justify-content: flex-end;
-  width: 100vw; */
-    @media screen and (max-width: 768px) {
-        display: none;
-    }
 `;
 
 export const NavBtnLink = styled(Link)`
     border-radius: 20px;
-    height: 30px;
-    background: #EDF6F9;
-    padding: 10px 22px;
-    color: #006D77;
-    outline: none;
+    background: #83C5BE;
+    padding: 17px 30px;
+    color: #111111;
+    font-weight: bold;
     border: none;
+    outline: none;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
     text-decoration: none;
-
-    /* Second Nav */
-    margin-left: 5px;
+    margin-left: 60px;
+    margin-right: -200px;
     &:hover {
-        transition: all 0.2s ease-in-out;
+        background: #4E8098;
+        color: #010606;
+        font-weight: bold;
+    }
+    &:active,
+    &:focus {
         background: #006D77;
-        color: #EDF6F9;
+        color: #FFFF;
+        font-weight: bold;
+    }
+`;
+
+
+export const DropdownMenu = styled.div`
+    position: absolute;
+    top: 85px;
+    margin-left: 0px;
+    background: #83C5BE;
+    border-radius: 20px;
+    padding: 10px 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+`;
+
+export const DropdownItem = styled(Link)`
+    color: #000000; /* Color negro */
+    font-weight: bold; /* Texto en negritas */
+    padding: 10px 20px;
+    text-decoration: none;
+    display: block;
+    text-align: right;
+    &:hover {
+        background: #0B5351;
+        color: #FFFFFF;
+        font-weight: bold;
+        border-radius: 10px;
     }
 `;

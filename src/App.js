@@ -9,7 +9,8 @@ import {
     Route,
 } from "react-router-dom";
 import Explore from "./pages/Explore";
-import About from "./pages/About";
+import GlosarioBotanico from "./pages/GlosarioBotanico";
+import Acerca from "./pages/Acerca";
 
 
 function App() {
@@ -18,8 +19,8 @@ function App() {
             <Navbar />
             <Routes>
                 <Route path="/" element={<Explore />} />
-                <Route path="/about" element={<About />} />
-                
+                <Route path="/acerca" element={<Acerca />} />
+                <Route path="/glosario-botanico" element={<GlosarioBotanico />} />
             </Routes>
         </Router>
     );
