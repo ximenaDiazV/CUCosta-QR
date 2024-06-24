@@ -11,6 +11,7 @@ import {
 import Explore from "./pages/Explore";
 import GlosarioBotanico from "./pages/GlosarioBotanico";
 import Acerca from "./pages/Acerca";
+import Arbol from "./pages/Arbol";
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
                 <Route path="/" element={<Explore />} />
                 <Route path="/acerca" element={<Acerca />} />
                 <Route path="/glosario-botanico" element={<GlosarioBotanico />} />
+                <Route path="/arbol" element={<Arbol />}/>
             </Routes>
         </Router>
     );
