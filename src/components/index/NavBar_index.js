@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
     Nav,
     NavMenu,
@@ -9,20 +9,40 @@ import {
     SearchIcon,
     DropdownMenu,
     DropdownItem,
-    SignInBtn,
+    LoginWrapper,
+    BoxLoginWrapper,
+    Logo2,
+    Icon,
+    IconClose,
 } from "./NavBar_Elements";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons"; // Importa el icono de búsqueda de Font Awesome
 import Modal from "react-modal";
+import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
 
 const Navbar = () => {
+    
     //Menu desplegable.
-    const [dropdown, setDropdown] = useState(false);
-
-    const toggleDropdown = () => {
-        setDropdown(!dropdown);
+    const [isOpenDropdown, setIsOpenDropdown] = useState(false);
+    const menuRef = useRef(null);
+    const [icon, setIcon] = useState(TiArrowSortedDown);
+    
+    const toggleMenuDropdown = () => {
+        setIsOpenDropdown(!isOpenDropdown);
+        setIcon(isOpenDropdown ? TiArrowSortedDown : TiArrowSortedUp);
     };
 
+    const handleClickOutside = (event) => {
+        if (menuRef.current && !menuRef.current.contains(event.target)) {
+            setIsOpenDropdown(false);
+        }
+      };
+    
+    useEffect(() => {
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
+    
     //Modal pop up Login.
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -44,16 +64,18 @@ const Navbar = () => {
                 <SearchBarWrapper>
                     <SearchBar type="text" placeholder="Buscar..." />
                     <SearchIcon>
-                        <FontAwesomeIcon icon={faSearch} />
+                        <img src="/lupa.png" alt="SearchIcon" />
                     </SearchIcon>
                 </SearchBarWrapper>
 
                 <NavMenu>
-                    <div>
-                        <NavBtnLink to="#" onClick={toggleDropdown}>
+                    <div ref={menuRef} >
+                        <NavBtnLink to="#" onClick={toggleMenuDropdown}>
                             Explorar
                         </NavBtnLink>
-                        {dropdown && (
+                        <Icon to="#" onClick={toggleMenuDropdown}
+                        >{icon}</Icon>
+                        {isOpenDropdown && (
                             <DropdownMenu>
                                 <DropdownItem to="/glosario-botanico">Glosario Botánico</DropdownItem>
                                 <DropdownItem to="/acerca">Acerca</DropdownItem>
@@ -71,12 +93,12 @@ const Navbar = () => {
                 contentLabel="Sign In"
                 style={{
                     content: {
-                        top: '50%',
+                        top: '55%',
                         left: '50%',
                         right: 'auto',
                         bottom: 'auto',
-                        height: 450,
-                        width: 390,
+                        height: 550,
+                        width: 400,
                         borderRadius: 20,
                         marginRight: '-50%',
                         transform: 'translate(-50%, -50%)',
@@ -85,16 +107,112 @@ const Navbar = () => {
                     
                 }}
             >
-                <h2>Bienvenid@ al glosario botánico CUCosta</h2>
+                <Logo2>
+                    <img src="/logoCUC.png" alt="Logo2" />
+                </Logo2>
+                <IconClose to="#" onClick={closeModal}>
+                    <img src="/cerrar.png" alt="IconClose" />
+                </IconClose>
+                <h2
+                style={{
+                    fontWeight: "bold",
+                    fontSize: 23,
+                    marginTop: 90,
+                    marginLeft: 5,
+                    textAlign: "center",
+                }}>
+                    Bienvenid@ al glosario botánico CUCosta
+                </h2>
                 <form>
-                    
-                    
-                    <SignInBtn to="#" onClick={closeModal}
-                    style={{ 
-                        bottom: '10px', 
+                    <BoxLoginWrapper>
+                    </BoxLoginWrapper>
+                    <LoginWrapper>
+                        <p
+                        style={{
+                            opacity: -1,
+                            fontWeight: "bold",
+                            fontSize: 20,
+                            marginTop: 60,
+                            marginLeft: 30,
                         }}>
-                            Login In
-                    </SignInBtn>
+                            _
+                        </p>
+                        <p
+                        style={{
+                            color: "#11111",
+                            fontWeight: "bold",
+                            fontSize: 17,
+                            marginTop: -25,
+                            marginLeft: 28,
+                        }}>
+                            Correo electrónico:
+                        </p>
+
+                        <input 
+                            style={{ 
+                                width: 240,
+                                height: 40,
+                                marginLeft: 18,
+                                marginTop: -7,
+                                borderWidth: 1.5,
+                                borderColor: "#11111",
+                                outlineColor: "#11111",
+                                outlineStyle: "ridge",
+                                outlineWidth: 2.5,
+                                borderRadius: 30,
+                                paddingLeft: 14,
+                                paddingRight: 14,
+                                fontSize: 16,
+                                }}
+
+                        type="Correo" placeholder="Correo electrónico" />
+
+                        <p
+                        style={{
+                            color: "#11111",
+                            fontWeight: "bold",
+                            fontSize: 17,
+                            marginLeft: 28,
+                            marginTop: 23,
+                        }}>
+                            Contraseña:
+                        </p>
+                        <input 
+                            style={{ 
+                                width: 240,
+                                height: 40,
+                                marginLeft: 18,
+                                marginTop: -7,
+                                borderWidth: 1.5,
+                                borderColor: "#11111",
+                                outlineColor: "#11111",
+                                outlineStyle: "ridge",
+                                outlineWidth: 2.5,
+                                borderRadius: 30,
+                                paddingLeft: 14,
+                                paddingRight: 14,
+                                fontSize: 16,
+                                }}
+
+                        type="Contraseña" placeholder="Contraseña" />
+                    
+                        <button to="#" onClick={closeModal}
+                        style={{ 
+                            borderRadius: 30,
+                            height: 45,
+                            width: 160,
+                            marginTop: 35,
+                            marginLeft: 80,
+                            background: "#092327",
+                            color: "#FFFFFF",
+                            fontWeight: "bold",
+                            cursor: "pointer",
+                            fontSize: 19,
+                            }}>
+                                Login In
+                        </button>
+                    </LoginWrapper>
+                    
                 </form>
             </Modal>
         </>
