@@ -1,8 +1,7 @@
-import react, { useEffect, useState } from 'react'
-import { DiVim } from 'react-icons/di'
+import { useEffect, useState } from 'react'
 import axios from 'axios'
 const Arbol = () => {
-
+    {/* traer datos mysql*/}
     const [plantas, setplantas] = useState([])
     useEffect(()=>{
         const fecthAllplantas = async ()=>{
@@ -15,20 +14,8 @@ const Arbol = () => {
         }
         fecthAllplantas()
     },[])
-    {/* traer datos mysql
-    <div>
-    {plantas.map(planta=>(
-        <div>
-            <h2>
-                {planta.idplanta}
-            </h2>
-            <h2>
-                {planta.name}
-            </h2>
-        </div>
-    ))}
-    </div>*/}
-
+    
+    {/* post metod -> datos mysql*/}
     const [user, setUser] = useState({
         user: "",
         pass: "",

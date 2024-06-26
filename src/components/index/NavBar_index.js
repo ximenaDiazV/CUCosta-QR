@@ -17,9 +17,17 @@ import {
 } from "./NavBar_Elements";
 import Modal from "react-modal";
 import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
+import {login} from './Auth'
+import { useNavigate } from "react-router-dom";
 
-const Navbar = () => {
-    
+const Navbar = ({ setUser }) => {
+
+    const navigate = useNavigate();
+    //User
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+
     //Menu desplegable.
     const [isOpenDropdown, setIsOpenDropdown] = useState(false);
     const menuRef = useRef(null);
@@ -54,6 +62,31 @@ const Navbar = () => {
         setModalIsOpen(false);
     };
 
+     //funcion login
+     const handleLogin = async (e) => {
+        setError("");
+        e.preventDefault();
+        console.log("Entre a la funcion login");
+        try {
+            console.log(username,password);
+            const data = await login(username, password);
+            if (data.success) {
+                console.log(data);
+                localStorage.setItem('user', JSON.stringify(data.username));
+                setUser(data.username);
+                console.log(data.username, "Entro succes");
+                navigate('/dashboard');
+                setModalIsOpen(false);
+            } else {
+                setError(data.message);
+            }
+        } catch (error) {
+            console.log(error, " catch");
+            setError('Error logging in. Please try again later.');
+        }
+        {/*Activar dashboard */}
+    };
+
     return (
         <>
             <Nav>
@@ -80,7 +113,7 @@ const Navbar = () => {
                                 <DropdownItem to="/glosario-botanico">Glosario Botánico</DropdownItem>
                                 <DropdownItem to="/acerca">Acerca</DropdownItem>
                                 <DropdownItem to="#" onClick={openModal}>Sign In</DropdownItem>
-                                <DropdownItem to="/logout">Log Out</DropdownItem>
+                                <DropdownItem to="/logout">Log Out</DropdownItem> {/*ocultar hasta que entre*/}
                             </DropdownMenu>
                         )}
                     </div>
@@ -90,6 +123,7 @@ const Navbar = () => {
             <Modal
                 isOpen={modalIsOpen}
                 onRequestClose={closeModal}
+                appElement={document.getElementById('root')}
                 contentLabel="Sign In"
                 style={{
                     content: {
@@ -123,7 +157,7 @@ const Navbar = () => {
                 }}>
                     Bienvenid@ al glosario botánico CUCosta
                 </h2>
-                <form>
+                <form onSubmit={handleLogin}>
                     <BoxLoginWrapper>
                     </BoxLoginWrapper>
                     <LoginWrapper>
@@ -165,7 +199,7 @@ const Navbar = () => {
                                 fontSize: 16,
                                 }}
 
-                        type="Correo" placeholder="Correo electrónico" />
+                        type="Correo" placeholder="Correo electrónico" value={username} onChange={(e) => setUsername(e.target.value)} required />
 
                         <p
                         style={{
@@ -194,9 +228,9 @@ const Navbar = () => {
                                 fontSize: 16,
                                 }}
 
-                        type="Contraseña" placeholder="Contraseña" />
+                        type="password" placeholder="Contraseña" value={password} onChange={(e) => setPassword(e.target.value)} required  />
                     
-                        <button to="#" onClick={closeModal}
+                        <button to="#" type="submit"
                         style={{ 
                             borderRadius: 30,
                             height: 45,
@@ -211,6 +245,7 @@ const Navbar = () => {
                             }}>
                                 Login In
                         </button>
+                        {error && <p style={{ color: 'red' }}>{error}</p>}
                     </LoginWrapper>
                     
                 </form>
