@@ -8,7 +8,7 @@ export const Nav = styled.nav`
     display: flex;
     justify-content: space-between;
     padding: 0.5rem calc((100vw - 1000px) / 2);
-    z-index: 10;
+    z-index: 100;
     align-items: center;
     border-bottom: 1px solid black; /* Línea diferenciadora de NavBar */
 `;
@@ -32,19 +32,21 @@ export const NavMenu = styled.div`
 `;
 
 export const NavBtnLink = styled(Link)`
+    display: flex;
+    align-items: center;
     border-radius: 25px;
     background: #83C5BE;
-    padding: 18px 36px;
+    padding: 15px 22px;
     color: #111111;
-    font-size: 23px;
+    font-size: 24px;
     font-weight: bold;
     border: none;
     outline: none;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
     text-decoration: none;
-    margin-left: 110px;
-    margin-right: -200px;
+    margin-left: 130px;
+    margin-right: -299px;
     &:hover {
         background: #006D77;
         color: #FFFF;
@@ -94,10 +96,11 @@ export const IconClose = styled(Link)`
     }
 `;
 
-export const Icon = styled(Link)`
-    margin-left: -30px; 
-    margin-top: 9px;
-    padding: 4px 4px;
+export const Icon = styled.div`
+    margin-top: 11px;
+    margin-right: -10px;
+    margin-left: 6px; 
+    font-size: 29px;
 `;
 
 // BARRA DE BUSQUEDA ------------------------------
@@ -139,11 +142,12 @@ export const SearchBar = styled.input`
 export const DropdownMenu = styled.div`
     position: absolute;
     top: 100px;
-    margin-left: 80px;
+    margin-left: 75px;
     background: #83C5BE;
     border-radius: 20px;
     padding: 30px 30px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+    z-index: 200;
 `;
 
 export const DropdownItem = styled(Link)`

@@ -33,6 +33,7 @@ const Navbar = () => {
     const handleClickOutside = (event) => {
         if (menuRef.current && !menuRef.current.contains(event.target)) {
             setIsOpenDropdown(false);
+            setIcon(TiArrowSortedDown);
         }
       };
     
@@ -69,12 +70,13 @@ const Navbar = () => {
                 </SearchBarWrapper>
 
                 <NavMenu>
-                    <div ref={menuRef} >
-                        <NavBtnLink to="#" onClick={toggleMenuDropdown}>
-                            Explorar
+                    <div ref={menuRef}>
+                        <NavBtnLink to="#" onClick={toggleMenuDropdown} >
+                            Explorar 
+                            <Icon>
+                                {isOpenDropdown ? <TiArrowSortedUp /> : <TiArrowSortedDown />}
+                            </Icon>
                         </NavBtnLink>
-                        <Icon to="#" onClick={toggleMenuDropdown}
-                        >{icon}</Icon>
                         {isOpenDropdown && (
                             <DropdownMenu>
                                 <DropdownItem to="/glosario-botanico">Glosario Botánico</DropdownItem>

@@ -8,7 +8,7 @@ import {
     Routes,
     Route,
 } from "react-router-dom";
-import Explore from "./pages/Explore";
+import Principal from "./pages/Principal";
 import GlosarioBotanico from "./pages/GlosarioBotanico";
 import Acerca from "./pages/Acerca";
 import Arbol from "./pages/Arbol";
@@ -19,7 +19,7 @@ function App() {
         <Router>
             <Navbar />
             <Routes>
-                <Route path="/" element={<Explore />} />
+                <Route path="/" element={<Principal />} />
                 <Route path="/acerca" element={<Acerca />} />
                 <Route path="/glosario-botanico" element={<GlosarioBotanico />} />
                 <Route path="/arbol" element={<Arbol />}/>
@@ -27,5 +27,6 @@ function App() {
         </Router>
     );
 }
+
 
 export default App;
