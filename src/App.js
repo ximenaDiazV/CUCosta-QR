@@ -19,15 +19,19 @@ import Dashboard from './pages/Dashboard';
 function App() {
 
     const [user, setUser] = useState(null);
+    const [token, setToken] = useState(null);
 
     useEffect(() => {
         const storedUser = localStorage.getItem('user');
-        if (storedUser) {
+        const storedToken = localStorage.getItem('token');
+        if (storedUser && storedToken) {
             try {
                 setUser(JSON.parse(storedUser));
+                setToken(JSON.parse(storedToken));
             } catch (error) {
                 console.error('Error parsing stored user data:', error);
-                localStorage.removeItem('user'); // Eliminar datos corruptos
+                localStorage.removeItem('user');
+                localStorage.removeItem('token'); // Eliminar datos corruptos
             }
         }
     }, []);
@@ -42,7 +46,7 @@ function App() {
                 <Route path="/arbol" element={<Arbol />}/>
                 <Route 
                     path="/dashboard" 
-                    element={ user ? <Dashboard user={user} /> : <Navigate to="/"/> }
+                    element={ user ? <Dashboard user={user} token={token} /> : <Navigate to="/"/> }
                 />
             </Routes>
         </Router>

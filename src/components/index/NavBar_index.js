@@ -26,6 +26,7 @@ const Navbar = ({ setUser }) => {
     //User
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [token, setToken] = useState(null);
     const [error, setError] = useState('');
 
     //Menu desplegable.
@@ -73,6 +74,8 @@ const Navbar = ({ setUser }) => {
             const data = await login(username, password);
             if (data.success) {
                 console.log(data);
+                setToken(data.token)
+                localStorage.setItem('token', JSON.stringify(data.token));
                 localStorage.setItem('user', JSON.stringify(data.username));
                 setUser(data.username);
                 console.log(data.username, "Entro succes");
