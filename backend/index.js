@@ -1,7 +1,6 @@
 import express from "express"
 import mysql2 from "mysql2"
 import cors from "cors"
-import { useState } from "react"
 
 const app = express()
 
@@ -16,21 +15,24 @@ app.use(express.json())
 app.use(cors())
 
 app.post("/conect", (req,res)=>{
-    console.log(req.body.user)
-    console.log(req.body.pass)
+    const {username, password} = req.body;
+    console.log(password)
+    console.log(username)
     const db2 = mysql2.createConnection({
         host: "localhost",
-        user:req.body.user,
-        password:req.body.pass,
+        user:username,
+        password:password,
         database:"plantitas"
     })
 
     db2.connect((err) => {
         if(err) {
             console.error('Error connecting mysql: '+err.stack);
-            return;
-        }
+            res.json({success: false, message: 'Error, no se logro acceder'});
+            return res;
+        } 
         console.log('Connected to mysql as ID ' + db2.threadId);
+        res.json({success: true, username});
     })
 
 
@@ -46,7 +48,8 @@ app.get("/plantas", (req,res)=>{
         if(err) return res.json(err)
         return res.json(data)
     })
-    {/*const query = "INSERT INTO plantitas (`idplantitas`, `name`) VALUES ('4', 'sal')";
+    {/* insertar plantitas
+    const query = "INSERT INTO plantitas (`idplantitas`, `name`) VALUES ('4', 'sal')";
     db.query(query,(err,data)=>{
         if(err) return res.json(err)
         return res.json("Ingreso datos")
