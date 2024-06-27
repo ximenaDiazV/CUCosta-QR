@@ -5,12 +5,15 @@ import { NavLink as Link } from "react-router-dom";
 export const Nav = styled.nav`
     background: #FFFFFF;
     height: 90px;
+    width: 1000px;
     display: flex;
     justify-content: space-between;
     padding: 0.5rem calc((100vw - 1000px) / 2);
     z-index: 100;
+    margin-top: 0px;
     align-items: center;
-    border-bottom: 1px solid black; /* Línea diferenciadora de NavBar */
+    border-bottom: 2px solid black; /* Línea diferenciadora de NavBar */
+    position: fixed;
 `;
 
 export const NavLink = styled(Link)`
