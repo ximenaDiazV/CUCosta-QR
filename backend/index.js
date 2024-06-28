@@ -24,36 +24,6 @@ const db3 = mysql2.createConnection({
 app.use(express.json())
 app.use(cors())
 
-app.post("/conect", (req,res)=>{
-    const {username, password} = req.body;
-    console.log(password)
-    console.log(username)
-    const db2 = mysql2.createConnection({
-        host: "localhost",
-        user:username,
-        password:password,
-        database:"plantitas"
-    })
-
-    db2.connect((err) => {
-        if(err) {
-            console.error('Error connecting mysql: '+err.stack);
-            res.json({success: false, message: 'Error, no se logro acceder'});
-            return res;
-        } 
-        const idsession = db2.threadId;
-        const query = "SELECT User FROM mysql.user"
-        db2.query(query,(err)=>{
-            setRole(err ? 2 :1);
-        })
-        console.log("Type role= ",role);
-        console.log('Connected to mysql as ID ' + db2.threadId);
-        res.json({success: true, username, role, idsession});
-    })
-
-
-})
-
 app.post("/login", (req,res)=>{
     const {username, password} = req.body;
     const user = users.find(u => u.username === username && u.password === password);

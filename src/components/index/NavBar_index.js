@@ -19,14 +19,14 @@ import Modal from "react-modal";
 import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
 import {login} from './Auth'
 import { useNavigate } from "react-router-dom";
+import { Logout } from './Logout'
 
-const Navbar = ({ setUser }) => {
+const Navbar = ({ setUser, setToken}) => {
 
     const navigate = useNavigate();
     //User
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [token, setToken] = useState(null);
     const [error, setError] = useState('');
 
     //Menu desplegable.
@@ -74,10 +74,10 @@ const Navbar = ({ setUser }) => {
             const data = await login(username, password);
             if (data.success) {
                 console.log(data);
-                setToken(data.token)
                 localStorage.setItem('token', JSON.stringify(data.token));
                 localStorage.setItem('user', JSON.stringify(data.username));
                 setUser(data.username);
+                setToken(data.token);
                 console.log(data.username, "Entro succes");
                 navigate('/dashboard');
                 setModalIsOpen(false);
@@ -88,7 +88,19 @@ const Navbar = ({ setUser }) => {
             console.log(error, " catch");
             setError('Error logging in. Please try again later.');
         }
-        {/*Activar dashboard */}
+        //Activar dashboard 
+    };
+
+    //funcion logout 
+    const handllogout = async (e) =>{
+        e.preventDefault();
+        console.log("Entre a la funcion logout");
+        try {
+
+        }catch (error){
+            console.log(error, " catch");
+            setError('Error al salir. Por favor intentelo más tarde.');
+        }
     };
 
     return (
