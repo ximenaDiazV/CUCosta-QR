@@ -19,9 +19,9 @@ import Modal from "react-modal";
 import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
 import {login} from './Auth'
 import { useNavigate } from "react-router-dom";
-import { Logout } from './Logout'
+import Alert from '@mui/material/Alert';
 
-const Navbar = ({ setUser, setToken}) => {
+const Navbar = ({ setUser, setToken, user}) => {
 
     const navigate = useNavigate();
     //User
@@ -81,6 +81,8 @@ const Navbar = ({ setUser, setToken}) => {
                 console.log(data.username, "Entro succes");
                 navigate('/dashboard');
                 setModalIsOpen(false);
+                setPassword(null)
+                setUsername(null)
             } else {
                 setError(data.message);
             }
@@ -105,6 +107,19 @@ const Navbar = ({ setUser, setToken}) => {
             setError('Error al salir. Por favor intentelo más tarde.');
         }
     };
+
+    function changeButtonlogin(){
+        if(user)
+        {
+            return <DropdownItem to="#" onClick={handllogout}>Log Out</DropdownItem>
+        } 
+        else{
+            return <DropdownItem to="#" onClick={openModal}>Sign In</DropdownItem>
+        }
+        /*ocultar hasta que entre*/
+    }
+
+
 
     return (
         <>
@@ -132,8 +147,7 @@ const Navbar = ({ setUser, setToken}) => {
                             <DropdownMenu>
                                 <DropdownItem to="/glosario-botanico">Glosario Botánico</DropdownItem>
                                 <DropdownItem to="/acerca">Acerca</DropdownItem>
-                                <DropdownItem to="#" onClick={openModal}>Sign In</DropdownItem>
-                                <DropdownItem to="#" onClick={handllogout}>Log Out</DropdownItem> {/*ocultar hasta que entre*/}
+                                {changeButtonlogin()}
                             </DropdownMenu>
                         )}
                     </div>
@@ -265,7 +279,14 @@ const Navbar = ({ setUser, setToken}) => {
                             }}>
                                 Login In
                         </button>
-                        {error && <p style={{ color: 'red' }}>{error}</p>}
+                        <div 
+                        style={{
+                          padding: 10,  
+                        }}>
+                        {error && <Alert variant="outlined" severity="error">
+                                        {error}
+                                  </Alert>}
+                        </div>
                     </LoginWrapper>
                     
                 </form>

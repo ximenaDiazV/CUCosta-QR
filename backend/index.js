@@ -10,15 +10,15 @@ const app = express()
 
 const users = [
     // Estos son ejemplos de usuarios con sus credenciales de conexión
-    { id: 1, username: 'root', password: 'contrasena', dbHost: 'localhost', dbUser: 'root', dbPassword: 'contrasena', dbName: 'plantitas' },
-    { id: 2, username: 'usuario1', password: 'password', dbHost: 'localhost', dbUser: 'usuario1', dbPassword: 'password', dbName: 'plantitas'}
+    { id: 1, username: 'root', password: 'contrasena', dbHost: 'localhost', dbUser: 'root', dbPassword: 'contrasena', dbName: 'plantas_cuc' },
+    { id: 2, username: 'usuario1', password: 'password', dbHost: 'localhost', dbUser: 'usuario1', dbPassword: 'password', dbName: 'plantas_cuc'}
   ];
 
 const db3 = mysql2.createConnection({
     host: "localhost",
     user:"read",
     password:"CUCosta.2024#qr",
-    database:"plantitas"
+    database:"plantas_cuc"
 })
  
 app.use(express.json())
