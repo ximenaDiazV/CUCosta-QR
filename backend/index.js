@@ -76,6 +76,16 @@ app.get('/query', authenticate, connectDb, (req, res) => {
     });
  });
 
+app.post("/logout", connectDb, (req,res)=>{
+  console.log("Parte del backLogout");
+    connectDb.end(err => {
+      if (err) {
+        console.error('Error closing the database connection:', err);
+        return res.json({error: 'No se pudo cerrar sesion'});
+      }});
+      console.log("Se cerro sesion, sin problema ujuy");
+      return res.json({message: 'Adios hasta la vista'});
+})
 
 app.get("/", (req,res)=>{
     res.json("hello this is the backend")

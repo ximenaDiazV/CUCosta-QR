@@ -96,9 +96,12 @@ const Navbar = ({ setUser, setToken}) => {
         e.preventDefault();
         console.log("Entre a la funcion logout");
         try {
-
+            localStorage.removeItem('user');
+            localStorage.removeItem('token');
+            setUser(null)
+            setToken(null)
         }catch (error){
-            console.log(error, " catch");
+            console.log(error, " catch logout");
             setError('Error al salir. Por favor intentelo más tarde.');
         }
     };
@@ -130,7 +133,7 @@ const Navbar = ({ setUser, setToken}) => {
                                 <DropdownItem to="/glosario-botanico">Glosario Botánico</DropdownItem>
                                 <DropdownItem to="/acerca">Acerca</DropdownItem>
                                 <DropdownItem to="#" onClick={openModal}>Sign In</DropdownItem>
-                                <DropdownItem to="/logout">Log Out</DropdownItem> {/*ocultar hasta que entre*/}
+                                <DropdownItem to="#" onClick={handllogout}>Log Out</DropdownItem> {/*ocultar hasta que entre*/}
                             </DropdownMenu>
                         )}
                     </div>
