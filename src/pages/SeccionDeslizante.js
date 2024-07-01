@@ -107,8 +107,8 @@ const ScrollButtonDown = styled.button`
   background-color: #ffffff;
   border: none;
   position: absolute;
-  bottom: 100px;
-  left: 50%;
+  bottom: 50px;
+  left: 48%;
   transform: translateX(-50%);
   outline: none;
   cursor: pointer;
@@ -144,30 +144,158 @@ const ImageContainer = styled.div`
   text-align: center;
 `;
 
-
 const sections = [
+  {
+    title0: "Glosario botánico CUCosta",
+    description0: "Descubre las plantas que son parte del centro universitario.",
+    images: [
+      { 
+        src: "/plant1.jpg",
+        top: 160, 
+        left: 200, 
+        height: 600, 
+        borderRadius: 20, 
+        boxShadow: "0px 0px 30px rgba(1, 0, 0, 1)" 
+      },
+      { 
+        src: "/plant1.jpg",
+        bottom: 60, 
+        left: 500, 
+        height: 500, 
+        borderRadius: 20, 
+        boxShadow: "0px 0px 30px rgba(1, 0, 0, 1)"  
+      },
+    ],
+    title0Props: 
+      { 
+        left: 1090, 
+        top: 400 
+      },
+    description0Props: 
+      { 
+        left: 1090, 
+        bottom: 300 
+      },
+    bgColor: "#FFFFFF",
+  },
   {
     title1: "Glosario botánico CUCosta",
     description1: "Descubre las plantas que son parte del centro universitario.",
-    leftImage: "/plant1.jpg",
-    imageSrc: "/plant2.jpg",
+    images: [
+      { 
+        src: "/TabebuiaRosea.jpg",
+        top: 165, 
+        left: 200, 
+        height: 600, 
+        borderRadius: 20, 
+        boxShadow: "0px 0px 30px rgba(1, 0, 0, 1)" 
+      },
+      { 
+        src: "/TabebuiaRosea2.jpg", 
+        bottom: 60, 
+        left: 500, 
+        height: 500, 
+        borderRadius: 20, 
+        boxShadow: "0px 0px 30px rgba(1, 0, 0, 1)" 
+      },
+    ],
+    title1Props: 
+      { 
+        left: 1090, 
+        top: 400 
+      },
+    description1Props: 
+      { 
+        left: 1090, 
+        bottom: 300 
+      },
     bgColor: "#83C5BE",
   },
   {
     title2: "Inspírate",
     description2: "Explora la variedad de especies que te rodean.",
-    leftImage: "/plant1.jpg",
-    imageSrc: "/plant2.jpg",
-    bgColor: "#5692B7",
+    images: [
+      { 
+        src: "/DelonixRegia2.jpg",
+        top: 200, 
+        left: 150, 
+        height: 600,  
+        borderRadius: 20, 
+        boxShadow: "0px 0px 30px rgba(1, 0, 0, 1)" 
+      },
+      { 
+        src: "/DelonixRegia.jpg",
+        bottom: 100, 
+        left: 330, 
+        height: 380,
+        borderRadius: 20, 
+        boxShadow: "0px 0px 30px rgba(1, 0, 0, 1)" 
+      },
+      {
+        src: "/Plant1.jpg",
+        top: 160,
+        left: 330,
+        height: 200,
+        borderRadius: 20,
+        boxShadow: "0px 0px 30px rgba(1, 0, 0, 1)"
+      },
+    ],
+    title2Props: 
+      { 
+        left: 1090, 
+        top: 400 
+      },
+    description2Props: 
+      { 
+        left: 1090, 
+        bottom: 300 
+      },
+    bgColor: "#90BCF6",
   },
   {
     title3: "Comparte con otros",
     description3: "Conecta y comparte tus ideas con una comunidad global.",
-    leftImage: "/plant1.jpg",
-    imageSrc: "/plant2.jpg",
+    images: [
+      {
+        src: "/PrunusDulcis(Almond)3.jpg",
+        top: 160,
+        left: 1200,
+        height: 200,
+        borderRadius: 20,
+        boxShadow: "0px 0px 30px rgba(1, 0, 0, 1)"
+      },
+      { 
+        src: "/PrunusDulcis(Almond)2.jpg",
+        top: 200, 
+        left: 1400, 
+        height: 550, 
+        borderRadius: 20, 
+        zIndex: 1,
+        boxShadow: "0px 0px 30px rgba(1, 0, 0, 1)" 
+      },
+      { 
+        src: "/PrunusDulcis(Almond).jpg", 
+        bottom: 60, 
+        left: 1080, 
+        height: 400,  
+        borderRadius: 20, 
+        boxShadow: "0px 0px 30px rgba(1, 0, 0, 1)" 
+      },
+    ],
+    title3Props: 
+      { 
+        left: 190, 
+        top: 400 
+      },
+    description3Props: 
+      { 
+        left: 190, 
+        bottom: 300 
+      },
     bgColor: "#FFCAD7",
   },
 ];
+
 
 
 const Image = styled.img`
@@ -178,7 +306,31 @@ const Image = styled.img`
   width: ${(props) => props.width}px;
   height: ${(props) => props.height}px;
   border-radius: ${(props) => props.borderRadius}px;
-  box-shadow: ${(props) => props.boxShadow}; 
+  box-shadow: ${(props) => props.boxShadow};
+  z-index: ${(props) => props.zIndex};
+  transition: transform 0.3s ease; /* Agregamos una transición */
+  cursor: pointer;
+
+  z-index: ${(props) => (props.zoomed ? 10 : 1)}; /* Z-index más alto si está ampliada */
+
+  &:hover {
+    transform: scale(1.1); /* Efecto de zoom al pasar el mouse */
+    z-index: 10; /* Asegura que la imagen ampliada esté en primer plano */
+  }
+`;
+
+const FooterContainer = styled.div`
+  background-color: #83C5BE; /* Color del botón de explorar */
+  width: 1840px; /* Ancho en píxeles */
+  height: 140px;
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
 `;
 
 
@@ -209,6 +361,7 @@ const SeccionDeslizante = () => {
     sectionRefs.current[0].scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
+
   return (
     <Container>
       {sections.map((section, index) => (
@@ -217,64 +370,42 @@ const SeccionDeslizante = () => {
           bgColor={section.bgColor}
           ref={(ref) => (sectionRefs.current[index] = ref)}
         >
+        
           <ContentContainer flexDirection={index % 2 === 0 ? "row-reverse" : "row"}>
             <ImageContainer>
-            <Image 
-              src={section.leftImage} 
-              alt="imagen1" 
-              left={200} 
-              top={165} 
-              height={600} 
-              borderRadius={20}
-              boxShadow="0px 4px 10px rgba(0, 0, 0, 1)"
-            />
-            <Image 
-              src={section.imageSrc} 
-              alt="imagen2" 
-              left={500} 
-              bottom={60} 
-              height={500} 
-              borderRadius={20}
-              boxShadow="0px 0px 30px rgba(1, 0, 0, 1)"
-            />
+            {section.images.map((image, imgIndex) => (
+                <Image
+                  key={imgIndex}
+                  src={image.src}
+                  alt={`Imagen ${index}-${imgIndex}`}
+                  {...image}
+                />
+              ))}
             </ImageContainer>
             <TextContainer>
-              <Title
-                left={1090} 
-                top={400}
-              >
-                {section.title1}
-              </Title>
-              <Description
-                left={1090} 
-                bottom={300}
-              >
-                {section.description1}
-              </Description>
-              <Title
-              
-              >
-                {section.title2}
-              </Title>
-              <Description>
-                {section.description2}
-              </Description>
-              <Title
-                left={1090} 
-                top={400}
-              >
-                {section.title3}
-              </Title>
-              <Description
-                left={1090} 
-                bottom={300}
-              >
-                {section.description3}
-              </Description>
+              {section[`title${index}`] && (
+                <>
+                  <Title {...section[`title${index}Props`]}>
+                    {section[`title${index}`]}
+                  </Title>
+                  <Description {...section[`description${index}Props`]}>
+                    {section[`description${index}`]}
+                  </Description>
+                </>
+              )}
               {index === 0 && (
-                <ScrollButtonDown onClick={() => sectionRefs.current[1].scrollIntoView({ behavior: "smooth", block: "start" })}>
-                  <FaArrowDown className="arrow-icon" color="#111111" size={5} />
-                </ScrollButtonDown>
+                <FooterContainer>
+                  <ScrollButtonDown
+                    onClick={() =>
+                      sectionRefs.current[1].scrollIntoView({
+                        behavior: "smooth",
+                        block: "start",
+                      })
+                    }
+                  >
+                    <FaArrowDown className="arrow-icon" color="#111111" size={5} />
+                  </ScrollButtonDown>
+                </FooterContainer>
               )}
               {index === sections.length - 1 && (
                 <ScrollButtonUp onClick={scrollToTop}>

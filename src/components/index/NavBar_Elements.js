@@ -164,7 +164,7 @@ export const DropdownItem = styled(Link)`
     font-size: 20px;
     text-align: right;
     &:hover {
-        background: #0B5351;
+        background: #006D77;
         color: #FFFFFF;
         font-weight: bold;
         border-radius: 10px;
