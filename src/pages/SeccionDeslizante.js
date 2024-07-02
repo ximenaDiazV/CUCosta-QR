@@ -1,12 +1,15 @@
+// ---------------  PAGINA PRINCIPAL - SECCIONES.
 import React, { useRef, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 import { FaArrowUp, FaArrowDown } from "react-icons/fa";
 
+// ---------------  CONTENEDORES.
+//CONTENEDOR PRINCIPAL.
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 100vh;
+  height: ${({ sectionCount }) => sectionCount * 100}vh;
   overflow: hidden;
   scroll-snap-type: y mandatory;
   overflow-y: scroll;
@@ -17,14 +20,17 @@ const Container = styled.div`
     display: none;
   }
   -ms-overflow-style: none; /* Oculta el scrollbar en Internet Explorer */
+
 `;
 
+//CONTENEDOR DE LAS SECCIONES.
 const SectionContainer = styled.div`
   width: 100%;
-  height: calc(100vh - 0vh); /* Ocupa toda la altura de la ventana */
+  height: 100vh; /* Ocupa toda la altura de la ventana */
   display: flex;
   flex-direction: column;
   justify-content: center;
+  overflow: hidden;
   align-items: center;
   position: relative;
   background-color: ${(props) => props.bgColor};
@@ -34,98 +40,7 @@ const SectionContainer = styled.div`
   z-index: -1;              /* Asegura que las secciones estén detrás del navbar */
 `;
 
-
-const Title = styled.h2`
-  color: #fff;
-  font-size: 3rem;
-  position: absolute;
-  top: ${(props) => props.top}px;
-  bottom: ${(props) => props.bottom}px;
-  left: ${(props) => props.left}px;
-  width: ${(props) => props.width}px;
-  height: ${(props) => props.height}px;
-  border-radius: ${(props) => props.borderRadius}px;
-  box-shadow: ${(props) => props.boxShadow}; 
-`;
-
-const Description = styled.p`
-  color: #111111;
-  font-size: 1.5rem;
-  position: absolute;
-  top: ${(props) => props.top}px;
-  bottom: ${(props) => props.bottom}px;
-  left: ${(props) => props.left}px;
-  width: ${(props) => props.width}px;
-  height: ${(props) => props.height}px;
-  border-radius: ${(props) => props.borderRadius}px;
-  box-shadow: ${(props) => props.boxShadow}; 
-`;
-
-const bounceUp = keyframes`
-  0%, 10%, 100% {
-    transform: translateY(0);     /* Posición inicial y final */
-  }
-  60% {
-    transform: translateY(20px);  /* Punto más alto del rebote */
-  }
-`;
-
-const ScrollButtonUp = styled.button`
-  background-color: #ffffff;
-  border: none;
-  position: absolute;
-  bottom: 70px;
-  left: 50%;
-  transform: translateX(-50%);
-  outline: none;
-  cursor: pointer;
-  transition: box-shadow 0.3s ease;
-  border-radius: 50%;
-  &:hover {
-    box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.2);
-  }
-  bottom: 100px;
-  animation: ${bounceUp} 2s infinite; /* Animación de rebote */
-
-  .arrow-icon {
-    border-radius: 50%;
-    width: 45px;
-    height: 50px;
-  }
-`;
-
-const bounceDown = keyframes`
-  0%, 10%, 100% {
-    transform: translateY(0);     /* Posición inicial y final */
-  }
-  60% {
-    transform: translateY(20px);  /* Punto más alto del rebote */
-  }
-`;
-
-const ScrollButtonDown = styled.button`
-  background-color: #ffffff;
-  border: none;
-  position: absolute;
-  bottom: 50px;
-  left: 48%;
-  transform: translateX(-50%);
-  outline: none;
-  cursor: pointer;
-  transition: box-shadow 0.3s ease;
-  border-radius: 50%;
-  &:hover {
-    box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.2);
-  }
-  animation: ${bounceDown} 2s infinite; /* Animación de rebote */
-
-  .arrow-icon {
-    border-radius: 50%;
-    width: 45px;
-    height: 50px;
-  }
-`;
-
+//CONTENEDOR PARA EL CONTENIDO DE CADA SECCION.
 const ContentContainer = styled.div`
   display: flex;
   flex-direction: ${(props) => props.flexDirection};
@@ -135,176 +50,127 @@ const ContentContainer = styled.div`
   height: 100%;
 `;
 
+//CONTENEDOR PARA EL TEXTO.
 const TextContainer = styled.div`
   max-width: 50%;
+
+  @media (max-width: 1000px) {
+      margin: 1rem 0;
+  }
 `;
 
+//CONTENEDOR PARA LAS IMAGENES.
 const ImageContainer = styled.div`
   max-width: 100%;
   text-align: center;
+  overflow: hidden;
+
+  @media (max-width: 1000px) {
+      margin: 1rem 0;
+  }
 `;
 
-const sections = [
-  {
-    title0: "Glosario botánico CUCosta",
-    description0: "Descubre las plantas que son parte del centro universitario.",
-    images: [
-      { 
-        src: "/plant1.jpg",
-        top: 160, 
-        left: 200, 
-        height: 600, 
-        borderRadius: 20, 
-        boxShadow: "0px 0px 30px rgba(1, 0, 0, 1)" 
-      },
-      { 
-        src: "/plant1.jpg",
-        bottom: 60, 
-        left: 500, 
-        height: 500, 
-        borderRadius: 20, 
-        boxShadow: "0px 0px 30px rgba(1, 0, 0, 1)"  
-      },
-    ],
-    title0Props: 
-      { 
-        left: 1090, 
-        top: 400 
-      },
-    description0Props: 
-      { 
-        left: 1090, 
-        bottom: 300 
-      },
-    bgColor: "#FFFFFF",
-  },
-  {
-    title1: "Glosario botánico CUCosta",
-    description1: "Descubre las plantas que son parte del centro universitario.",
-    images: [
-      { 
-        src: "/TabebuiaRosea.jpg",
-        top: 165, 
-        left: 200, 
-        height: 600, 
-        borderRadius: 20, 
-        boxShadow: "0px 0px 30px rgba(1, 0, 0, 1)" 
-      },
-      { 
-        src: "/TabebuiaRosea2.jpg", 
-        bottom: 60, 
-        left: 500, 
-        height: 500, 
-        borderRadius: 20, 
-        boxShadow: "0px 0px 30px rgba(1, 0, 0, 1)" 
-      },
-    ],
-    title1Props: 
-      { 
-        left: 1090, 
-        top: 400 
-      },
-    description1Props: 
-      { 
-        left: 1090, 
-        bottom: 300 
-      },
-    bgColor: "#83C5BE",
-  },
-  {
-    title2: "Inspírate",
-    description2: "Explora la variedad de especies que te rodean.",
-    images: [
-      { 
-        src: "/DelonixRegia2.jpg",
-        top: 200, 
-        left: 150, 
-        height: 600,  
-        borderRadius: 20, 
-        boxShadow: "0px 0px 30px rgba(1, 0, 0, 1)" 
-      },
-      { 
-        src: "/DelonixRegia.jpg",
-        bottom: 100, 
-        left: 330, 
-        height: 380,
-        borderRadius: 20, 
-        boxShadow: "0px 0px 30px rgba(1, 0, 0, 1)" 
-      },
-      {
-        src: "/Plant1.jpg",
-        top: 160,
-        left: 330,
-        height: 200,
-        borderRadius: 20,
-        boxShadow: "0px 0px 30px rgba(1, 0, 0, 1)"
-      },
-    ],
-    title2Props: 
-      { 
-        left: 1090, 
-        top: 400 
-      },
-    description2Props: 
-      { 
-        left: 1090, 
-        bottom: 300 
-      },
-    bgColor: "#90BCF6",
-  },
-  {
-    title3: "Comparte con otros",
-    description3: "Conecta y comparte tus ideas con una comunidad global.",
-    images: [
-      {
-        src: "/PrunusDulcis(Almond)3.jpg",
-        top: 160,
-        left: 1200,
-        height: 200,
-        borderRadius: 20,
-        boxShadow: "0px 0px 30px rgba(1, 0, 0, 1)"
-      },
-      { 
-        src: "/PrunusDulcis(Almond)2.jpg",
-        top: 200, 
-        left: 1400, 
-        height: 550, 
-        borderRadius: 20, 
-        zIndex: 1,
-        boxShadow: "0px 0px 30px rgba(1, 0, 0, 1)" 
-      },
-      { 
-        src: "/PrunusDulcis(Almond).jpg", 
-        bottom: 60, 
-        left: 1080, 
-        height: 400,  
-        borderRadius: 20, 
-        boxShadow: "0px 0px 30px rgba(1, 0, 0, 1)" 
-      },
-    ],
-    title3Props: 
-      { 
-        left: 190, 
-        top: 400 
-      },
-    description3Props: 
-      { 
-        left: 190, 
-        bottom: 300 
-      },
-    bgColor: "#FFCAD7",
-  },
-];
+//CONTENEDOR DEL FOOTER.
+const FooterContainer = styled.div`
+  background-color: #83C5BE; /* Color del botón de explorar */
+  width: 140vw;
+  height: 15vh;
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
 
+  @media (max-width: 1000px) {
+      margin: 1rem 0;
+  }
+`;
 
+// ---------------  PARTES DE CADA SECCION.
+// TITULO POR SECCION- GENERAL.
+const Title = styled.h2`
+  color: ${(props) => props.color};
+  font-size: ${(props) => props.fontSize}rem; 
+  position: absolute;
+  top: ${(props) => props.top}vh;
+  bottom: ${(props) => props.bottom}vh;
+  margin-right:  ${(props) => props.marginRight}vw; 
+  margin-left:  ${(props) => props.marginLeft}vw; 
+  left: ${(props) => props.left}vw;
+  width: ${(props) => props.width}vw;
+  height: ${(props) => props.height}vh;
+  border-radius: ${(props) => props.borderRadius}px;
+  box-shadow: ${(props) => props.boxShadow}; 
 
+  line-height: 1.2; /* Ajuste de altura de línea */
+  letter-spacing: 0.02em; /* Ajuste de espacio entre letras */
+
+   @media (max-width: 768px) {
+    font-size: calc(${(props) => props.fontSize}rem * 0.8);
+  }
+
+  @media (max-width: 1200px) {
+    font-size: 1.125rem; /* Ajuste para pantallas medianas */
+  }
+
+  /* Prefijos para navegadores */
+  -webkit-font-smoothing: antialiased; /* Mejora la legibilidad del texto en WebKit (Chrome, Safari) */
+  -moz-osx-font-smoothing: grayscale; /* Mejora la legibilidad del texto en Firefox */
+
+  @supports (-ms-ime-align: auto) {
+    /* Estilos específicos para Edge */
+    top: 1100px;
+  }
+  `;
+
+//DESCRIPCION POR SECCION- GENERAL.
+const Description = styled.p`
+  color: ${(props) => props.color};
+  font-size: ${(props) => props.fontSize}rem;
+  margin-right:  ${(props) => props.marginRight}vw;
+  position: absolute;
+  top: ${(props) => props.top}vh;
+  bottom: ${(props) => props.bottom}vh;
+  left: ${(props) => props.left}vw;
+  width: ${(props) => props.width}vw;
+  height: ${(props) => props.height}vh;
+  border-radius: ${(props) => props.borderRadius}px;
+  box-shadow: ${(props) => props.boxShadow}; 
+  text-align: ${(props) => (props.width ? "center" : "left")};
+
+  line-height: 1.5; /* Ajuste de altura de línea */
+  letter-spacing: 0.01em; /* Ajuste de espacio entre letras */
+
+  @media (max-width: 768px) {
+    font-size: calc(${(props) => props.fontSize}rem * 0.8); 
+  }
+
+  @media (max-width: 1200px) {
+    font-size: 2.125rem; /* Ajuste para pantallas medianas */
+  }
+
+  /* Prefijos para navegadores */
+  -webkit-font-smoothing: antialiased; /* Mejora la legibilidad del texto en WebKit (Chrome, Safari) */
+  -moz-osx-font-smoothing: grayscale; /* Mejora la legibilidad del texto en Firefox */
+
+  @supports (-ms-ime-align: auto) {
+    /* Estilos específicos para Edge */
+    /* Ejemplo: */
+    font-size: 1.5rem; /* Ejemplo de ajuste específico para Edge */
+  }
+  `;
+
+//IMAGENES POR SECCION- GENERAL.
 const Image = styled.img`
   position: absolute;
-  top: ${(props) => props.top}px;
-  bottom: ${(props) => props.bottom}px;
-  left: ${(props) => props.left}px;
-  width: ${(props) => props.width}px;
-  height: ${(props) => props.height}px;
+  top: ${(props) => props.top}vh;
+  bottom: ${(props) => props.bottom}vh;
+  left: ${(props) => props.left}vw;
+  width: ${(props) => props.width}vw;
+  height: ${(props) => props.height}vh;
   border-radius: ${(props) => props.borderRadius}px;
   box-shadow: ${(props) => props.boxShadow};
   z-index: ${(props) => props.zIndex};
@@ -317,21 +183,300 @@ const Image = styled.img`
     transform: scale(1.1); /* Efecto de zoom al pasar el mouse */
     z-index: 10; /* Asegura que la imagen ampliada esté en primer plano */
   }
+
+  @media (max-width: 768px) {
+    top: ${(props) => props.top * 1.5}vh;
+    left: ${(props) => props.left * 1.5}vw;
+    right: ${(props) => props.right * 1.5}vw;
+    width: ${(props) => props.width * 1.5}vw;
+    height: ${(props) => props.height * 1.5}vh;
+    bottom: ${(props) => props.bottom * 1.5}vh;
+  }
 `;
 
-const FooterContainer = styled.div`
-  background-color: #83C5BE; /* Color del botón de explorar */
-  width: 1840px; /* Ancho en píxeles */
-  height: 140px;
-  position: fixed;
-  bottom: 0;
+// ---------------  ANIMACION PARA LOS BOTONES DE DESPLAZAMIENTO EN LAS SECCIONES.
+// ANIMACION BOTON - HACIA ARRIBA.
+const bounceUp = keyframes`
+  0%, 10%, 100% {
+    transform: translateY(0);     /* Posición inicial y final */
+  }
+  60% {
+    transform: translateY(20px);  /* Punto más alto del rebote */
+  }
+`;
+
+//ANIMACION BOTON - HACIA ABAJO.
+const bounceDown = keyframes`
+  0%, 10%, 100% {
+    transform: translateY(0);     /* Posición inicial y final */
+  }
+  60% {
+    transform: translateY(20px);  /* Punto más alto del rebote */
+  }
+`;
+
+// ---------------  DISEÑO PARA BOTONES DE DESPLAZAMIENTO.
+//BOTON SUBIR - SECCION FINAL.
+const ScrollButtonUp = styled.button`
+  background-color: #ffffff;
+  border: none;
+  position: absolute;
+  bottom: 5vh;
   left: 50%;
   transform: translateX(-50%);
-  display: flex;
+  outline: none;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+  border-radius: 50%;
+  display: flex; /* Para centrar el contenido dentro del div */
   justify-content: center;
   align-items: center;
-  z-index: 1;
+
+  &:hover {
+    box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.2);
+  }
+  bottom: 70px;
+  animation: ${bounceUp} 2s infinite; /* Animación de rebote */
+
+  .arrow-icon {
+    border-radius: 50%;
+    width: 2.5vw;
+    height: 5.5vh;
+  }
+
 `;
+
+//BOTON BAJAR - SECCION CON FOOTER.
+const ScrollButtonDown = styled.button`
+  background-color: #ffffff;
+  border: none;
+  position: absolute;
+  bottom: 5vh;
+  left: 48%;
+  transform: translateX(-50%);
+  outline: none;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+  border-radius: 50%;
+  display: flex; /* Para centrar el contenido dentro del div */
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.2);
+  }
+  animation: ${bounceDown} 2s infinite; /* Animación de rebote */
+
+  .arrow-icon {
+    border-radius: 50%;
+    width: 2.5vw;
+    height: 5.6vh;
+  }
+`;
+
+// ---------------  DISEÑO DE CADA SECCION.
+const sections = [
+  { 
+    //SECCION PRINCIPAL - 0
+    title0: "Glosario botánico CUCosta",
+    description0: "Descubre más sobre las plantas que son parte del centro universitario.",
+    images: [
+      { 
+        src: "/CeibaPentandra.jpg",
+        top: 18, 
+        left: 11, 
+        height: 56, 
+        borderRadius: 20, 
+        boxShadow: "0px 0px 30px rgba(1, 0, 0, 1)" 
+      },
+      { 
+        src: "/CeibaPentandra2.jpg",
+        bottom: 22, 
+        left: 26, 
+        height: 33, 
+        borderRadius: 20, 
+        boxShadow: "0px 0px 30px rgba(1, 0, 0, 1)"  
+      },
+    ],
+    title0Props: 
+      { 
+        left: 57.2, 
+        top: 20,
+        fontSize: 3.8,
+        marginLeft: -3,
+        width: 40,
+        color: "#0B5351",
+      },
+    description0Props: 
+      { 
+        left: 56.9, 
+        bottom: 34,
+        fontSize: 1.9, 
+        marginRight: 8,
+        color: "#0B5351",
+        width: 35,
+      },
+    bgColor: "#FFFFFF",
+  },
+  { //SECCION - 1
+    title1: "Busca y nutréte.",
+    description1: "¿Quieres un dato interesante para abrir conversación?, nombra esa planta que encuentras fuera de tu aula y veamos que aprendes.",
+    images: [
+      { 
+        src: "/TabebuiaRosea.jpg",
+        top: 10, 
+        left: 74.5, 
+        height: 62, 
+        borderRadius: 20, 
+        boxShadow: "0px 0px 30px rgba(1, 0, 0, 1)" 
+      },
+      { 
+        src: "/TabebuiaRosea2.jpg", 
+        top: 8, 
+        left: 50, 
+        height: 30, 
+        borderRadius: 20, 
+        boxShadow: "0px 0px 30px rgba(1, 0, 0, 1)" 
+      },
+      {
+        src: "/Plant1.jpg",
+        bottom: -2,
+        left: 56,
+        height: 60,
+        borderRadius: 20,
+        boxShadow: "0px 0px 30px rgba(1, 0, 0, 1)"
+      },
+    ],
+    title1Props: 
+      { 
+        left: 12.4, 
+        top: 30,
+        fontSize: 3.8,
+        marginRight: 10,
+        color: "#006D77",
+      },
+    description1Props: 
+      { 
+        left: 5, 
+        bottom: 25,
+        fontSize: 1.7, 
+        marginRight: 53,
+        color: "#006D77",
+        width: 47,
+      },
+    bgColor: "#83C5BE",
+  },
+  { //SECCION - 2
+    title2: "¡Inspírate!",
+    description2: "Explora la variedad de especies que te rodean.",
+    images: [
+      { 
+        src: "/DelonixRegia2.jpg",
+        top: 7, 
+        left: 15, 
+        height: 60,  
+        borderRadius: 20, 
+        boxShadow: "0px 0px 30px rgba(1, 0, 0, 1)" 
+      },
+      { 
+        src: "/DelonixRegia.jpg",
+        top: 15, 
+        left: 40, 
+        height: 25,
+        borderRadius: 20, 
+        boxShadow: "0px 0px 30px rgba(1, 0, 0, 1)" 
+      },
+      { 
+        src: "/FicusBenjamina.jpg",
+        bottom: 8, 
+        left: 37, 
+        height: 50,  
+        borderRadius: 20, 
+        boxShadow: "0px 0px 30px rgba(1, 0, 0, 1)" 
+      },
+      { 
+        src: "/FicusBenjamina2.jpg",
+        bottom: 2, 
+        left: 10, 
+        height: 28.5,  
+        borderRadius: 20, 
+        boxShadow: "0px 0px 30px rgba(1, 0, 0, 1)" 
+      },
+    ],
+    title2Props: 
+      { 
+        left: 64.7, 
+        top: 31.5,
+        fontSize: 4.78,
+        color: "#FFFFFF",
+
+      },
+    description2Props: 
+      { 
+        left: 65.79, 
+        bottom: 27.5,
+        fontSize: 1.7,
+        color: "#FFFFFF",
+        width: 24,
+      },
+    bgColor: "#90BCF6",
+  },
+  { //SECCION - 3
+    title3: "Conoce y comparte.",
+    description3: "Este glosario no solo informa sobre las plantas del campus, sino que también te invita a conocerlas y compartir tu conocimiento.",
+    images: [
+      {
+        src: "/PrunusDulcis(Almond)3.jpg",
+        top: 18,
+        left: 72,
+        height: 28,
+        borderRadius: 20,
+        boxShadow: "0px 0px 30px rgba(1, 0, 0, 1)"
+      },
+      { 
+        src: "/PrunusDulcis(Almond)2.jpg",
+        bottom: -10, 
+        left: 60, 
+        height: 60, 
+        borderRadius: 20, 
+        zIndex: 1,
+        boxShadow: "0px 0px 30px rgba(1, 0, 0, 1)" 
+      },
+      { 
+        src: "/PrunusDulcis(Almond).jpg", 
+        top: 6, 
+        left: 50, 
+        height: 40,  
+        borderRadius: 20, 
+        boxShadow: "0px 0px 30px rgba(1, 0, 0, 1)" 
+      },
+      { 
+        src: "/PrunusDulcis(Almond)4.jpg", 
+        bottom: 12.5, 
+        left: 82.3, 
+        height: 40,  
+        borderRadius: 20, 
+        boxShadow: "0px 0px 30px rgba(1, 0, 0, 1)" 
+      },
+    ],
+    title3Props: 
+      { 
+        left: 7, 
+        top: 37,
+        fontSize: 3.7,
+        color: "#C24361" 
+      },
+    description3Props: 
+      { 
+        left: 5.6, 
+        bottom: 21,
+        color: "#C24361",
+        fontSize: 1.5,
+        width: 40,
+      },
+    bgColor: "#FFCAD7",
+  },
+];
 
 
 const SeccionDeslizante = () => {
@@ -350,12 +495,22 @@ const SeccionDeslizante = () => {
       } else if (deltaY < 0 && currentIndex > 0) {
         event.preventDefault();
         sectionRefs.current[currentIndex - 1].scrollIntoView({ behavior: "smooth", block: "start" });
+      }  else {
+        event.preventDefault();
+        if (deltaY > 0 && currentIndex === sections.length - 1) {
+          // Si estamos en la última sección y se intenta desplazar hacia abajo, no hacemos nada
+          return;
+        }
+        if (deltaY < 0 && currentIndex === 0) {
+          // Si estamos en la primera sección y se intenta desplazar hacia arriba, no hacemos nada
+          return;
+        }
       }
     };
 
     window.addEventListener("wheel", handleScroll, { passive: false });
     return () => window.removeEventListener("wheel", handleScroll);
-  }, []);
+  },  []);
 
   const scrollToTop = () => {
     sectionRefs.current[0].scrollIntoView({ behavior: "smooth", block: "start" });
@@ -393,29 +548,29 @@ const SeccionDeslizante = () => {
                   </Description>
                 </>
               )}
-              {index === 0 && (
-                <FooterContainer>
-                  <ScrollButtonDown
-                    onClick={() =>
-                      sectionRefs.current[1].scrollIntoView({
-                        behavior: "smooth",
-                        block: "start",
-                      })
-                    }
-                  >
-                    <FaArrowDown className="arrow-icon" color="#111111" size={5} />
-                  </ScrollButtonDown>
-                </FooterContainer>
-              )}
-              {index === sections.length - 1 && (
-                <ScrollButtonUp onClick={scrollToTop}>
-                  <FaArrowUp className="arrow-icon" color="#111111" size={10} />
-                </ScrollButtonUp>
-              )}
             </TextContainer>
           </ContentContainer>
+          {index === 0 && (
+            <FooterContainer>
+              <ScrollButtonDown
+                onClick={() =>
+                  sectionRefs.current[1].scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                  })
+                }
+              >
+                <FaArrowDown className="arrow-icon" color="#111111" size={5} />
+              </ScrollButtonDown>
+            </FooterContainer>
+          )}
         </SectionContainer>
       ))}
+      {sections.length > 0 && (
+        <ScrollButtonUp onClick={scrollToTop}>
+          <FaArrowUp className="arrow-icon" color="#111111" size={10} />
+        </ScrollButtonUp>
+      )}
     </Container>
   );
 };
