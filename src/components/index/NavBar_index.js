@@ -62,6 +62,7 @@ const Navbar = ({ setUser, setToken, user}) => {
 
     const closeModal = () => {
         setModalIsOpen(false);
+        setError(null); 
     };
 
      //funcion login
@@ -191,6 +192,7 @@ const Navbar = ({ setUser, setToken, user}) => {
                 }}>
                     Bienvenid@ al glosario botánico CUCosta
                 </h2>
+
                 <form onSubmit={handleLogin}>
                     <BoxLoginWrapper>
                     </BoxLoginWrapper>
@@ -279,17 +281,14 @@ const Navbar = ({ setUser, setToken, user}) => {
                             }}>
                                 Login In
                         </button>
-                        <div 
-                        style={{
-                          padding: 10,  
-                        }}>
-                        {error && <Alert variant="outlined" severity="error">
-                                        {error}
-                                  </Alert>}
-                        </div>
+                            {error && <Alert severity="error"> 
+                                {error}
+                            </Alert>
+                            }
                     </LoginWrapper>
-                    
                 </form>
+                
+
             </Modal>
         </>
     );
