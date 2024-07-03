@@ -1,3 +1,8 @@
+Prototipado / Maquetado:
+
+Figma: https://www.figma.com/design/zklU9YYlbO9fE8sScGClab/QR-CUC?node-id=0-1&t=ocdrNIIIR3hb8RxE-1
+
+---------------------------------------------------------------------------------------------------
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

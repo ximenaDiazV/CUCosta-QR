@@ -1,5 +1,5 @@
 import React from "react";
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle, StyleSheetManager } from "styled-components";
 import SeccionDeslizante from "./SeccionDeslizante";
 
 const GlobalStyle = createGlobalStyle`
@@ -16,7 +16,9 @@ const Principal = () => {
   return (
     <>
       <GlobalStyle />
-      <SeccionDeslizante />
+      <StyleSheetManager shouldForwardProp={(prop) => !['marginRight', 'bgColor', 'marginLeft'].includes(prop)}>
+        <SeccionDeslizante />
+      </StyleSheetManager>
     </>
   );
 };
