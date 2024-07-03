@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react'
-import axios from 'axios'
+import axios from 'axios';
+import DataTable from './SeccionTabla'
+
+
 const Arbol = () => {
     {/* traer datos mysql*/}
     const [plantas, setplantas] = useState([])
@@ -14,48 +17,35 @@ const Arbol = () => {
         }
         fecthAllplantas()
     },[])
-    
-    {/* post metod -> datos mysql*/}
-    const [user, setUser] = useState({
-        user: "",
-        pass: "",
-    });
-
-    const handleChange=(e) =>{
-        setUser(prev=>({...prev, [e.target.name]: e.target.value}))
-    };
-    console.log(user)
-
-    const handleClick = async e =>{
-        e.preventDefault()
-        try{
-            await axios.post("http://localhost:8800/conect", user)
-        }catch(err){
-            console.log(err)
-        }
-    }
 
     return(
-    <div>
-        <div className='form'>
-            <h1>login</h1>
-            <input type="text" placeholder='user' onChange={handleChange} name="user"/>
-            <input type="text" placeholder='pass' onChange={handleChange} name="pass"/>
-            <button onClick={handleClick} >login</button>
+    <>    
+        <div style={{ padding:100, width:"100%",
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            alignSelf:'center',
+        }}>
+            <DataTable/>
         </div>
+    {/* <div>
         <div>
         {plantas.map(planta=>(
             <div>
                 <h2>
-                    {planta.idplanta}
+                    {planta.IdArbol}
                 </h2>
                 <h2>
-                    {planta.name}
+                    {planta.Nombre}
                 </h2>
             </div>
         ))}
         </div>
-    </div>
+        <div>
+           
+        </div>
+    </div>*/}
+    </>
     )
 }
 
