@@ -408,7 +408,7 @@ const sections = [
         left: 64.7, 
         top: 31.5,
         fontSize: 4.78,
-        color: "#FFFFFF",
+        color: "#223D61",
 
       },
     description2Props: 
@@ -416,7 +416,7 @@ const sections = [
         left: 65.79, 
         bottom: 27.5,
         fontSize: 1.7,
-        color: "#FFFFFF",
+        color: "#223D61",
         width: 24,
       },
     bgColor: "#90BCF6",
@@ -522,6 +522,7 @@ const SeccionDeslizante = () => {
       {sections.map((section, index) => (
         <SectionContainer
           key={index}
+          flexDirection={section.flexDirection}
           bgColor={section.bgColor}
           ref={(ref) => (sectionRefs.current[index] = ref)}
         >
@@ -533,6 +534,14 @@ const SeccionDeslizante = () => {
                   key={imgIndex}
                   src={image.src}
                   alt={`Imagen ${index}-${imgIndex}`}
+                  top={image.top}
+                  bottom={image.bottom}
+                  left={image.left}
+                  width={image.width}
+                  height={image.height}
+                  borderRadius={image.borderRadius}
+                  boxShadow={image.boxShadow}
+                  zoomed={image.zoomed}
                   {...image}
                 />
               ))}

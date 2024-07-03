@@ -166,11 +166,14 @@ const Navbar = ({ setUser, setToken, user}) => {
                         left: '50%',
                         right: 'auto',
                         bottom: 'auto',
-                        height: 550,
-                        width: 400,
-                        borderRadius: 20,
-                        marginRight: '-50%',
                         transform: 'translate(-50%, -50%)',
+                        borderRadius: '20px',
+                        width: '90%',
+                        maxWidth: '400px',
+                        height: '90%',
+                        maxHeight: '550px',
+                        padding: '20px',
+                        background: '#FFFFFF',
                     },
                     
                     
@@ -183,13 +186,13 @@ const Navbar = ({ setUser, setToken, user}) => {
                     <img src="/cerrar.png" alt="IconClose" />
                 </IconClose>
                 <h2
-                style={{
-                    fontWeight: "bold",
-                    fontSize: 23,
-                    marginTop: 90,
-                    marginLeft: 5,
-                    textAlign: "center",
-                }}>
+                    style={{
+                        fontWeight: "bold",
+                        fontSize: 23,
+                        marginTop: 90,
+                        marginLeft: 5,
+                        textAlign: "center",
+                    }}>
                     Bienvenid@ al glosario botánico CUCosta
                 </h2>
 
@@ -198,32 +201,36 @@ const Navbar = ({ setUser, setToken, user}) => {
                     </BoxLoginWrapper>
                     <LoginWrapper>
                         <p
-                        style={{
-                            opacity: -1,
-                            fontWeight: "bold",
-                            fontSize: 20,
-                            marginTop: 60,
-                            marginLeft: 30,
-                        }}>
+                            style={{
+                                opacity: -1,
+                                fontWeight: "bold",
+                                fontSize: 20,
+                                marginTop: 57,
+                                marginLeft: 30,
+                                marginBottom: "-3vh",
+                            }}>
                             _
                         </p>
                         <p
-                        style={{
-                            color: "#11111",
-                            fontWeight: "bold",
-                            fontSize: 17,
-                            marginTop: -25,
-                            marginLeft: 28,
-                        }}>
+                            style={{
+                                color: "#11111",
+                                fontWeight: "bold",
+                                fontSize: 17,
+                                marginBottom: "10px",
+                                marginLeft: "2.5vw",
+                                marginTop: "2vh",
+                                
+                            }}>
                             Correo electrónico:
                         </p>
 
                         <input 
                             style={{ 
-                                width: 240,
-                                height: 40,
-                                marginLeft: 18,
-                                marginTop: -7,
+                                width: "90%",
+                                maxWidth: "240px",
+                                height: "40px",
+                                marginLeft: "2vw",
+                                marginTop: "10px",
                                 borderWidth: 1.5,
                                 borderColor: "#11111",
                                 outlineColor: "#11111",
@@ -233,26 +240,30 @@ const Navbar = ({ setUser, setToken, user}) => {
                                 paddingLeft: 14,
                                 paddingRight: 14,
                                 fontSize: 16,
+                                
                                 }}
 
-                        type="Correo" placeholder="Correo electrónico" value={username} onChange={(e) => setUsername(e.target.value)} required />
+                            type="Correo" placeholder="Correo electrónico" value={username} onChange={(e) => setUsername(e.target.value)} required />
 
                         <p
-                        style={{
-                            color: "#11111",
-                            fontWeight: "bold",
-                            fontSize: 17,
-                            marginLeft: 28,
-                            marginTop: 23,
-                        }}>
+                            style={{
+                                color: "#11111",
+                                fontWeight: "bold",
+                                fontSize: 17,
+                                marginLeft: "2.5vw",
+                                marginTop: "20px",
+                                marginBottom: "10px",
+                                
+                            }}>
                             Contraseña:
                         </p>
                         <input 
                             style={{ 
-                                width: 240,
-                                height: 40,
-                                marginLeft: 18,
-                                marginTop: -7,
+                                width: "90%",
+                                maxWidth: "240px",
+                                height: "40px",
+                                marginLeft: "2vw",
+                                marginTop: "10px",
                                 borderWidth: 1.5,
                                 borderColor: "#11111",
                                 outlineColor: "#11111",
@@ -262,33 +273,31 @@ const Navbar = ({ setUser, setToken, user}) => {
                                 paddingLeft: 14,
                                 paddingRight: 14,
                                 fontSize: 16,
-                                }}
+                                 
+                            }}
 
-                        type="password" placeholder="Contraseña" value={password} onChange={(e) => setPassword(e.target.value)} required  />
+                            type="password" placeholder="Contraseña" value={password} onChange={(e) => setPassword(e.target.value)} required  />
                     
-                        <button to="#" type="submit"
-                        style={{ 
-                            borderRadius: 30,
-                            height: 45,
-                            width: 160,
-                            marginTop: 35,
-                            marginLeft: 80,
-                            background: "#092327",
-                            color: "#FFFFFF",
-                            fontWeight: "bold",
-                            cursor: "pointer",
-                            fontSize: 19,
-                            }}>
-                                Login In
+                        <button 
+                            type="submit"
+                            style={{ 
+                                borderRadius: 30,
+                                height: "6vh",
+                                width: "11vw",
+                                marginTop: "20px",
+                                marginLeft: "5vw",
+                                background: "#092327",
+                                color: "#FFFFFF",
+                                fontWeight: "bold",
+                                cursor: "pointer",
+                                fontSize: 19,
+                            }}
+                        >
+                             Login In
                         </button>
-                            {error && <Alert severity="error"> 
-                                {error}
-                            </Alert>
-                            }
+                            {error && <Alert severity="error">{error}</Alert>}
                     </LoginWrapper>
                 </form>
-                
-
             </Modal>
         </>
     );

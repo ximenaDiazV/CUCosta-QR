@@ -103,10 +103,11 @@ export const Logo = styled(Link)`
 //LOGO DEL LOGIN.
 export const Logo2 = styled(Link)`
     display: flex;
-    margin: 0 1rem;
+    margin-left: 7.5vw;
+    margin-top: 2vh;
     cursor: pointer;
     img {
-        height: 80px;
+        height: 10vh;
         width: auto;
     }
 
@@ -119,9 +120,10 @@ export const Logo2 = styled(Link)`
 //ICONO DE CERRAR - POP UP LOGIN.
 export const IconClose = styled(Link)`
     display: flex;
-    margin: 0 1rem;
+    margin-left: 25vw;
+    margin-top: -12.5vh;
     img {
-        height: 25px;
+        height: 4vh;
         width: auto;
     }
 
@@ -239,9 +241,10 @@ export const DropdownItem = styled(Link)`
 export const LoginWrapper = styled.div`
     background: #83C5BE;
     border-radius: 40px;
-    width: 310px;
-    height: 300px;
-    margin: 0 1rem;
+    width: 20vw;
+    height: 42vh;
+    margin-left: 4.5vw;
+    margin-top: -47vh;
 
     @media (max-width: 1000px) {
         margin: 1rem 0;
@@ -252,9 +255,10 @@ export const LoginWrapper = styled.div`
 export const BoxLoginWrapper = styled.div`
     background: #092327;
     border-radius: 40px;
-    width: 320px;
-    height: 300px;
-    margin: 1rem;
+    width: 20vw;
+    height: 42vh;
+    margin-left: 3vw;
+    margin-top: 5vh;
 
     @media (max-width: 1000px) {
         margin: 1rem 0;
