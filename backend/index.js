@@ -92,7 +92,7 @@ app.get("/", (req,res)=>{
 })
 
 app.get("/plantas", (req,res)=>{
-    const query = "SELECT * FROM plantitas"
+    const query = "SELECT * FROM plantas_cuc.nombres_comunes"
     db3.query(query,(err,data)=>{
         if(err) return res.json(err)
         return res.json(data)
