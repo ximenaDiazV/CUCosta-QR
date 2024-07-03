@@ -37,13 +37,13 @@ const SectionContainer = styled.div`
   padding: 10px;
   text-align: center;
   scroll-snap-align: start;
-  z-index: -1;              /* Asegura que las secciones estén detrás del navbar */
+  z-index: 1;              /* Asegura que las secciones estén detrás del navbar */
 `;
 
 //CONTENEDOR PARA EL CONTENIDO DE CADA SECCION.
 const ContentContainer = styled.div`
   display: flex;
-  flex-direction: ${(props) => props.flexDirection};
+  flex-direction: ${(props) => (props.reverse ? 'row-reverse' : 'row')};
   justify-content: space-around;
   align-items: center;
   width: 100%;
@@ -92,6 +92,7 @@ const FooterContainer = styled.div`
 // ---------------  PARTES DE CADA SECCION.
 // TITULO POR SECCION- GENERAL.
 const Title = styled.h2`
+  z-index: 10; 
   color: ${(props) => props.color};
   font-size: ${(props) => props.fontSize}rem; 
   position: absolute;
@@ -128,6 +129,7 @@ const Title = styled.h2`
 
 //DESCRIPCION POR SECCION- GENERAL.
 const Description = styled.p`
+  z-index: 10; 
   color: ${(props) => props.color};
   font-size: ${(props) => props.fontSize}rem;
   margin-right:  ${(props) => props.marginRight}vw;
@@ -221,7 +223,7 @@ const ScrollButtonUp = styled.button`
   background-color: #ffffff;
   border: none;
   position: absolute;
-  bottom: 5vh;
+  bottom: 12vh;
   left: 50%;
   transform: translateX(-50%);
   outline: none;
@@ -235,7 +237,7 @@ const ScrollButtonUp = styled.button`
   &:hover {
     box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.2);
   }
-  bottom: 70px;
+ 
   animation: ${bounceUp} 2s infinite; /* Animación de rebote */
 
   .arrow-icon {
@@ -286,24 +288,24 @@ const sections = [
         top: 18, 
         left: 11, 
         height: 56, 
-        borderRadius: 20, 
-        boxShadow: "0px 0px 30px rgba(1, 0, 0, 1)" 
+        borderradius: 20, 
+        boxshadow: "0px 0px 30px rgba(1, 0, 0, 1)" 
       },
       { 
         src: "/CeibaPentandra2.jpg",
         bottom: 22, 
         left: 26, 
         height: 33, 
-        borderRadius: 20, 
-        boxShadow: "0px 0px 30px rgba(1, 0, 0, 1)"  
+        borderradius: 20, 
+        boxshadow: "0px 0px 30px rgba(1, 0, 0, 1)"  
       },
     ],
     title0Props: 
       { 
-        left: 57.2, 
+        left: 54.3, 
         top: 20,
         fontSize: 3.8,
-        marginLeft: -3,
+        marginleft: -3,
         width: 40,
         color: "#0B5351",
       },
@@ -312,11 +314,11 @@ const sections = [
         left: 56.9, 
         bottom: 34,
         fontSize: 1.9, 
-        marginRight: 8,
+        marginright: 8,
         color: "#0B5351",
         width: 35,
       },
-    bgColor: "#FFFFFF",
+    bgcolor: "#FFFFFF",
   },
   { //SECCION - 1
     title1: "Busca y nutréte.",
@@ -327,24 +329,24 @@ const sections = [
         top: 10, 
         left: 74.5, 
         height: 62, 
-        borderRadius: 20, 
-        boxShadow: "0px 0px 30px rgba(1, 0, 0, 1)" 
+        borderradius: 20, 
+        boxshadow: "0px 0px 30px rgba(1, 0, 0, 1)" 
       },
       { 
         src: "/TabebuiaRosea2.jpg", 
         top: 8, 
         left: 50, 
         height: 30, 
-        borderRadius: 20, 
-        boxShadow: "0px 0px 30px rgba(1, 0, 0, 1)" 
+        borderradius: 20, 
+        boxshadow: "0px 0px 30px rgba(1, 0, 0, 1)" 
       },
       {
         src: "/Plant1.jpg",
         bottom: -2,
         left: 56,
         height: 60,
-        borderRadius: 20,
-        boxShadow: "0px 0px 30px rgba(1, 0, 0, 1)"
+        borderradius: 20,
+        boxshadow: "0px 0px 30px rgba(1, 0, 0, 1)"
       },
     ],
     title1Props: 
@@ -352,7 +354,7 @@ const sections = [
         left: 12.4, 
         top: 30,
         fontSize: 3.8,
-        marginRight: 10,
+        marginright: 10,
         color: "#006D77",
       },
     description1Props: 
@@ -360,11 +362,11 @@ const sections = [
         left: 5, 
         bottom: 25,
         fontSize: 1.7, 
-        marginRight: 53,
+        marginright: 53,
         color: "#006D77",
         width: 47,
       },
-    bgColor: "#83C5BE",
+    bgcolor: "#83C5BE",
   },
   { //SECCION - 2
     title2: "¡Inspírate!",
@@ -375,37 +377,37 @@ const sections = [
         top: 7, 
         left: 15, 
         height: 60,  
-        borderRadius: 20, 
-        boxShadow: "0px 0px 30px rgba(1, 0, 0, 1)" 
+        borderradius: 20, 
+        boxshadow: "0px 0px 30px rgba(1, 0, 0, 1)" 
       },
       { 
         src: "/DelonixRegia.jpg",
         top: 15, 
         left: 40, 
         height: 25,
-        borderRadius: 20, 
-        boxShadow: "0px 0px 30px rgba(1, 0, 0, 1)" 
+        borderradius: 20, 
+        boxshadow: "0px 0px 30px rgba(1, 0, 0, 1)" 
       },
       { 
         src: "/FicusBenjamina.jpg",
         bottom: 8, 
         left: 37, 
         height: 50,  
-        borderRadius: 20, 
-        boxShadow: "0px 0px 30px rgba(1, 0, 0, 1)" 
+        borderradius: 20, 
+        boxshadow: "0px 0px 30px rgba(1, 0, 0, 1)" 
       },
       { 
         src: "/FicusBenjamina2.jpg",
         bottom: 2, 
         left: 10, 
         height: 28.5,  
-        borderRadius: 20, 
-        boxShadow: "0px 0px 30px rgba(1, 0, 0, 1)" 
+        borderradius: 20, 
+        boxshadow: "0px 0px 30px rgba(1, 0, 0, 1)" 
       },
     ],
     title2Props: 
       { 
-        left: 64.7, 
+        left: 64.9, 
         top: 31.5,
         fontSize: 4.78,
         color: "#223D61",
@@ -419,7 +421,7 @@ const sections = [
         color: "#223D61",
         width: 24,
       },
-    bgColor: "#90BCF6",
+    bgcolor: "#90BCF6",
   },
   { //SECCION - 3
     title3: "Conoce y comparte.",
@@ -430,33 +432,32 @@ const sections = [
         top: 18,
         left: 72,
         height: 28,
-        borderRadius: 20,
-        boxShadow: "0px 0px 30px rgba(1, 0, 0, 1)"
+        borderradius: 20,
+        boxshadow: "0px 0px 30px rgba(1, 0, 0, 1)"
       },
       { 
         src: "/PrunusDulcis(Almond)2.jpg",
         bottom: -10, 
         left: 60, 
         height: 60, 
-        borderRadius: 20, 
-        zIndex: 1,
-        boxShadow: "0px 0px 30px rgba(1, 0, 0, 1)" 
+        borderradius: 20, 
+        boxshadow: "0px 0px 30px rgba(1, 0, 0, 1)" 
       },
       { 
         src: "/PrunusDulcis(Almond).jpg", 
         top: 6, 
         left: 50, 
         height: 40,  
-        borderRadius: 20, 
-        boxShadow: "0px 0px 30px rgba(1, 0, 0, 1)" 
+        borderradius: 20, 
+        boxshadow: "0px 0px 30px rgba(1, 0, 0, 1)" 
       },
       { 
         src: "/PrunusDulcis(Almond)4.jpg", 
         bottom: 12.5, 
         left: 82.3, 
         height: 40,  
-        borderRadius: 20, 
-        boxShadow: "0px 0px 30px rgba(1, 0, 0, 1)" 
+        borderradius: 20, 
+        boxshadow: "0px 0px 30px rgba(1, 0, 0, 1)" 
       },
     ],
     title3Props: 
@@ -468,18 +469,18 @@ const sections = [
       },
     description3Props: 
       { 
-        left: 5.6, 
+        left: 5.8, 
         bottom: 21,
         color: "#C24361",
         fontSize: 1.5,
         width: 40,
       },
-    bgColor: "#FFCAD7",
+    bgcolor: "#FFCAD7",
   },
 ];
 
 
-const SeccionDeslizante = () => {
+const SeccionDeslizante = ({ index }) => {
   const sectionRefs = useRef([]);
 
   useEffect(() => {
@@ -516,50 +517,52 @@ const SeccionDeslizante = () => {
     sectionRefs.current[0].scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
+  const lastIndex = sections.length - 1;
+
+
 
   return (
     <Container>
-      {sections.map((section, index) => (
+      {sections.map((section, idx) => (
         <SectionContainer
-          key={index}
-          flexDirection={section.flexDirection}
-          bgColor={section.bgColor}
-          ref={(ref) => (sectionRefs.current[index] = ref)}
+          key={idx}
+          bgColor={section.bgcolor}
+          ref={(ref) => (sectionRefs.current[idx] = ref)}
         >
         
-          <ContentContainer flexDirection={index % 2 === 0 ? "row-reverse" : "row"}>
+          <ContentContainer reverse={idx % 2 === 0 ? 'true' : undefined}>
             <ImageContainer>
             {section.images.map((image, imgIndex) => (
                 <Image
                   key={imgIndex}
                   src={image.src}
-                  alt={`Imagen ${index}-${imgIndex}`}
+                  alt={`Imagen ${idx}-${imgIndex}`}
                   top={image.top}
                   bottom={image.bottom}
                   left={image.left}
                   width={image.width}
                   height={image.height}
-                  borderRadius={image.borderRadius}
-                  boxShadow={image.boxShadow}
+                  borderRadius={image.borderradius}
+                  boxShadow={image.boxshadow}
                   zoomed={image.zoomed}
                   {...image}
                 />
               ))}
             </ImageContainer>
             <TextContainer>
-              {section[`title${index}`] && (
+              {section[`title${idx}`] && (
                 <>
-                  <Title {...section[`title${index}Props`]}>
-                    {section[`title${index}`]}
+                  <Title {...section[`title${idx}Props`]}>
+                    {section[`title${idx}`]}
                   </Title>
-                  <Description {...section[`description${index}Props`]}>
-                    {section[`description${index}`]}
+                  <Description {...section[`description${idx}Props`]}>
+                    {section[`description${idx}`]}
                   </Description>
                 </>
               )}
             </TextContainer>
           </ContentContainer>
-          {index === 0 && (
+          {idx === 0 && (
             <FooterContainer>
               <ScrollButtonDown
                 onClick={() =>
@@ -573,13 +576,13 @@ const SeccionDeslizante = () => {
               </ScrollButtonDown>
             </FooterContainer>
           )}
+        {idx === lastIndex && (
+          <ScrollButtonUp onClick={scrollToTop}>
+            <FaArrowUp className="arrow-icon" color="#111111" size={10} />
+          </ScrollButtonUp>
+        )}
         </SectionContainer>
       ))}
-      {sections.length > 0 && (
-        <ScrollButtonUp onClick={scrollToTop}>
-          <FaArrowUp className="arrow-icon" color="#111111" size={10} />
-        </ScrollButtonUp>
-      )}
     </Container>
   );
 };

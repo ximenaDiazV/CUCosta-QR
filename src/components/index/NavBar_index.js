@@ -162,16 +162,16 @@ const Navbar = ({ setUser, setToken, user}) => {
                 contentLabel="Sign In"
                 style={{
                     content: {
-                        top: '55%',
+                        top: '57%',
                         left: '50%',
                         right: 'auto',
                         bottom: 'auto',
                         transform: 'translate(-50%, -50%)',
                         borderRadius: '20px',
                         width: '90%',
-                        maxWidth: '400px',
+                        maxWidth: '27vw',
                         height: '90%',
-                        maxHeight: '550px',
+                        maxHeight: '75vh',
                         padding: '20px',
                         background: '#FFFFFF',
                     },
@@ -189,7 +189,7 @@ const Navbar = ({ setUser, setToken, user}) => {
                     style={{
                         fontWeight: "bold",
                         fontSize: 23,
-                        marginTop: 90,
+                        marginTop: 100,
                         marginLeft: 5,
                         textAlign: "center",
                     }}>
@@ -205,8 +205,8 @@ const Navbar = ({ setUser, setToken, user}) => {
                                 opacity: -1,
                                 fontWeight: "bold",
                                 fontSize: 20,
-                                marginTop: 57,
-                                marginLeft: 30,
+                                marginTop: 65,
+                                marginLeft: 29,
                                 marginBottom: "-3vh",
                             }}>
                             _
@@ -215,10 +215,10 @@ const Navbar = ({ setUser, setToken, user}) => {
                             style={{
                                 color: "#11111",
                                 fontWeight: "bold",
-                                fontSize: 17,
-                                marginBottom: "10px",
-                                marginLeft: "2.5vw",
-                                marginTop: "2vh",
+                                fontSize: 16,
+                                marginBottom: "1px",
+                                marginLeft: "2.2vw",
+                                marginTop: "4vh",
                                 
                             }}>
                             Correo electrónico:
@@ -227,20 +227,22 @@ const Navbar = ({ setUser, setToken, user}) => {
                         <input 
                             style={{ 
                                 width: "90%",
-                                maxWidth: "240px",
-                                height: "40px",
-                                marginLeft: "2vw",
-                                marginTop: "10px",
-                                borderWidth: 1.5,
+                                maxWidth: "230px",
+                                height: "29px",
+                                marginLeft: "auto",
+                                marginRight: "auto",
+                                borderWidth: "1.5px",
                                 borderColor: "#11111",
                                 outlineColor: "#11111",
                                 outlineStyle: "ridge",
-                                outlineWidth: 2.5,
-                                borderRadius: 30,
-                                paddingLeft: 14,
-                                paddingRight: 14,
-                                fontSize: 16,
-                                
+                                outlineWidth: "2.5px",
+                                borderRadius: "30px",
+                                paddingLeft: "14px",
+                                paddingRight: "14px",
+                                fontSize: "14px",
+                                display: "block",
+                                marginBottom: "10px",
+                                marginTop: "1vh",
                                 }}
 
                             type="Correo" placeholder="Correo electrónico" value={username} onChange={(e) => setUsername(e.target.value)} required />
@@ -249,10 +251,10 @@ const Navbar = ({ setUser, setToken, user}) => {
                             style={{
                                 color: "#11111",
                                 fontWeight: "bold",
-                                fontSize: 17,
-                                marginLeft: "2.5vw",
+                                fontSize: 16,
+                                marginLeft: "2.2vw",
                                 marginTop: "20px",
-                                marginBottom: "10px",
+                                marginBottom: "8px",
                                 
                             }}>
                             Contraseña:
@@ -260,20 +262,21 @@ const Navbar = ({ setUser, setToken, user}) => {
                         <input 
                             style={{ 
                                 width: "90%",
-                                maxWidth: "240px",
-                                height: "40px",
-                                marginLeft: "2vw",
-                                marginTop: "10px",
-                                borderWidth: 1.5,
+                                maxWidth: "230px",
+                                height: "29px",
+                                marginLeft: "auto",
+                                marginRight: "auto",
+                                borderWidth: "1.5px",
                                 borderColor: "#11111",
                                 outlineColor: "#11111",
                                 outlineStyle: "ridge",
-                                outlineWidth: 2.5,
-                                borderRadius: 30,
-                                paddingLeft: 14,
-                                paddingRight: 14,
-                                fontSize: 16,
-                                 
+                                outlineWidth: "2.5px",
+                                borderRadius: "30px",
+                                paddingLeft: "14px",
+                                paddingRight: "14px",
+                                fontSize: "14px",
+                                display: "block",
+                                marginBottom: "10px",
                             }}
 
                             type="password" placeholder="Contraseña" value={password} onChange={(e) => setPassword(e.target.value)} required  />
@@ -281,16 +284,19 @@ const Navbar = ({ setUser, setToken, user}) => {
                         <button 
                             type="submit"
                             style={{ 
-                                borderRadius: 30,
-                                height: "6vh",
-                                width: "11vw",
-                                marginTop: "20px",
-                                marginLeft: "5vw",
+                                borderRadius: "30px",
+                                height: "46px",
+                                width: "150px",
+                                marginTop: "5vh",
+                                marginLeft: "auto",
+                                marginRight: "auto",
                                 background: "#092327",
                                 color: "#FFFFFF",
                                 fontWeight: "bold",
                                 cursor: "pointer",
-                                fontSize: 19,
+                                fontSize: "16px",
+                                display: "block",
+                                marginBottom: "10px",
                             }}
                         >
                              Login In
