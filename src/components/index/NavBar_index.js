@@ -218,7 +218,7 @@ const Navbar = ({ setUser, setToken, user}) => {
                                 fontSize: 16,
                                 marginBottom: "1px",
                                 marginLeft: "2.2vw",
-                                marginTop: "4vh",
+                                marginTop: "2vh",
                                 
                             }}>
                             Correo electrónico:

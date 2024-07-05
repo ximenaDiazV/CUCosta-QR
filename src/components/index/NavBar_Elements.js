@@ -12,7 +12,7 @@ export const Nav = styled.nav`
     justify-content: space-between;
     padding: 0.5rem;
     z-index: 100;
-    margin-top: 0px;
+    top: 0px;
     align-items: center;
     border-bottom: 2px solid black; /* Línea diferenciadora de NavBar */
     position: fixed;
@@ -157,7 +157,7 @@ export const SearchBarWrapper = styled.div`
 
 export const SearchIcon = styled.div`
     position: absolute;
-    right: 10px;
+    left: 32vw;
     top: 50%;
     transform: translateY(-50%);
     color: #111;
@@ -178,14 +178,14 @@ export const SearchIcon = styled.div`
 `;
 
 export const SearchBar = styled.input`
-    width: 500px;
+    min-width: 30vw;
     height: 40px;
     border: 3px solid black;
     border-radius: 30px;
-    padding-left: 15px;
+    padding-left: 12px;
     padding-right: 60px;
     font-size: 19px;
-    margin-left: -300px;
+    margin-right: 5vw;
 
     @media (max-width: 1000px) {
         width: 100%;
