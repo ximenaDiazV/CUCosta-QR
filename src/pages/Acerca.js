@@ -1,6 +1,8 @@
 // Acerca.js
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
+import { NavLink as Link } from "react-router-dom";
+import { IoIosArrowForward } from "react-icons/io";
 import CarouselComponent from './Carousel';
 
 const ContenedorPrincipal = styled.div`
@@ -19,7 +21,7 @@ const ContenedorPrincipal = styled.div`
     display: none;
   }
   -ms-overflow-style: none; /* Oculta el scrollbar en Internet Explorer */
-
+  margin-bottom: 2vh;
 `;
 
 const MenuContainer = styled.div`
@@ -56,7 +58,7 @@ const Image = styled.img`
   height: ${(props) => props.height}vh;
   border-radius: ${(props) => props.$borderradius}px;
   box-shadow: ${(props) => props.boxShadow};
-  z-index: ${(props) => props.zIndex};
+  z-index: ${(props) => props.$zindex};
   transform: rotate(${(props) => props.$rotation}deg);
   transition: transform 0.3s ease; /* Agregamos una transición */
   cursor: pointer;
@@ -66,6 +68,37 @@ const Image = styled.img`
   &:hover {
     transform: scale(1.1); /* Efecto de zoom al pasar el mouse */
     z-index: 10; /* Asegura que la imagen ampliada esté en primer plano */
+  }
+
+  @media (max-width: 768px) {
+    top: ${(props) => props.$top * 1.5}vh;
+    left: ${(props) => props.$left * 1.5}vw;
+    right: ${(props) => props.right * 1.5}vw;
+    width: ${(props) => props.width * 1.5}vw;
+    height: ${(props) => props.height * 1.5}vh;
+    bottom: ${(props) => props.bottom * 1.5}vh;
+  }
+`;
+
+const Image2 = styled.img`
+  position: absolute;
+  top: ${(props) => props.$top}vh;
+  bottom: ${(props) => props.bottom}vh;
+  left: ${(props) => props.$left}vw;
+  width: ${(props) => props.width}vw;
+  height: ${(props) => props.height}vh;
+  border-radius: ${(props) => props.$borderradius}px;
+  box-shadow: ${(props) => props.boxShadow};
+  z-index: ${(props) => props.$zindex};
+  transform: rotate(${(props) => props.$rotation}deg);
+  transition: transform 0.3s ease; /* Agregamos una transición */
+  cursor: pointer;
+
+  z-index: ${(props) => (props.zoomed ? 10 : 1)}; /* Z-index más alto si está ampliada */
+
+  &:hover {
+    transform: scale(1.1); /* Efecto de zoom al pasar el mouse */
+    
   }
 
   @media (max-width: 768px) {
@@ -152,11 +185,121 @@ const Separador = styled.p`
   font-weight: bold;
 `;
 
+export const BtnContacto = styled(Link)`
+    display: flex;
+    align-items: center;
+    border-radius: 25px;
+    background: #83C5BE;
+    height: 7vh;
+    color: #0B5351;
+    font-size: 20px;
+    font-weight: bold;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    text-decoration: none;
+    margin-right: 40vw;
+    width: 18vw;
+    padding: 1px 20px;
+    margin-bottom: 3vh;
+    &:hover {
+      transform: scale(1.1); /* Efecto de zoom al pasar el mouse */
+    }
+
+    @media (max-width: 1000px) {
+        margin: 0rem 0;
+     }
+`;
+
+export const BtnContacto2 = styled(Link)`
+    display: flex;
+    align-items: center;
+    border-radius: 25px;
+    background: #0B5351;
+    height: 7vh;
+    color: #FFFFFF;
+    font-size: 20px;
+    font-weight: bold;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    text-decoration: none;
+    margin-right: 40vw;
+    margin-top: 10h;
+    margin-bottom: -60vh;
+    width: 18vw;
+    padding: 1px 20px;
+
+    &:hover {
+      transform: scale(1.1); /* Efecto de zoom al pasar el mouse */
+    }
+
+    @media (max-width: 1000px) {
+        margin: 0rem 0;
+     }
+`;
+
+const CircleWrapperContacto = styled.div`
+  position: relative;
+  top: 15vh;
+  left: 35.5vw;
+  transform: translate(-50%, -50%);
+  width: 30vw; 
+  height: 55vh; 
+  background: #83C5BE;
+  border-radius: 50%;
+  z-index: -1; 
+`;
+
+const Barra1 = styled.div`
+  position: relative;
+  top: 50vh;
+  left: 20.5vw;
+  width: 25vw; 
+  height: 15vh; 
+  background: #FFFFFF;
+  z-index: 1; 
+`;
+
+const ArrowIcon = styled(IoIosArrowForward)`
+  margin-left: 8.2vw;
+  font-size: 25px;
+  font-weight: bold;
+`;
+
+const ArrowIcon2 = styled(IoIosArrowForward)`
+  margin-left: 4.8vw;
+  font-size: 24px;
+  font-weight: bold;
+`;
+
+export const Logo = styled(Link)`
+    position: relative;
+    top: 64vh;
+    left: 28%;
+    transform: translateX(-50%);
+    z-index: 2;
+    img {
+        height: 80px;
+        width: auto;
+    }
+
+    @media (max-width: 1000px) {
+        bottom: 1vh;
+    }
+`;
+
 
 const Acerca = () => {
   const [activeSection, setActiveSection] = useState(null);
   const [menuFixed, setMenuFixed] = useState(false);
   const menuRef = useRef(null);
+
+  const paginaCUC = () => {
+    window.open('http://www.cuc.udg.mx/', '_blank', 'noopener,noreferrer');
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -184,7 +327,7 @@ const Acerca = () => {
           }
         });
       },
-      { threshold: 0 } // Ajusta este valor según tus necesidades
+      { threshold: 0.1 } 
     );
 
     sections.forEach((section) => observer.observe(section));
@@ -199,8 +342,9 @@ const Acerca = () => {
   const scrollToSection = (sectionId) => {
     const section = document.getElementById(sectionId);
     if (section) {
+      const offset = 300;
       window.scrollTo({
-        $top: section.offsetTop,
+        top: section.offsetTop - offset,
         behavior: 'smooth',
       });
     }
@@ -238,7 +382,7 @@ const Acerca = () => {
           $active={activeSection === 'seccion4'}
           onClick={() => scrollToSection('seccion4')}
         >
-          Contacto
+          Contacto y más...
         </Button>
       </MenuContainer>
       <SubTitulo 
@@ -298,7 +442,7 @@ const Acerca = () => {
         id="seccion2" 
         className="section"
         $margintop="10vh"
-        $marginright="1vw"
+        $marginright="28vw"
       >
         Navega y explora
       </SubTitulo>
@@ -360,14 +504,14 @@ const Acerca = () => {
           $left={40}
         />
       </ImageContainer>
-      <Separador $margintop="25vh" $marginbottom="5vh">
+      <Separador $margintop="25vh" $marginbottom="1vh">
       ---------------------------------------------
       </Separador>
       <SubTitulo 
         id="seccion3"
         className="section"
         $margintop="10vh"
-        $marginright="1vw"
+        $marginright="28vw"
       >
         Encuentra con QR
       </SubTitulo>
@@ -376,9 +520,27 @@ const Acerca = () => {
         className="section"
         $marginright="0vw"
         $maxwidth="50vw"
-        $margintop="8vh"
+        $margintop="3vh"
       >
-        
+        Una vez encuentres un código QR cercano a alguna planta (que sea parte de la flora del centro universitario), escanea y descubre datos acerca de dicho ejemplar.
+      </Descripcion>
+      <Descripcion 
+        id="seccion3"
+        className="section"
+        $marginright="0vw"
+        $maxwidth="50vw"
+        $margintop="1vh"
+      >
+        El objetivo de los códigos QR son el proporcionar información relevante y actualizada de la flora que pertenece al Centro Universitario de la Costa y que al escanearlo con tu dispositivo móvil, este te direccioné a una página donde encontrarás todo lo relacionado con ella.
+      </Descripcion>
+      <Descripcion 
+        id="seccion3"
+        className="section"
+        $marginright="0vw"
+        $maxwidth="50vw"
+        $margintop="1vh"
+      >
+        Desde su nombre científico hasta sus usos, este glosario botánico recaba lo esencial y lo presenta de una forma accesible para que te sea posible reconocer y aprender de lo que te rodea.
       </Descripcion>
       <Separador $margintop="5vh" $marginbottom="5vh">
       ---------------------------------------------
@@ -386,17 +548,50 @@ const Acerca = () => {
       <SubTitulo 
         id="seccion4"
         className="section"
-        $margintop="10vh"
-        $marginright="1vw"
+        $margintop="20vh"
+        $marginright="40vw"
+        $marginbottom="15vh"
       >
-        Contacto
+        Contacto y más...
       </SubTitulo>
-      <Descripcion 
-        id="seccion4"
-        className="section"
+      <BtnContacto to="/">
+        CUCBotánico 
+        <ArrowIcon/>
+      </BtnContacto>
+      <BtnContacto2 onClick={paginaCUC}>
+        Página oficial CUC 
+        <ArrowIcon2/>
+      </BtnContacto2>
+      <ImageContainer>
+        <Image2
+          src="/plant1.jpg"
+          alt="Imagen 1"
+          width="14%"
+          height="auto"
+          $margintop="10vh"
+          $borderradius={20}
+          $top={25}
+          $left={49}
+          $zindex={-1}
+        />
+        <Image2
+          src="/TabebuiaRosea.jpg"
+          alt="Imagen 2"
+          width="14%"
+          height="auto"
+          $borderradius={20}
+          $top={25}
+          $left={60.5}
+        />
+      </ImageContainer>
+      <Logo
+          $top={40}
       >
-        jfjfd
-      </Descripcion>
+          <img src="/logoCUC.png" alt="Logo" />
+      </Logo>
+      <Barra1></Barra1>
+      <CircleWrapperContacto>
+      </CircleWrapperContacto>
     </ContenedorPrincipal>
   );
 };

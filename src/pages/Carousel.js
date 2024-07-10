@@ -5,14 +5,14 @@ import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css'; // Estilos CSS del carrusel
 
 const ImageCarousel = styled.div`
-  width: 80%;
+  width: 60%;
   margin: 0 auto;
-  margin-top: 3vh;
+  margin-top: 5vh;
   position: relative;
 `;
 
 const Image = styled.img`
-  max-width: 20%;
+  max-width: 40%;
   height: auto;
   border-radius: 20px;
 `;
@@ -21,7 +21,7 @@ const Button = styled.button`
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: transparent;
   border: none;
   cursor: pointer;
   padding: 10px;
@@ -32,7 +32,7 @@ const Button = styled.button`
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: transparent;
   }
 
   ${(props) => props.left ? 'left: 10px;' : 'right: 10px;'}
@@ -42,16 +42,16 @@ const CarouselComponent = () => {
   const [slideIndex, setSlideIndex] = useState(0);
 
   const nextSlide = () => {
-    setSlideIndex((slideIndex + 1) % 3);
+    setSlideIndex((slideIndex + 1) % 5);
   };
 
   const prevSlide = () => {
-    setSlideIndex((slideIndex - 1 + 3) % 3);
+    setSlideIndex((slideIndex - 1 + 5) % 5);
   };
 
   return (
     <ImageCarousel>
-      <Button onClick={prevSlide} left></Button>
+      <Button onClick={prevSlide} $left="true"></Button>
       <Button onClick={nextSlide}></Button>
       <Carousel
         showStatus={false}
@@ -59,25 +59,25 @@ const CarouselComponent = () => {
         showThumbs={false}
         infiniteLoop
         autoPlay
-        interval={5000}
+        interval={3500}
         stopOnHover
         selectedItem={slideIndex}
         onChange={(index) => setSlideIndex(index)}
       >
         <div>
-          <Image src="/plant1.jpg" alt="Imagen 1" />
+          <Image src="/ceibaPentandra2.jpg" alt="Ceiba Pentandra" />
         </div>
         <div>
-          <Image src="/DelonixRegia2.jpg" alt="Imagen 2" />
+          <Image src="/DelonixRegia.jpg" alt="Delonix Regia" />
         </div>
         <div>
-          <Image src="/FicusBenjamina.jpg" alt="Imagen 3" />
+          <Image src="/FicusBenjamina2.jpg" alt="Ficus Benjamina" />
         </div>
         <div>
-          <Image src="/plant2.jpg" alt="Imagen 4" />
+          <Image src="/TabebuiaRosea2.jpg" alt="Tabebuia Rosea" />
         </div>
         <div>
-          <Image src="/PrunusDulcis(Almond)2.jpg" alt="Imagen 5" />
+          <Image src="/PrunusDulcis(Almond)3.jpg" alt="Prunus Dulcis" />
         </div>
       </Carousel>
     </ImageCarousel>
