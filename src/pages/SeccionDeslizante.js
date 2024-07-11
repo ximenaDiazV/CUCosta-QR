@@ -103,8 +103,8 @@ const Title = styled.h2`
   left: ${(props) => props.left}vw;
   width: ${(props) => props.width}vw;
   height: ${(props) => props.height}vh;
-  border-radius: ${(props) => props.borderRadius}px;
-  box-shadow: ${(props) => props.boxShadow}; 
+  border-radius: ${(props) => props.$borderradius}px;
+  box-shadow: ${(props) => props.$boxshadow}; 
 
   line-height: 1.2; /* Ajuste de altura de línea */
   letter-spacing: 0.02em; /* Ajuste de espacio entre letras */
@@ -139,8 +139,8 @@ const Description = styled.p`
   left: ${(props) => props.left}vw;
   width: ${(props) => props.width}vw;
   height: ${(props) => props.height}vh;
-  border-radius: ${(props) => props.borderRadius}px;
-  box-shadow: ${(props) => props.boxShadow}; 
+  border-radius: ${(props) => props.$borderradius}px;
+  box-shadow: ${(props) => props.$boxshadow}; 
   text-align: ${(props) => (props.width ? "center" : "left")};
 
   line-height: 1.5; /* Ajuste de altura de línea */
@@ -173,8 +173,8 @@ const Image = styled.img`
   left: ${(props) => props.left}vw;
   width: ${(props) => props.width}vw;
   height: ${(props) => props.height}vh;
-  border-radius: ${(props) => props.borderRadius}px;
-  box-shadow: ${(props) => props.boxShadow};
+  border-radius: ${(props) => props.$borderradius}px;
+  box-shadow: ${(props) => props.$boxshadow};
   z-index: ${(props) => props.zIndex};
   transition: transform 0.3s ease; /* Agregamos una transición */
   cursor: pointer;
@@ -542,8 +542,8 @@ const SeccionDeslizante = ({ index }) => {
                   left={image.left}
                   width={image.width}
                   height={image.height}
-                  borderRadius={image.borderradius}
-                  boxShadow={image.boxshadow}
+                  $borderradius={image.borderradius}
+                  $boxshadow={image.boxshadow}
                   zoomed={image.zoomed}
                   {...image}
                 />
