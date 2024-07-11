@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios';
 import DataTable from './SeccionTabla'
+import BttonAgregarArbol from '../components/index/BttonAgregarArbol';
+import { Stack } from 'react-bootstrap';
 
 
 const Arbol = () => {
@@ -25,8 +27,10 @@ const Arbol = () => {
             alignItems: 'center',
             justifyContent: 'center',
             alignSelf:'center',
+            flexDirection: 'column',
         }}>
             <DataTable/>
+            <BttonAgregarArbol/>
         </div>
     {/* <div>
         <div>
