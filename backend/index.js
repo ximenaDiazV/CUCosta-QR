@@ -131,6 +131,25 @@ app.post("/updateArbol", (req, res)=>{
     })
 })
 
+app.post("/addarbol", (req, res)=>{
+  console.log("desde addarbol");
+  const nombre = req.body.arbol.nombre;
+  const nombrecie = req.body.arbol.nombre;
+  const nombrecom = req.body.arbol.nombrecom; 
+  const query = "INSERT INTO plantas_cuc.nombres_comunes (`Nombre`, `Nombre_Cientifico`, `Nombre_Comun`) VALUES (?)";
+  const values = [nombre, nombrecie, nombrecom];
+  console.log(values)
+  db4.query(query,[values],(err,data)=>{
+    if (err) {
+      res.json({success: false, message: 'Error, no se logro ingresar los datoss', err});
+      console.log(err)
+    }else{
+      res.json({ success: true, message: 'Dato ingresado correctamente'});
+    }
+  })
+})
+
+
 app.listen(8800, ()=>{
     console.log("Connected to backend")
 }) 
