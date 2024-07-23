@@ -20,6 +20,14 @@ const db3 = mysql2.createConnection({
     password:"CUCosta.2024#qr",
     database:"plantas_cuc"
 })
+
+const db4 = mysql2.createConnection({
+  host: "localhost",
+  user:"usuario1",
+  password:"password",
+  database:"plantas_cuc"
+})
+
  
 app.use(express.json())
 app.use(cors())
@@ -104,6 +112,43 @@ app.get("/plantas", (req,res)=>{
         return res.json("Ingreso datos")
     })*/}
 })
+
+app.post("/updateArbol", (req, res)=>{
+  const query = "UPDATE plantas_cuc.nombres_comunes SET `Nombre`= ?,`Nombre_Cientifico` = ?,`Nombre_Comun` = ? WHERE (IdArbol = ? )";
+  console.log('backend: ',req.body.IdArbol);
+  const values = [
+    req.body.nombre,
+    req.body.nombreCientifico,
+    req.body.nombreComun,
+    req.body.IdArbol,
+  ];      
+      db4.query(query,values,(err,data)=>{
+        if (err) {
+          res.json({success: false, message: 'Error, no se logro actualizar los datoss', err});
+        }else{
+          res.json({ success: true, message: 'Update'});
+        }
+    })
+})
+
+app.post("/addarbol", (req, res)=>{
+  console.log("desde addarbol");
+  const nombre = req.body.arbol.nombre;
+  const nombrecie = req.body.arbol.nombre;
+  const nombrecom = req.body.arbol.nombrecom; 
+  const query = "INSERT INTO plantas_cuc.nombres_comunes (`Nombre`, `Nombre_Cientifico`, `Nombre_Comun`) VALUES (?)";
+  const values = [nombre, nombrecie, nombrecom];
+  console.log(values)
+  db4.query(query,[values],(err,data)=>{
+    if (err) {
+      res.json({success: false, message: 'Error, no se logro ingresar los datoss', err});
+      console.log(err)
+    }else{
+      res.json({ success: true, message: 'Dato ingresado correctamente'});
+    }
+  })
+})
+
 
 app.listen(8800, ()=>{
     console.log("Connected to backend")

@@ -9,7 +9,7 @@ import Stack from '@mui/system/Stack';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/system/Unstable_Grid';
 import SendIcon from '@mui/icons-material/Send';
-
+import { UpdateArbol } from '../components/index/Editar';
 
 const verdeF = '#006D77';
 
@@ -29,17 +29,43 @@ export default function DataTable() {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [modalData, setModalData] = useState([]);
   const [plantas, setplantas] = useState([]);
-  const [nombre, setNombre] = useState(null);
-  const [nombreCientifico, setNombreCientifico] = useState(null);
-  const [nombreComun, setNombreComun] = useState(null);
-  const [error, setError] = useState('');
+    const [nombre, setNombre] = useState(null);
+    const [nombreCientifico, setNombreCientifico] = useState(null);
+    const [nombreComun, setNombreComun] = useState(null);
+    const [error, setError] = useState('');
+    const [IdArbol, setIdArbol] = useState('');
 
+  
   const editar = async (e) => {
     setError("");
+    setIdArbol(modalData[0]);
+    if(!nombre){
+      setNombre(modalData[1]);
+      console.log(nombre);
+    }
+    if(!nombreCientifico){
+      setNombreCientifico(modalData[2]);
+      console.log(nombreCientifico);
+    }
+    if(!nombreComun){
+      setNombreComun(modalData[3]);
+      console.log(nombreComun);
+    }
     e.preventDefault();
     console.log("Entre a la funcion editar");
     try {
-        console.log('hola');
+        console.log('hola editar seccion tabla');
+        const data = await UpdateArbol(nombre, nombreCientifico, nombreComun, IdArbol);
+        if(data.success){
+          console.log("SUCCESS");
+          //Alert succes
+          setModalData([IdArbol,nombre,nombreCientifico,nombreComun]);
+          console.log(modalData);
+        }else{
+          setError(data.message);
+          console.log('Error al actualizar datos: ',error);
+        }
+        //Incompleta
     } catch (error) {
       console.log(error, " catch");
       setError('Error editar in. Please try again later.');
@@ -88,7 +114,7 @@ export default function DataTable() {
                     onClick={()=>{
                       setModalData(Object.values(params.row));
                       openModal();
-                      console.log(modalData," Desde botoncito");
+                      console.log(modalData," Desde botoncito editar ", Object.values(params.row));
                     }}
                 >
                     Editar
@@ -154,7 +180,7 @@ export default function DataTable() {
             }
         }
         fecthAllplantas()
-    },[])
+    },[modalData]);
 
   return (
       <>
@@ -210,9 +236,6 @@ export default function DataTable() {
                     endIcon={<SendIcon />}
                     size="small"
                     //style={{ marginLeft: 16 }}
-                    onClick={() => {
-                        
-                    }}
                 >
               Enviar
             </Button>

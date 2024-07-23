@@ -14,6 +14,7 @@ import GlosarioBotanico from "./pages/GlosarioBotanico";
 import Acerca from "./pages/Acerca";
 import Arbol from "./pages/Arbol";
 import Dashboard from './pages/Dashboard';
+import NewArbol from './pages/NuevoArbol';
 import PlantTemplate from "./pages/PlantTemplate"; 
 
 
@@ -56,6 +57,7 @@ function App() {
                 <Route path="/acerca" element={<Acerca />} />
                 <Route path="/glosario-botanico" element={<GlosarioBotanico plantas={plantas} />} />
                 <Route path="/arbol" element={<Arbol />}/>
+                <Route path="/nuevoarbol" element={<NewArbol />}/>
                 <Route 
                     path="/dashboard" 
                     element={ user ? <Dashboard user={user} token={token} /> : <Navigate to="/"/> }
