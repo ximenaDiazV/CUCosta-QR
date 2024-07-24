@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import NuevoArbol from '../../pages/NuevoArbol';
 import { newArbol } from './NuevoA';
 
 const FormNuevoArbol = (props) => {
@@ -68,7 +67,7 @@ const FormNuevoArbol = (props) => {
                     value={arbol.nombrecom}
                     onChange={handleChange} required 
                   />
-                <p>Seccion especificacione</p>
+                <p>Seccion especificaciones</p>
                 <TextField
                     type='text' 
                     id="familia" 
@@ -76,6 +75,8 @@ const FormNuevoArbol = (props) => {
                     variant="outlined" 
                     helperText="Obligatorio"
                     size='small'
+                    value={arbol.familia}
+                    onChange={handleChange} required
                 />
                 <TextField
                     type='text' 
@@ -84,6 +85,8 @@ const FormNuevoArbol = (props) => {
                     variant="outlined" 
                     helperText="Obligatorio"
                     size='small'
+                    value={arbol.altura}
+                    onChange={handleChange} required
                 />
                 <TextField
                     type='text' 
@@ -92,6 +95,8 @@ const FormNuevoArbol = (props) => {
                     variant="outlined" 
                     helperText="Obligatorio"
                     size='small'
+                    value={arbol.diametro}
+                    onChange={handleChange} required
                 />
                 <TextField
                     type='text' 
@@ -100,6 +105,8 @@ const FormNuevoArbol = (props) => {
                     variant="outlined" 
                     helperText="Obligatorio"
                     size='small'
+                    value={arbol.copa}
+                    onChange={handleChange} required
                 />
                 <TextField
                     type='text' 
@@ -108,6 +115,8 @@ const FormNuevoArbol = (props) => {
                     variant="outlined" 
                     helperText="Obligatorio"
                     size='small'
+                    value={arbol.corteza}
+                    onChange={handleChange} required
                 />
                 <p>Seccion frutas</p>
                 <TextField
@@ -117,6 +126,8 @@ const FormNuevoArbol = (props) => {
                     variant="outlined" 
                     helperText="Obligatorio"
                     size='small'
+                    value={arbol.tipo_fruta}
+                    onChange={handleChange} required
                 />
                 <TextField
                     type='text' 
@@ -125,6 +136,8 @@ const FormNuevoArbol = (props) => {
                     variant="outlined" 
                     helperText="Obligatorio"
                     size='small'
+                    value={arbol.forma}
+                    onChange={handleChange} required
                 />
                 <TextField
                     type='text' 
@@ -133,6 +146,8 @@ const FormNuevoArbol = (props) => {
                     variant="outlined" 
                     helperText="Obligatorio"
                     size='small'
+                    value={arbol.tamanio}
+                    onChange={handleChange} required
                 />
                 <TextField
                     type='text' 
@@ -141,6 +156,8 @@ const FormNuevoArbol = (props) => {
                     variant="outlined" 
                     helperText="Obligatorio"
                     size='small'
+                    value={arbol.color_fruta}
+                    onChange={handleChange} required
                 />
                 <p>Seccion hojas</p>
                 <TextField
@@ -150,6 +167,8 @@ const FormNuevoArbol = (props) => {
                     variant="outlined" 
                     helperText="Obligatorio"
                     size='small'
+                    value={arbol.tipo_hoja}
+                    onChange={handleChange} required
                 />
                 <TextField
                     type='text' 
@@ -158,6 +177,8 @@ const FormNuevoArbol = (props) => {
                     variant="outlined" 
                     helperText="Obligatorio"
                     size='small'
+                    value={arbol.longitud}
+                    onChange={handleChange} required
                 />
                 <TextField
                     type='text' 
@@ -166,6 +187,8 @@ const FormNuevoArbol = (props) => {
                     variant="outlined" 
                     helperText="Obligatorio"
                     size='small'
+                    value={arbol.follaje}
+                    onChange={handleChange} required
                 />
                 <p>Seccion flores</p>
                 <TextField
@@ -175,6 +198,8 @@ const FormNuevoArbol = (props) => {
                     variant="outlined" 
                     helperText="Obligatorio"
                     size='small'
+                    value={arbol.color_flor}
+                    onChange={handleChange} required
                 />
                 <TextField
                     type='text' 
@@ -183,6 +208,8 @@ const FormNuevoArbol = (props) => {
                     variant="outlined" 
                     helperText="Obligatorio"
                     size='small'
+                    value={arbol.tipo_flor}
+                    onChange={handleChange} required
                 />
                 <TextField
                     type='text' 
@@ -191,6 +218,8 @@ const FormNuevoArbol = (props) => {
                     variant="outlined" 
                     helperText="Obligatorio"
                     size='small'
+                    value={arbol.epoca}
+                    onChange={handleChange} required
                 />
                 <p>Seccion habitat</p>
                 <TextField
@@ -200,6 +229,8 @@ const FormNuevoArbol = (props) => {
                     variant="outlined" 
                     helperText="Obligatorio"
                     size='small'
+                    value={arbol.distribucion}
+                    onChange={handleChange} required
                 />
                 <TextField
                     type='text' 
@@ -208,6 +239,8 @@ const FormNuevoArbol = (props) => {
                     variant="outlined" 
                     helperText="Obligatorio"
                     size='small'
+                    value={arbol.clima}
+                    onChange={handleChange} required
                 />
                 <TextField
                     type='text' 
@@ -216,6 +249,8 @@ const FormNuevoArbol = (props) => {
                     variant="outlined" 
                     helperText="Obligatorio"
                     size='small'
+                    value={arbol.altitud}
+                    onChange={handleChange} required
                 />
                 <TextField
                     type='text' 
@@ -224,6 +259,8 @@ const FormNuevoArbol = (props) => {
                     variant="outlined" 
                     helperText="Obligatorio"
                     size='small'
+                    value={arbol.suelo}
+                    onChange={handleChange} required
                 />
                 <p>Seccion usos</p>
                 <TextField
@@ -233,6 +270,8 @@ const FormNuevoArbol = (props) => {
                     variant="outlined" 
                     helperText="Obligatorio"
                     size='small'
+                    value={arbol.madera}
+                    onChange={handleChange} required
                 />
                 <TextField
                     type='text' 
@@ -241,6 +280,8 @@ const FormNuevoArbol = (props) => {
                     variant="outlined" 
                     helperText="Obligatorio"
                     size='small'
+                    value={arbol.forraje}
+                    onChange={handleChange} required
                 />
                 <TextField
                     type='text' 
@@ -249,6 +290,8 @@ const FormNuevoArbol = (props) => {
                     variant="outlined" 
                     helperText="Obligatorio"
                     size='small'
+                    value={arbol.medicinal}
+                    onChange={handleChange} required
                 />
                 <TextField
                     type='text' 
@@ -257,6 +300,8 @@ const FormNuevoArbol = (props) => {
                     variant="outlined" 
                     helperText="Obligatorio"
                     size='small'
+                    value={arbol.ornamental}
+                    onChange={handleChange} required
                 />
                 <Button variant="primary" type="submit">
                     Enviar
