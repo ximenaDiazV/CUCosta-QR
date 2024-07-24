@@ -340,13 +340,20 @@ const Acerca = () => {
 
   // Función para manejar el clic en los botones del menú
   const scrollToSection = (sectionId) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      const offset = 300;
+    if (sectionId === 'inicio') {
       window.scrollTo({
-        top: section.offsetTop - offset,
+        top: 0,
         behavior: 'smooth',
       });
+    } else {
+      const section = document.getElementById(sectionId);
+      if (section) {
+        const offset = 300;
+        window.scrollTo({
+          top: section.offsetTop - offset,
+          behavior: 'smooth',
+        });
+      }
     }
   };
 
@@ -554,7 +561,7 @@ const Acerca = () => {
       >
         Contacto y más...
       </SubTitulo>
-      <BtnContacto to="/">
+      <BtnContacto to="/"  onClick={() => scrollToSection('inicio')}>
         CUCBotánico 
         <ArrowIcon/>
       </BtnContacto>

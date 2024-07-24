@@ -60,6 +60,10 @@ const Recuadro = styled.div`
   height: 40vh;
   transition: box-shadow 0.3s ease;
   box-shadow: 0 8px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease-in-out;
+  &:hover {
+        background: #006D77;
+    }
 `;
 
 const RecuadroImagen = styled.div`
@@ -97,8 +101,8 @@ const Boton = styled.button`
   text-align: center;
   transition: all 0.2s ease-in-out;
   &:hover {
-        background: #006D77;
-        color: #FFFF;
+        background: #FFFFFF;
+        color: #0B5351;
         font-weight: bold;
         transform: scale(1.1);
     }

@@ -24,18 +24,14 @@ function App() {
     const [token, setToken] = useState(null);
 
     const plantas = [
-        { id: 1, nombre: 'Ceiba Pentandra', imagen: '/CeibaPentandra.jpg', pagina: '/planta/ceiba-pentandra' },
-        { id: 2, nombre: 'Ficus Benjamina', imagen: '/FicusBenjamina.jpg', pagina: '/planta/ficus-benjamina' },
-        { id: 3, nombre: 'Delonix Regia', imagen: '/DelonixRegia2.jpg', pagina: '/planta/delonix-regia' },
-        { id: 4, nombre: 'Tabebuia Rosea', imagen: '/TabebuiaRosea.jpg', pagina: '/planta/tabebuia-rosea' },
+        { id: 1, nombre: 'Ceiba', imagen: '/CeibaPentandra.jpg', pagina: '/planta/ceiba-pentandra' },
+        { id: 2, nombre: 'Ficus', imagen: '/FicusBenjamina.jpg', pagina: '/planta/ficus-benjamina' },
+        { id: 3, nombre: 'Tabachín', imagen: '/DelonixRegia2.jpg', pagina: '/planta/delonix-regia' },
+        { id: 4, nombre: 'Primavera', imagen: '/TabebuiaRosea.jpg', pagina: '/planta/tabebuia-rosea' },
         { id: 5, nombre: 'Suace Llorón', imagen: '/sauceLloron.jpg', pagina: '/planta/suace-lloron' },
-        { id: 6, nombre: 'Prunus Dulcis', imagen: '/PrunusDulcis(Almond)2.jpg', pagina: '/planta/prunus-dulcis' },
-        { id: 7, nombre: 'Ceiba Pentandra2', imagen: '/CeibaPentandra.jpg', pagina: '/CeibaPentandra' },
-        { id: 8, nombre: 'Ficus Benjamina2', imagen: '/FicusBenjamina.jpg', pagina: '/FicusBenjamina' },
-        { id: 9, nombre: 'Delonix Regia2', imagen: '/DelonixRegia2.jpg', pagina: '/DelonixRegia' },
-        { id: 10, nombre: 'Tabebuia Rosea2', imagen: '/TabebuiaRosea.jpg', pagina: '/TabebuiaRosea' },
-        { id: 11, nombre: 'Suace Llorón2', imagen: '/sauceLloron.jpg', pagina: '/SauceLloron' },
-        { id: 12, nombre: 'Prunus Dulcis2', imagen: '/PrunusDulcis(Almond)2.jpg', pagina: '/PrunusDulcis' },
+        { id: 6, nombre: 'Almendro', imagen: '/PrunusDulcis(Almond)2.jpg', pagina: '/planta/prunus-dulcis' },
+        { id: 7, nombre: 'Parota', imagen: '/Parota1.jpg', pagina: '/Parota' },
+        { id: 8, nombre: 'Guamúchil', imagen: '/Guamuchil1.jpg', pagina: '/Guamuchil' },
     ];
 
     useEffect(() => {
