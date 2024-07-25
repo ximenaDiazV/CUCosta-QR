@@ -7,8 +7,31 @@ const FormNuevoArbol = (props) => {
 
     const [arbol, setArbol] = useState({
         nombre: props.arbol ? props.arbol.nombre : '',
-        nombrecie: props.arbol ? props.libro.nombrecie : '',
-        nombrecom: props.libro ? props.libro.nombrecom : ''
+        nombrecie: props.arbol ? props.arbol.nombrecie : '',
+        nombrecom: props.arbol ? props.arbol.nombrecom : '',
+        familia: props.arbol ? props.arbol.familia : '',
+        altura: props.arbol ? props.arbol.altura :'',
+        diametro: props.arbol ? props.arbol.diametro :'',
+        copa: props.arbol ? props.arbol.copa :'',
+        corteza: props.arbol ? props.arbol.corteza :'',
+        tipo_fruta: props.arbol ? props.arbol.tipo_fruta :'' ,
+        forma: props.arbol ? props.arbol.forma :'',
+        tamanio: props.arbol ? props.arbol.tamanio :'',
+        color_fruta: props.arbol ? props.arbol.color_fruta :'',
+        tipo_hoja: props.arbol ? props.arbol.tipo_hoja :'',
+        longitud: props.arbol ? props.arbol.longitud :'',
+        follaje: props.arbol ? props.arbol.follaje :'',
+        color_flor: props.arbol ? props.arbol.color_flor :'',
+        tipo_flor: props.arbol ? props.arbol.tipo_flor :'',
+        epoca: props.arbol ? props.arbol.epoca :'',
+        distribucion: props.arbol ? props.arbol.distribucion :'',
+        clima: props.arbol ? props.arbol.clima :'',
+        altitud: props.arbol ? props.arbol.altitud :'',
+        suelo: props.arbol ? props.arbol.suelo :'',
+        madera: props.arbol ? props.arbol.madera :'', 
+        forraje: props.arbol ? props.arbol.forraje :'',
+        medicinal: props.arbol ? props.arbol.medicinal :'',
+        ornamental: props.arbol ? props.arbol.ornamental :'',
       });
     
       const [errorMsg, setErrorMsg] = useState('');

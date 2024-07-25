@@ -3,6 +3,9 @@ import mysql2 from "mysql2"
 import cors from "cors"
 import jwt from "jsonwebtoken"
 import dotenv from "dotenv"
+import { faMillSign } from "@fortawesome/free-solid-svg-icons"
+import { ViewKanban } from "@mui/icons-material"
+import { or } from "sequelize"
 
 dotenv.config();
 
@@ -132,20 +135,128 @@ app.post("/updateArbol", (req, res)=>{
 })
 
 app.post("/addarbol", (req, res)=>{
-  console.log("desde addarbol");
+  console.log("desde addarbol"); 
+  //tabla nombres
   const nombre = req.body.arbol.nombre;
-  const nombrecie = req.body.arbol.nombre;
+  const nombrecie = req.body.arbol.nombrecie;
   const nombrecom = req.body.arbol.nombrecom; 
-  const query = "INSERT INTO plantas_cuc.nombres_comunes (`Nombre`, `Nombre_Cientifico`, `Nombre_Comun`) VALUES (?)";
-  const values = [nombre, nombrecie, nombrecom];
-  console.log(values)
-  db4.query(query,[values],(err,data)=>{
+  //tabla especificaciones
+  const familia = req.body.arbol.familia;
+  const altura = req.body.arbol.altura;
+  const diametro = req.body.arbol.diametro;
+  const copa = req.body.arbol.copa;
+  const corteza = req.body.arbol.corteza;
+  //tabla flores
+  const color_flor = req.body.arbol.color_flor;
+  const tipo_flor = req.body.arbol.tipo_flor;
+  const epoca = req.body.arbol.epoca;
+  //tabla frutos
+  const tipo_fruta = req.body.arbol.tipo_fruta;
+  const forma = req.body.arbol.forma;
+  const tamanio = req.body.arbol.tamanio;
+  const color_fruta = req.body.arbol.color_fruta;
+  //tabla habitat
+  const distribucion = req.body.arbol.distribucion;
+  const clima = req.body.arbol.clima;
+  const altitud = req.body.arbol.altitud;
+  const suelo = req.body.arbol.suelo;
+  //tabla hoja
+  const tipo_hoja = req.body.arbol.tipo_hoja;
+  const longitud = req.body.arbol.longitud;
+  const follaje = req.body.arbol.follaje;
+  //tabla usos
+  const madera = req.body.arbol.madera;
+  const forraje = req.body.arbol.forraje;
+  const medicinal = req.body.arbol.medicinal;
+  const ornamental = req.body.arbol.ornamental;
+
+   
+  const querynombres = "INSERT INTO plantas_cuc.nombres_comunes (`Nombre`, `Nombre_Cientifico`, `Nombre_Comun`) VALUES (?)";
+  const valuesnombres = [nombre, nombrecie, nombrecom];
+  const queryespecificaciones = "INSERT INTO plantas_cuc.especificaciones (`IdArbol`, `familia`, `altura`, `diametro_Tronco`, `copa`, `corteza`) VALUES (?)";
+  const queryflores = "INSERT INTO plantas_cuc.flores (`IdArbol`, `color`, `tipo`, `epoca_floracion`) VALUES (?)";
+  const queryfrutos = "INSERT INTO plantas_cuc.frutos (`IdArbol`, `tipo`, `forma`, `tamaño`, `color`) VALUES (?)";
+  const queryhabitat = "INSERT INTO plantas_cuc.habitat (`IdArbol`, `distribucion`, `clima`, `altitud`, `suelo`) VALUES (?)";
+  const queryhojas = "INSERT INTO plantas_cuc.hojas (`IdArbol`, `tipo`, `longitud`, `follaje`) VALUES (?)";
+  const queryusos = "INSERT INTO plantas_cuc.usos (`IdArbol`, `madera`, `forraje`, `medicinal`, `Ornamental`) VALUES (?)";
+  //const valuesespecificaciones = [familia, altura, diametro, copa, corteza];
+  //console.log(valuesespecificaciones)
+  db4.query(querynombres,[valuesnombres],(err,data)=>{
     if (err) {
-      res.json({success: false, message: 'Error, no se logro ingresar los datoss', err});
+      res.json({success: false, message: 'Error, no se logro ingresar los datos', err});
+      console.log(err)
+    }
+  db4.query('SELECT MAX(IdArbol) AS id FROM plantas_cuc.nombres_comunes', (err,resultid)=>{
+    if (err) {
+      res.json({success: false, message: 'Error, no se logro ingresar los datos', err});
       console.log(err)
     }else{
-      res.json({ success: true, message: 'Dato ingresado correctamente'});
+      console.log(resultid)
     }
+    const valuesespecificaciones = [resultid[0].id,familia, altura, diametro, copa, corteza];
+    //console.log(valuesespecificaciones);
+    db4.query(queryespecificaciones,[valuesespecificaciones],(err,data)=>{
+      if (err) {
+        res.json({success: false, message: 'Error, no se logro ingresar los datos', err});
+        console.log(err)
+      }else{
+        console.log("succes especificaciones");
+      }
+    })
+    
+    const valuesflores = [resultid[0].id,color_flor, tipo_flor, epoca];
+    //console.log(valuesespecificaciones);
+    db4.query(queryflores,[valuesflores],(err,data)=>{
+      if (err) {
+        res.json({success: false, message: 'Error, no se logro ingresar los datos', err});
+        console.log(err)
+      }else{
+        console.log("succes flores");
+      }})
+
+    const valuesfrutos = [resultid[0].id,tipo_fruta, forma, tamanio, color_fruta];
+    //console.log(valuesespecificaciones);
+    db4.query(queryfrutos,[valuesfrutos],(err,data)=>{
+      if (err) {
+        res.json({success: false, message: 'Error, no se logro ingresar los datos', err});
+        console.log(err)
+      }else{
+        console.log("succes frutos");
+      }
+    })
+    const valueshabitat = [resultid[0].id,distribucion, clima, altitud, suelo];
+    db4.query(queryhabitat,[valueshabitat],(err,data)=>{
+      if (err) {
+        res.json({success: false, message: 'Error, no se logro ingresar los datos', err});
+        console.log(err)
+      }else{
+        console.log("succes habitat");
+      }
+    })
+
+    const valueshojas = [resultid[0].id,tipo_hoja, longitud, follaje];
+    db4.query(queryhojas,[valueshojas],(err,data)=>{
+      if (err) {
+        res.json({success: false, message: 'Error, no se logro ingresar los datos', err});
+        console.log(err)
+      }else{
+        console.log("succes hojas");
+      }
+    })
+    
+    const valuesusos = [resultid[0].id,madera, forraje, medicinal, ornamental];
+    db4.query(queryusos,[valuesusos],(err,data)=>{
+      if (err) {
+        res.json({success: false, message: 'Error, no se logro ingresar los datos', err});
+        console.log(err)
+      }else{
+        console.log("succes usos");
+      }
+    })
+  })
+  
+  res.json({ success: true, message: 'Dato ingresado correctamente'});
+    
   })
 })
 
