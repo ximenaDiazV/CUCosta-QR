@@ -16,12 +16,27 @@ import Arbol from "./pages/Arbol";
 import Dashboard from './pages/Dashboard';
 import NewArbol from './pages/NuevoArbol';
 import PlantTemplate from "./pages/PlantTemplate"; 
+import axios from 'axios';
 
 
 function App() {
 
     const [user, setUser] = useState(null);
     const [token, setToken] = useState(null);
+    const [plants, setplants] = useState([])
+
+    useEffect(()=>{
+        const fecthAllplantas = async ()=>{
+            try{
+                const res = await axios.get("http://localhost:8800/plantas")
+                setplants(res.data);
+                console.log(res.data);
+            }catch(err){
+                console.log(err)
+            }
+        }
+        fecthAllplantas()
+    },[])
 
     const plantas = [
         { id: 1, nombre: 'Ceiba', imagen: '/CeibaPentandra.jpg', pagina: '/planta/ceiba-pentandra' },
@@ -33,6 +48,8 @@ function App() {
         { id: 7, nombre: 'Parota', imagen: '/Parota1.jpg', pagina: '/Parota' },
         { id: 8, nombre: 'Guamúchil', imagen: '/Guamuchil1.jpg', pagina: '/Guamuchil' },
     ];
+
+    
 
     useEffect(() => {
         const storedUser = localStorage.getItem('user');
@@ -55,18 +72,18 @@ function App() {
             <Routes>
                 <Route path="/" element={<Principal />} />
                 <Route path="/acerca" element={<Acerca />} />
-                <Route path="/glosario-botanico" element={<GlosarioBotanico plantas={plantas} />} />
+                <Route path="/glosario-botanico" element={<GlosarioBotanico plantas={plants} />} />
                 <Route path="/arbol" element={<Arbol />}/>
                 <Route path="/nuevoarbol" element={<NewArbol />}/>
                 <Route 
                     path="/dashboard" 
                     element={ user ? <Dashboard user={user} token={token} /> : <Navigate to="/"/> }
                 />
-                {plantas.map((planta) => (
+                {plants.map((planta) => (
                     <Route
-                        key={planta.id}
-                        path={planta.pagina} // Ruta basada en el campo 'pagina' de cada planta
-                        element={<PlantTemplate nombre={planta.nombre} imagen={planta.imagen} />} // Pasa props a la plantilla de detalle
+                        key={planta.IdArbol}
+                        path={"/"+planta.Nombre} // Ruta basada en el campo 'pagina' de cada planta
+                        element={<PlantTemplate nombre={planta.Nombre} imagen={"/"+planta.IdArbol+".jpg"} id={planta.IdArbol} />} // Pasa props a la plantilla de detalle
                     />
                 ))}
             </Routes>

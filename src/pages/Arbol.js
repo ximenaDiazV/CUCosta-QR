@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios';
 import DataTable from './SeccionTabla'
-import BttonAgregarArbol from '../components/index/BttonAgregarArbol';
+import BttonAgregarArbol from '../components/CrearArbol/BttonAgregarArbol';
 import { Stack } from 'react-bootstrap';
 
 

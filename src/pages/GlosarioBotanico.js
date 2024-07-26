@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
+
 const ContenedorPrincipal = styled.div`
   display: flex;
   flex-direction: column;
@@ -166,9 +167,9 @@ const GlosarioBotanico = ({ plantas }) => {
         {plantasMostradas.map((planta, index) => (
           <Recuadro key={index}>
             <RecuadroImagen>
-              <Imagen src={planta.imagen} alt={planta.nombre} />
+              <Imagen src={"/"+planta.IdArbol+".jpg"} alt={planta.Nombre} />
             </RecuadroImagen>
-            <Boton onClick={() => manejarClick(planta.pagina)}>{planta.nombre}</Boton>
+            <Boton onClick={() => manejarClick("/"+planta.Nombre)}>{planta.Nombre}</Boton>
           </Recuadro>
         ))}
       </ContenedorRecuadros>

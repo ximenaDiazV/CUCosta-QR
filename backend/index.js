@@ -103,17 +103,11 @@ app.get("/", (req,res)=>{
 })
 
 app.get("/plantas", (req,res)=>{
-    const query = "SELECT * FROM plantas_cuc.nombres_comunes"
+    const query = "SELECT IdArbol, Nombre FROM plantas_cuc.nombres_comunes"
     db3.query(query,(err,data)=>{
         if(err) return res.json(err)
         return res.json(data)
     })
-    {/* insertar plantitas
-    const query = "INSERT INTO plantitas (`idplantitas`, `name`) VALUES ('4', 'sal')";
-    db.query(query,(err,data)=>{
-        if(err) return res.json(err)
-        return res.json("Ingreso datos")
-    })*/}
 })
 
 app.post("/updateArbol", (req, res)=>{
@@ -258,6 +252,21 @@ app.post("/addarbol", (req, res)=>{
   res.json({ success: true, message: 'Dato ingresado correctamente'});
     
   })
+})
+
+app.get("/nombres/:IdArbol", (req,res)=>{
+  const id = req.params.IdArbol;
+  const queryNombres = "SELECT plantas_cuc.nombres_comunes.IdArbol, plantas_cuc.nombres_comunes.Nombre, plantas_cuc.nombres_comunes.Nombre_Cientifico, plantas_cuc.nombres_comunes.Nombre_Comun, plantas_cuc.especificaciones.familia, plantas_cuc.especificaciones.altura, plantas_cuc.especificaciones.diametro_Tronco, plantas_cuc.especificaciones.copa, plantas_cuc.especificaciones.corteza, plantas_cuc.flores.color as colorflor, plantas_cuc.flores.tipo as tipoflor, plantas_cuc.flores.epoca_floracion, plantas_cuc.frutos.tipo as tipofruto, plantas_cuc.frutos.forma, plantas_cuc.frutos.tamaño as tamanio, plantas_cuc.frutos.color as colorfruto, plantas_cuc.habitat.distribucion, plantas_cuc.habitat.clima, plantas_cuc.habitat.altitud, plantas_cuc.habitat.suelo, plantas_cuc.hojas.tipo as tipohoja, plantas_cuc.hojas.longitud, plantas_cuc.hojas.follaje, plantas_cuc.usos.madera, plantas_cuc.usos.forraje, plantas_cuc.usos.medicinal, plantas_cuc.usos.Ornamental FROM plantas_cuc.nombres_comunes LEFT JOIN plantas_cuc.especificaciones ON plantas_cuc.nombres_comunes.IdArbol = plantas_cuc.especificaciones.IdArbol LEFT JOIN plantas_cuc.flores ON plantas_cuc.nombres_comunes.IdArbol = plantas_cuc.flores.IdArbol  LEFT JOIN plantas_cuc.frutos ON plantas_cuc.nombres_comunes.IdArbol = plantas_cuc.frutos.IdArbol LEFT JOIN plantas_cuc.habitat ON plantas_cuc.nombres_comunes.IdArbol = plantas_cuc.habitat.IdArbol  LEFT JOIN plantas_cuc.hojas ON plantas_cuc.nombres_comunes.IdArbol = plantas_cuc.hojas.IdArbol LEFT JOIN plantas_cuc.usos ON plantas_cuc.nombres_comunes.IdArbol = plantas_cuc.usos.IdArbol WHERE (plantas_cuc.nombres_comunes.IdArbol = ?)";
+  //const queryEspeficaciones = "SELECT * FROM plantas_cuc.especificaciones";
+  //const queryFlores = "SELECT * FROM plantas_cuc.flores";
+  //const queryFrutos = "SELECT * FROM plantas_cuc.frutos";
+  //const queryHabitat = "SELECT * FROM plantas_cuc.habitat";
+  //const queryHojas = "SELECT * FROM plantas_cuc.hojas";
+  //const queryUsos = "SELECT * FROM plantas_cuc.usos";
+  db3.query(queryNombres,[id],(err,data)=>{
+      if(err) return res.json(err)
+      return res.json({nombre:data[0].Nombre,nombrecie:data[0].Nombre_Cientifico,nombrecom: data[0].Nombre_Comun, familia:data[0].familia, altura: data[0].altura, diametro: data[0].diametro_Tronco, copa: data[0].copa, corteza: data[0].corteza, colorflor: data[0].colorflor, tipoflor: data[0].tipoflor, epoca: data[0].epoca_floracion, tipofruto: data[0].tipofruto, forma: data[0].forma, tamanio: data[0].tamanio, colorfruto: data[0].colorfruto, distribucion: data[0].distribucion, clima:data[0].clima, altitud: data[0].altitud , suelo:data[0].suelo , tipohoja:data[0].tipohoja , longitud:data[0].longitud, follaje:data[0].follaje, madera:data[0].madera, forraje: data[0].forraje, medicinal:data[0].medicinal, ornamental:data[0].Ornamental})
+    })
 })
 
 

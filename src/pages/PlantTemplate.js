@@ -1,6 +1,8 @@
 // PlantTemplate.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
+import { distribute } from 'gsap';
 
 const Contenedor = styled.div`
   display: flex;
@@ -168,25 +170,117 @@ const Info = styled.p`
   margin-top: 10px;
 `;
 
-const PlantTemplate = ({ nombre, imagen, especificaciones, flores, frutos, habitat, hojas, usos }) => {
+const PlantTemplate = ({id, nombre, imagen, frutos, hojas, usos }) => {
   const [activeTab, setActiveTab] = useState('Nombre');
+  
+  const [nombres, setNombres] = useState({
+    nombre: '',
+    nombrecie: '',
+    nombrecom: '',
+  })
+  const [especif, setEspecif] = useState({
+    familia: '',
+    altura: '',
+    diamtro: '',
+    copa: '',
+    corteza: ''
+  })
+  const [flor, setFlor] = useState({
+    color: '',
+    tipo: '',
+    epoca: '',
+  })
+  const [fruto, setFruto] = useState({
+    tipo: '',
+    forma: '',
+    tamanio: '',
+    color: ''
+  })
+  const [habitat, setHabitat] = useState({
+    distribucion: '',
+    clima: '',
+    altitud: '',
+    suelo: '',
+  })
+  const [hoja, setHoja] = useState({
+    tipo: '',
+    longitud: '',
+    follaje: ''
+  })
+  const [uso, setUso] = useState({
+    madera: '',
+    forraje: '',
+    medicinal: '',
+    orna: '',
+  })
+  
+  useEffect(()=>{
+    const fecthAllnombres = async ()=>{
+        try{
+            const res = await axios.get("http://localhost:8800/nombres/"+id)
+            setNombres({... nombres, 
+              nombre:res.data.nombre,
+              nombrecie:res.data.nombrecie,
+              nombrecom:res.data.nombrecom,
+            });
+            setEspecif({... especif, 
+              familia:res.data.familia,
+              altura:res.data.altura,
+              diametro:res.data.diametro,
+              copa: res.data.copa,
+              corteza: res.data.corteza
+            });
+            setFlor({... flor, 
+              color:res.data.colorflor,
+              tipo:res.data.tipoflor,
+              epoca:res.data.epoca
+            });
+            setFruto({... fruto, 
+              tipo:res.data.tipofruto,
+              forma:res.data.forma,
+              tamanio:res.data.tamanio,
+              color: res.data.colorfruto,
+            });
+            setHabitat({... habitat, 
+              distribucion:res.data.distribucion,
+              clima:res.data.clima,
+              altitud:res.data.altitud,
+              suelo: res.data.suelo,
+            });
+            setHoja({... hoja, 
+              tipo:res.data.tipohoja,
+              longitud:res.data.longitud,
+              follaje:res.data.follaje
+            });
+            setUso({... uso, 
+              madera:res.data.madera,
+              forraje:res.data.altura,
+              medicinal:res.data.medicinal,
+              orna: res.data.ornamental
+            });
+        }catch(err){
+            console.log(err)
+        }
+    }
+    fecthAllnombres()
+},[])
 
   const renderInfo = () => {
     switch (activeTab) {
       case 'Nombre':
-        return <Info>{nombre}</Info>;
+        return <Info>{nombres.nombre+nombres.nombrecie+nombres.nombrecom}</Info>;
       case 'Especificaciones':
-        return <Info>{especificaciones}</Info>;
+        return <Info>{especif.familia+especif.altura+especif.diamtro+especif.copa+especif.corteza}</Info>;
       case 'Flores':
-        return <Info>{flores}</Info>;
+        return <Info>{flor.color+flor.tipo+flor.epoca}</Info>;
       case 'Frutos':
-        return <Info>{frutos}</Info>;
+        return <Info>{fruto.tipo+fruto.forma+fruto.tamanio+fruto.color}</Info>;
       case 'Hábitat':
-        return <Info>{habitat}</Info>;
+        return <Info>{habitat.distribucion+habitat.clima+habitat.altitud+habitat.suelo}</Info>;
       case 'Hojas':
-        return <Info>{hojas}</Info>;
+        return <Info>{hoja.tipo+hoja.longitud+hoja.follaje}</Info>;
       case 'Usos':
-        return <Info>{usos}</Info>;
+        return <Info>{uso.madera+uso.forraje+uso.medicinal+uso.orna}</Info>;
       default:
         return <Info>{nombre}</Info>;
     }
