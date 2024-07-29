@@ -32,23 +32,6 @@ const Arbol = () => {
             <DataTable/>
             <BttonAgregarArbol/>
         </div>
-    {/* <div>
-        <div>
-        {plantas.map(planta=>(
-            <div>
-                <h2>
-                    {planta.IdArbol}
-                </h2>
-                <h2>
-                    {planta.Nombre}
-                </h2>
-            </div>
-        ))}
-        </div>
-        <div>
-           
-        </div>
-    </div>*/}
     </>
     )
 }

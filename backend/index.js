@@ -121,12 +121,55 @@ app.post("/updateArbol", (req, res)=>{
   ];      
       db4.query(query,values,(err,data)=>{
         if (err) {
+          console.log(err)
           res.json({success: false, message: 'Error, no se logro actualizar los datoss', err});
         }else{
           res.json({ success: true, message: 'Update'});
         }
     })
 })
+
+app.post("/updateArbolFlor", (req, res)=>{
+  const query = "UPDATE plantas_cuc.flores SET `color`= ?,`tipo` = ?,`epoca_floracion` = ? WHERE (IdArbol = ? )";
+  console.log('backend: ',req.body.IdArbol);
+  const values = [
+    req.body.colorflor,
+    req.body.tipoflor,
+    req.body.epoca,
+    req.body.IdArbol,
+  ];      
+      db4.query(query,values,(err,data)=>{
+        if (err) {
+          console.log(err)
+          res.json({success: false, message: 'Error, no se logro actualizar los datoss', err});
+        }else{
+          res.json({ success: true, message: 'Update'});
+        }
+    })
+})
+
+
+app.post("/updateArbolE", (req, res)=>{
+  const query = "UPDATE plantas_cuc.especificaciones SET `familia`= ?,`altura` = ?,`diametro_Tronco` = ?, `copa`= ?,`corteza` = ? WHERE (IdArbol = ? )";
+  console.log('backend: ',req.body.IdArbol);
+  const values = [
+    req.body.familia,
+    req.body.altura,
+    req.body.diametro,
+    req.body.copa,
+    req.body.corteza,
+    req.body.IdArbol
+  ];      
+      db4.query(query,values,(err,data)=>{
+        if (err) {
+          console.log(err)
+          res.json({success: false, message: 'Error, no se logro actualizar los datoss especificaciones', err});
+        }else{
+          res.json({ success: true, message: 'Update'});
+        }
+    })
+})
+
 
 app.post("/addarbol", (req, res)=>{
   console.log("desde addarbol"); 
@@ -252,6 +295,56 @@ app.post("/addarbol", (req, res)=>{
   res.json({ success: true, message: 'Dato ingresado correctamente'});
     
   })
+})
+
+app.get("/eliminar/:id", (req,res)=>{
+  const id = req.params.id;
+  console.log(id+ ' desde index eliminar')
+  const querynombres = "DELETE FROM `plantas_cuc`.`nombres_comunes` WHERE (`plantas_cuc`.`nombres_comunes`.IdArbol = ?)";
+  const queryespecif = "DELETE FROM `plantas_cuc`.`especificaciones` WHERE (`plantas_cuc`.`especificaciones`.IdArbol = ?)";
+  const queryflores = "DELETE FROM `plantas_cuc`.`flores` WHERE (`plantas_cuc`.`flores`.IdArbol = ?)";
+  const queryfrutos = "DELETE FROM `plantas_cuc`.`frutos` WHERE (`plantas_cuc`.`frutos`.IdArbol = ?)";
+  const queryhabitat = "DELETE FROM `plantas_cuc`.`habitat` WHERE (`plantas_cuc`.`habitat`.IdArbol = ?)";
+  const queryhojas = "DELETE FROM `plantas_cuc`.`hojas` WHERE (`plantas_cuc`.`hojas`.IdArbol = ?)";
+  const queryusos = "DELETE FROM `plantas_cuc`.`usos` WHERE (`plantas_cuc`.`usos`.IdArbol = ?)";
+
+  db4.query(querynombres,[id],(err,data)=>{
+    if (err) {
+      res.json({success: false, message: 'Error, no se logro eliminar los datos en nombres_comunes', err});
+    }
+  })
+  db4.query(queryespecif,[id],(err,data)=>{
+    if (err) {
+      res.json({success: false, message: 'Error, no se logro eliminar los datos en especificaciones', err});
+    }
+  })
+  db4.query(queryflores,[id],(err,data)=>{
+    if (err) {
+      res.json({success: false, message: 'Error, no se logro eliminar los datos en flores', err});
+    }
+  })
+  db4.query(queryfrutos,[id],(err,data)=>{
+    if (err) {
+      res.json({success: false, message: 'Error, no se logro eliminar los datos en frutos', err});
+    }
+  })   
+  db4.query(queryhabitat,[id],(err,data)=>{
+    if (err) {
+      res.json({success: false, message: 'Error, no se logro eliminar los datos en habitat', err});
+    }
+  })
+  db4.query(queryhojas,[id],(err,data)=>{
+    if (err) {
+      res.json({success: false, message: 'Error, no se logro eliminar los datos en hojas', err});
+    }
+  })
+  db4.query(queryusos,[id],(err,data)=>{
+    if (err) {
+      res.json({success: false, message: 'Error, no se logro eliminar los datos en usos', err});
+    }
+  })
+  res.json({ success: true, message: 'Datos eliminados'});
+    
 })
 
 app.get("/nombres/:IdArbol", (req,res)=>{

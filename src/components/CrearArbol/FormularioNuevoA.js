@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { newArbol } from './NuevoA';
+import { Grid } from '@mui/material';
 
 const FormNuevoArbol = (props) => {
 
@@ -57,9 +58,9 @@ const FormNuevoArbol = (props) => {
       };
 
     return(
-        <div>
+        <div style={{width:'50%',}}>
             <form onSubmit={handleOnSubmit}>
-                <p>Seccion nombres</p>
+                <Grid  container direction="column" p={3}>
                 <TextField
                     type='text' 
                     id="nombre" 
@@ -326,9 +327,10 @@ const FormNuevoArbol = (props) => {
                     value={arbol.ornamental}
                     onChange={handleChange} required
                 />
-                <Button variant="primary" type="submit">
-                    Enviar
-                </Button>
+                    <Button fullWidth variant="contained" size="large" type="submit">
+                        Enviar
+                    </Button>
+                </Grid>
             </form>
         </div>
     );

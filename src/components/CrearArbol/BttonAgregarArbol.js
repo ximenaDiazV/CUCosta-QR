@@ -13,6 +13,7 @@ export default function BttonAgregarArbol() {
 
     return (
         <Button
+            style={{margin:'2%'}}
             variant="contained"
             color= "secondary"
             size="large"

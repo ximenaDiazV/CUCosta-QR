@@ -120,8 +120,6 @@ const Navbar = ({ setUser, setToken, user}) => {
         /*ocultar hasta que entre*/
     }
 
-
-
     return (
         <>
             <Nav>
@@ -148,7 +146,8 @@ const Navbar = ({ setUser, setToken, user}) => {
                             <DropdownMenu>
                                 <DropdownItem to="/glosario-botanico">Glosario Botánico</DropdownItem>
                                 <DropdownItem to="/acerca">Acerca</DropdownItem>
-                                {changeButtonlogin()}
+                                {user && <DropdownItem to="/dashboard">Administrador</DropdownItem>}
+                                {changeButtonlogin()}                                
                             </DropdownMenu>
                         )}
                     </div>

@@ -7,6 +7,7 @@ const NuevoArbol = () => {
 
     return(
         <>
+
             <div style={{padding:100, width:"100%",
             display: 'flex',
             alignItems: 'center',
@@ -14,6 +15,7 @@ const NuevoArbol = () => {
             alignSelf:'center',
             flexDirection: 'column',
             }}>
+            {/*Agregar boton de regresar */}
             <p>Nuevo Arbol</p>
                 <FormNuevoArbol/>
             </div>
