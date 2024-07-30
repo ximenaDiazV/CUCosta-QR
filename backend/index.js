@@ -3,6 +3,11 @@ import mysql2 from "mysql2"
 import cors from "cors"
 import jwt from "jsonwebtoken"
 import dotenv from "dotenv"
+import path from "path"; 
+import { fileURLToPath } from 'url';
+import { faMillSign } from "@fortawesome/free-solid-svg-icons"
+import { ViewKanban } from "@mui/icons-material"
+import { or } from "sequelize"
 
 dotenv.config();
 
@@ -31,6 +36,14 @@ const db4 = mysql2.createConnection({
  
 app.use(express.json())
 app.use(cors())
+
+// Obtén el nombre del archivo actual y el directorio
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Configura el middleware para servir archivos estáticos
+app.use('/images', express.static(path.join(__dirname, 'images')));
+
 
 app.post("/login", (req,res)=>{
     const {username, password} = req.body;

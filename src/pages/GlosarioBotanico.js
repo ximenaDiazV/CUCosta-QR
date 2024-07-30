@@ -167,9 +167,9 @@ const GlosarioBotanico = ({ plantas }) => {
         {plantasMostradas.map((planta, index) => (
           <Recuadro key={index}>
             <RecuadroImagen>
-              <Imagen src={"/"+planta.IdArbol+".jpg"} alt={planta.Nombre} />
+              <Imagen src={`http://localhost:8800/images/${planta.IdArbol}.jpg`} alt={planta.Nombre} />
             </RecuadroImagen>
-            <Boton onClick={() => manejarClick("/"+planta.Nombre)}>{planta.Nombre}</Boton>
+            <Boton onClick={() => manejarClick(`/${planta.Nombre}`)}>{planta.Nombre}</Boton>
           </Recuadro>
         ))}
       </ContenedorRecuadros>
