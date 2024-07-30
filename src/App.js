@@ -38,18 +38,6 @@ function App() {
         fecthAllplantas()
     },[])
 
-    const plantas = [
-        { id: 1, nombre: 'Ceiba', imagen: '/CeibaPentandra.jpg', pagina: '/planta/ceiba-pentandra' },
-        { id: 2, nombre: 'Ficus', imagen: '/FicusBenjamina.jpg', pagina: '/planta/ficus-benjamina' },
-        { id: 3, nombre: 'Tabachín', imagen: '/DelonixRegia2.jpg', pagina: '/planta/delonix-regia' },
-        { id: 4, nombre: 'Primavera', imagen: '/TabebuiaRosea.jpg', pagina: '/planta/tabebuia-rosea' },
-        { id: 5, nombre: 'Suace Llorón', imagen: '/sauceLloron.jpg', pagina: '/planta/suace-lloron' },
-        { id: 6, nombre: 'Almendro', imagen: '/PrunusDulcis(Almond)2.jpg', pagina: '/planta/prunus-dulcis' },
-        { id: 7, nombre: 'Parota', imagen: '/Parota1.jpg', pagina: '/Parota' },
-        { id: 8, nombre: 'Guamúchil', imagen: '/Guamuchil1.jpg', pagina: '/Guamuchil' },
-    ];
-
-    
 
     useEffect(() => {
         const storedUser = localStorage.getItem('user');

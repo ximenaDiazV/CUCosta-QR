@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import { distribute } from 'gsap';
 
 const Contenedor = styled.div`
   display: flex;
@@ -141,36 +140,36 @@ const Imagen = styled.img`
   object-fit: cover;
 `;
 
-const Boton = styled.button`
-  background-color: #83C5BE;
-  color: #0B5351;
-  font-weight: bold;
-  border: none;
-  border-radius: 20px;
-  padding: 10px 20px;
-  margin-bottom: 2vh;
-  cursor: pointer;
-  font-size: 1.1rem;
-  margin-top: auto;
-  width: 13vw;
-  text-align: center;
-  transition: all 0.2s ease-in-out;
-  &:hover {
-        background: #FFFFFF;
-        color: #0B5351;
-        font-weight: bold;
-        transform: scale(1.1);
-    }
-`;
-
 const Info = styled.p`
   font-size: 1rem;
   color: #333;
-  line-height: 1.6;
-  margin-top: 10px;
+  line-height: 1.3;
+  margin-top: 1.5vh;
 `;
 
-const PlantTemplate = ({id, nombre, imagen, frutos, hojas, usos }) => {
+const Detalle = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+`;
+
+const Label = styled.h3`
+  color: #006D77;
+  font-size: 1.2rem;
+  margin: 0;
+  flex-shrink: 0;
+  width: 15vw;
+`;
+
+const Valor = styled.p`
+  font-size: 1rem;
+  color: #333;
+  line-height: 1.6;
+  margin: 0;
+  flex: 1; // Para que ocupe el espacio restante
+`;
+
+const PlantTemplate = ({id, nombre, imagen }) => {
   const [activeTab, setActiveTab] = useState('Nombre');
   
   const [nombres, setNombres] = useState({
@@ -181,7 +180,7 @@ const PlantTemplate = ({id, nombre, imagen, frutos, hojas, usos }) => {
   const [especif, setEspecif] = useState({
     familia: '',
     altura: '',
-    diamtro: '',
+    diametro: '',
     copa: '',
     corteza: ''
   })
@@ -215,76 +214,57 @@ const PlantTemplate = ({id, nombre, imagen, frutos, hojas, usos }) => {
   })
   
   useEffect(()=>{
-    const fecthAllnombres = async ()=>{
+    const fetchData = async ()=>{
         try{
-            const res = await axios.get("http://localhost:8800/nombres/"+id)
-            setNombres({... nombres, 
-              nombre:res.data.nombre,
-              nombrecie:res.data.nombrecie,
-              nombrecom:res.data.nombrecom,
+            const res = await axios.get(`http://localhost:8800/nombres/${id}`)
+            setNombres({
+              nombre: res.data.nombre,
+              nombrecie: res.data.nombrecie,
+              nombrecom: res.data.nombrecom,
             });
-            setEspecif({... especif, 
-              familia:res.data.familia,
-              altura:res.data.altura,
-              diametro:res.data.diametro,
+            setEspecif({
+              familia: res.data.familia,
+              altura: res.data.altura,
+              diametro: res.data.diametro,
               copa: res.data.copa,
               corteza: res.data.corteza
             });
-            setFlor({... flor, 
-              color:res.data.colorflor,
-              tipo:res.data.tipoflor,
-              epoca:res.data.epoca
+            setFlor({ 
+              color: res.data.colorflor,
+              tipo: res.data.tipoflor,
+              epoca: res.data.epoca
             });
-            setFruto({... fruto, 
-              tipo:res.data.tipofruto,
-              forma:res.data.forma,
-              tamanio:res.data.tamanio,
+            setFruto({ 
+              tipo: res.data.tipofruto,
+              forma: res.data.forma,
+              tamanio: res.data.tamanio,
               color: res.data.colorfruto,
             });
-            setHabitat({... habitat, 
-              distribucion:res.data.distribucion,
-              clima:res.data.clima,
-              altitud:res.data.altitud,
+            setHabitat({
+              distribucion: res.data.distribucion,
+              clima: res.data.clima,
+              altitud: res.data.altitud,
               suelo: res.data.suelo,
             });
-            setHoja({... hoja, 
-              tipo:res.data.tipohoja,
-              longitud:res.data.longitud,
-              follaje:res.data.follaje
+            setHoja({
+              tipo: res.data.tipohoja,
+              longitud: res.data.longitud,
+              follaje: res.data.follaje
             });
-            setUso({... uso, 
-              madera:res.data.madera,
-              forraje:res.data.altura,
-              medicinal:res.data.medicinal,
+            setUso({ 
+              madera: res.data.madera,
+              forraje: res.data.altura,
+              medicinal: res.data.medicinal,
               orna: res.data.ornamental
             });
         }catch(err){
-            console.log(err)
+            console.log(err);
         }
     }
-    fecthAllnombres()
-},[])
+    fetchData();
+  }, [id]);
 
-  const renderInfo = () => {
-    switch (activeTab) {
-      case 'Nombre':
-        return <Info>{nombres.nombre+nombres.nombrecie+nombres.nombrecom}</Info>;
-      case 'Especificaciones':
-        return <Info>{especif.familia+especif.altura+especif.diamtro+especif.copa+especif.corteza}</Info>;
-      case 'Flores':
-        return <Info>{flor.color+flor.tipo+flor.epoca}</Info>;
-      case 'Frutos':
-        return <Info>{fruto.tipo+fruto.forma+fruto.tamanio+fruto.color}</Info>;
-      case 'Hábitat':
-        return <Info>{habitat.distribucion+habitat.clima+habitat.altitud+habitat.suelo}</Info>;
-      case 'Hojas':
-        return <Info>{hoja.tipo+hoja.longitud+hoja.follaje}</Info>;
-      case 'Usos':
-        return <Info>{uso.madera+uso.forraje+uso.medicinal+uso.orna}</Info>;
-      default:
-        return <Info>{nombre}</Info>;
-    }
-  };
+  const imagenURL = `http://localhost:8800/images/${id}.jpg`;
 
   return (
     <>
@@ -304,19 +284,162 @@ const PlantTemplate = ({id, nombre, imagen, frutos, hojas, usos }) => {
               <Tab $active={activeTab === 'Usos'} onClick={() => setActiveTab('Usos')}>Usos</Tab>
             </TabsContainer>
             <ContenedorInfo>
-              {renderInfo()}
+            {activeTab === 'Nombre' && (
+                <div>
+                  <h2>Identificación botánica, denominaciones o sinónimos.</h2>
+                  <h2>--------------------------------------------------------------------------------------------</h2>
+                  <Detalle>
+                    <Label>Nombre:</Label>
+                    <Valor>{nombres.nombre}</Valor>
+                  </Detalle>
+                  <Detalle>
+                    <Label>Nombre común:</Label>
+                    <Valor>{nombres.nombrecom}</Valor>
+                  </Detalle>
+                  <Detalle>
+                    <Label>Nombre científico:</Label>
+                    <Valor>{nombres.nombrecie}</Valor>
+                  </Detalle>
+                </div>
+              )}
+              {activeTab === 'Especificaciones' && (
+                <div>
+                  <h2>Características y detalles botánicos.</h2>
+                  <h2>--------------------------------------------------------------------------------------------</h2>
+                  <Detalle>
+                    <Label>Familia:</Label>
+                    <Valor>{especif.familia}</Valor>
+                  </Detalle>
+                  <Detalle>
+                    <Label>Altura:</Label>
+                    <Valor>{especif.altura}</Valor>
+                  </Detalle>
+                  <Detalle>
+                    <Label>Diámetro del tronco:</Label>
+                    <Valor>{especif.diametro}</Valor>
+                  </Detalle>
+                  <Detalle>
+                    <Label>Diámetro de la copa:</Label>
+                    <Valor>{especif.copa}</Valor>
+                  </Detalle>
+                  <Detalle>
+                    <Label>Corteza:</Label>
+                    <Valor>{especif.corteza}</Valor>
+                  </Detalle>
+                </div>
+              )}
+              {activeTab === 'Flores' && (
+                <div>
+                  <h2>Aspectos y detalles florales.</h2>
+                  <h2>--------------------------------------------------------------------------------------------</h2>
+                  <Detalle>
+                    <Label>Tipo:</Label>
+                    <Valor>{flor.tipo}</Valor>
+                  </Detalle>
+                  <Detalle>
+                    <Label>Color:</Label>
+                    <Valor>{flor.color}</Valor>
+                  </Detalle>
+                  <Detalle>
+                    <Label>Época de foración:</Label>
+                    <Valor>{flor.epoca}</Valor>
+                  </Detalle>
+                </div>
+              )}
+              {activeTab === 'Frutos' && (
+                <div>
+                  <h2>Descripción y clasificación del fruto.</h2>
+                  <h2>--------------------------------------------------------------------------------------------</h2>
+                  <Detalle>
+                    <Label>Tipo:</Label>
+                    <Valor>{fruto.tipo}</Valor>
+                  </Detalle>
+                  <Detalle>
+                    <Label>Color:</Label>
+                    <Valor>{fruto.color}</Valor>
+                  </Detalle>
+                  <Detalle>
+                    <Label>Forma:</Label>
+                    <Valor>{fruto.forma}</Valor>
+                  </Detalle>
+                  <Detalle>
+                    <Label>Tamaño:</Label>
+                    <Valor>{fruto.tamanio}</Valor>
+                  </Detalle>
+                </div>
+              )}
+              {activeTab === 'Hábitat' && (
+                <div>
+                  <h2>Condiciones del entorno natural.</h2>
+                  <h2>--------------------------------------------------------------------------------------------</h2>
+                  <Detalle>
+                    <Label>Clima:</Label>
+                    <Valor>{habitat.clima}</Valor>
+                  </Detalle>
+                  <Detalle>
+                    <Label>Suelo:</Label>
+                    <Valor>{habitat.suelo}</Valor>
+                  </Detalle>
+                  <Detalle>
+                    <Label>Altitud:</Label>
+                    <Valor>{habitat.altitud}</Valor>
+                  </Detalle>
+                  <Detalle>
+                    <Label>Distribución:</Label>
+                    <Valor>{habitat.distribucion}</Valor>
+                  </Detalle>
+                </div>
+              )}
+              {activeTab === 'Hojas' && (
+                <div>
+                  <h2>Características y aspectos de la hoja.</h2>
+                  <h2>--------------------------------------------------------------------------------------------</h2>
+                  <Detalle>
+                    <Label>Tipo:</Label>
+                    <Valor>{hoja.tipo}</Valor>
+                  </Detalle>
+                  <Detalle>
+                    <Label>Follaje:</Label>
+                    <Valor>{hoja.follaje}</Valor>
+                  </Detalle>
+                  <Detalle>
+                    <Label>Longitud:</Label>
+                    <Valor>{hoja.longitud}</Valor>
+                  </Detalle>
+                </div>
+              )}
+              {activeTab === 'Usos' && (
+                <div>
+                  <h2>Propósitos, utilidades y beneficios de la planta.</h2>
+                  <h2>--------------------------------------------------------------------------------------------</h2>
+                  <Detalle>
+                    <Label>Madera:</Label>
+                    <Valor>{uso.madera}</Valor>
+                  </Detalle>
+                  <Detalle>
+                    <Label>Forraje:</Label>
+                    <Valor>{uso.forraje}</Valor>
+                  </Detalle>
+                  <Detalle>
+                    <Label>Medicinal:</Label>
+                    <Valor>{uso.medicinal}</Valor>
+                  </Detalle>
+                  <Detalle>
+                    <Label>Otros:</Label>
+                    <Valor>{uso.orna}</Valor>
+                  </Detalle>
+                </div>
+              )}
             </ContenedorInfo>
           </ContenedorColumnaIzquierda>
           <ContenedorColumnaDerecha>
           <ContenedorRecuadros>
               <Recuadro>
                 <RecuadroImagen>
-                <Imagen src={imagen} alt={nombre} />
+                <Imagen src={imagenURL} alt={nombres.nombre} />
                 </RecuadroImagen>
               </Recuadro>
           </ContenedorRecuadros>
-            
-            {/* Agrega más imágenes aquí si es necesario */}
           </ContenedorColumnaDerecha>
         </ContenedorPrincipal>
       </Contenedor>
