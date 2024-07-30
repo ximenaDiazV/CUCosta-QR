@@ -3,9 +3,6 @@ import mysql2 from "mysql2"
 import cors from "cors"
 import jwt from "jsonwebtoken"
 import dotenv from "dotenv"
-import { faMillSign } from "@fortawesome/free-solid-svg-icons"
-import { ViewKanban } from "@mui/icons-material"
-import { or } from "sequelize"
 
 dotenv.config();
 
@@ -170,6 +167,84 @@ app.post("/updateArbolE", (req, res)=>{
     })
 })
 
+app.post("/updateArbolFruto", (req, res)=>{
+  const query = "UPDATE plantas_cuc.frutos SET `tipo`= ?, `forma`= ? ,`tamaño` = ?,`color` = ? WHERE (IdArbol = ? )";
+  console.log('backend: ',req.body.IdArbol);
+  const values = [
+    req.body.tipofruto,
+    req.body.forma,
+    req.body.tamanio,
+    req.body.colorfruto,
+    req.body.IdArbol
+  ];      
+      db4.query(query,values,(err,data)=>{
+        if (err) {
+          console.log(err)
+          res.json({success: false, message: 'Error, no se logro actualizar los datoss especificaciones', err});
+        }else{
+          res.json({ success: true, message: 'Update'});
+        }
+    })
+})
+
+app.post("/updateArbolHabitat", (req, res)=>{
+  const query = "UPDATE plantas_cuc.habitat SET `distribucion`= ?, `clima`= ? ,`altitud` = ?,`suelo` = ? WHERE (IdArbol = ? )";
+  console.log('backend: ',req.body.IdArbol);
+  const values = [
+    req.body.distribucion,
+    req.body.clima,
+    req.body.altitud,
+    req.body.suelo,
+    req.body.IdArbol
+  ];      
+      db4.query(query,values,(err,data)=>{
+        if (err) {
+          console.log(err)
+          res.json({success: false, message: 'Error, no se logro actualizar los datoss especificaciones', err});
+        }else{
+          res.json({ success: true, message: 'Update'});
+        }
+    })
+})
+
+app.post("/updateArbolHojas", (req, res)=>{
+  const query = "UPDATE plantas_cuc.hojas SET `tipo`= ?, `longitud`= ? ,`follaje` = ? WHERE (IdArbol = ? )";
+  console.log('backend: ',req.body.IdArbol);
+  const values = [
+    req.body.tipohoja,
+    req.body.longitud,
+    req.body.follaje,
+    req.body.IdArbol
+  ];      
+      db4.query(query,values,(err,data)=>{
+        if (err) {
+          console.log(err)
+          res.json({success: false, message: 'Error, no se logro actualizar los datoss especificaciones', err});
+        }else{
+          res.json({ success: true, message: 'Update'});
+        }
+    })
+})
+
+app.post("/updateArbolU", (req, res)=>{
+  const query = "UPDATE plantas_cuc.usos SET `madera`= ?, `forraje`= ? ,`medicinal` = ?,`Ornamental` = ? WHERE (IdArbol = ? )";
+  console.log('backend: ',req.body.IdArbol);
+  const values = [
+    req.body.madera,
+    req.body.forraje,
+    req.body.medicinal,
+    req.body.orna,
+    req.body.IdArbol
+  ];      
+      db4.query(query,values,(err,data)=>{
+        if (err) {
+          console.log(err)
+          res.json({success: false, message: 'Error, no se logro actualizar los datoss especificaciones', err});
+        }else{
+          res.json({ success: true, message: 'Update'});
+        }
+    })
+})
 
 app.post("/addarbol", (req, res)=>{
   console.log("desde addarbol"); 

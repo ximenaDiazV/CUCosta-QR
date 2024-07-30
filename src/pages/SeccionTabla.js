@@ -6,9 +6,13 @@ import axios from 'axios';
 import Modal from 'react-modal';
 import Stack from '@mui/system/Stack';
 import TextField from '@mui/material/TextField';
-import Grid from '@mui/system/Unstable_Grid';
-import SendIcon from '@mui/icons-material/Send';
-import { UpdateArbol, UpdateArbolE, UpdateArbolFlor } from '../components/index/Editar';
+import { UpdateArbol, 
+        UpdateArbolE, 
+        UpdateArbolFlor,
+        UpdateArbolFruto,
+        UpdateArbolHabitat,
+        UpdateArbolHojas, 
+        UpdateArbolU } from '../components/index/Editar';
 import { useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
@@ -30,578 +34,545 @@ const customStyles = {
 };
 
 export default function DataTable() {
-  let subtitle;
   const [modalIsOpen, setIsOpen] = useState(false);
   const [modalData, setModalData] = useState([]);
-  const [plantas, setplantas] = useState([]);
+  const [plantas, setPlantas] = useState([]);
   const navigate = useNavigate();
   const [eliminado, setEliminar] = useState(false);
   const [editado, setEditar] = useState(false);
-  const [nombre, setNombre] = useState(null);
-  const [nombreCientifico, setNombreCientifico] = useState(null);
-  const [nombreComun, setNombreComun] = useState(null);
-  const [error, setError] = useState('');
+
+  // States for modal fields
+  const [nombre, setNombre] = useState('');
+  const [nombreCientifico, setNombreCientifico] = useState('');
+  const [nombreComun, setNombreComun] = useState('');
+  const [familia, setFamilia] = useState('');
+  const [altura, setAltura] = useState('');
+  const [diametro, setDiametro] = useState('');
+  const [copa, setCopa] = useState('');
+  const [corteza, setCorteza] = useState('');
+  const [colorflor, setColorflor] = useState('');
+  const [tipoflor, setTipoflor] = useState('');
+  const [epoca, setEpoca] = useState('');
+  const [tipofruto, setTipoFruto] = useState('');
+  const [forma, setForma] = useState('');
+  const [tamanio, setTamanio] = useState('');
+  const [colorfruto, setColorfruto] = useState('');
+  const [distribucion, setDistribucion] = useState('');
+  const [clima, setClima] = useState('');
+  const [altitud, setAltitud] = useState('');
+  const [suelo, setSuelo] = useState('');
+  const [tipohoja, setTipohoja] = useState('');
+  const [longitud, setLongitud] = useState('');
+  const [follaje, setFollaje] = useState('');
+  const [madera, setMadera] = useState('');
+  const [forraje, setForraje] = useState('');
+  const [medicinal, setMedicinal] = useState('');
+  const [orna, setOrna] = useState('');
   const [IdArbol, setIdArbol] = useState('');
-  const [familia, setFamilia] = useState(null);
-  const [altura, setAltura] = useState(null);
-  const [diametro, setDiametro] = useState(null);
-  const [copa,setCopa] = useState(null);
-  const [corteza, setCorteza] = useState(null);
-  const [colorflor, setColorflor] = useState(null);
-  const [tipoflor, setTipoflor] = useState(null);
-  const [epoca, setEpoca] = useState(null);
-  const [tipofruto, setTipoFruto] = useState(null);
-  const [forma, setForma] = useState(null);
-  const [tamanio, setTamanio] = useState(null);
-  const [colorfruto, setColorfruto] = useState(null);
-  const [distribucion, setDistribucion] = useState(null);
-  const [clima, setClima] = useState(null);  
-  const [altitud, setAltitud] = useState(null);
-  const [suelo, setSuelo] = useState(null);
-  const [tipohoja, setTipohoja] = useState(null);
-  const [longitud, setLongitud] = useState(null);
-  const [follaje, setFollaje] = useState(null);
-  const [madera, setMadera] = useState(null);
-  const [forraje, setForraje] = useState(null);
-  const [medicinal, setMedicinal] = useState(null);
-  const [orna, setOrna] = useState(null);
-
-  
-
-
-  const [valueTab, setValueTab] = React.useState('1');
+  const [error, setError] = useState('');
+  const [valueTab, setValueTab] = useState('1');
 
   const handleChangeTab = (event, newValue) => {
     setValueTab(newValue);
   };
-  
-    useEffect(()=>{
-        const fecthAllplantas = async ()=>{
-            try{
-                const res = await axios.get("http://localhost:8800/plantas")
-                setplantas(res.data);
-            }catch(err){
-                console.log(err)
-            }
-        }
-        fecthAllplantas()
-        if(eliminado || editado){
-          setEliminar(false);
-          setEditar(false);
-        }
-    },[modalData,eliminado,editado]);
+
+  useEffect(() => {
+    const fetchAllPlantas = async () => {
+      try {
+        const res = await axios.get("http://localhost:8800/plantas");
+        setPlantas(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchAllPlantas();
+    if (eliminado || editado) {
+      setEliminar(false);
+      setEditar(false);
+    }
+  }, [eliminado, editado]);
 
   const eliminar = async (id) => {
-      console.log('desde eliminar'+id)
-      try{
-        const res = await axios.get("http://localhost:8800/eliminar/"+id);
-        //alert
-        console.log('success try')
-        setEliminar(true);
-      }catch (error){
-        console.log('fail try'+error)
-      }
-  }
-  
-  const editarnombres = async (e) => {
-    setError("");
-    console.log("editar nombres");
-    if(!nombre){
-      setNombre(modalData[0]);
-    }
-    if(!nombreCientifico){
-      setNombreCientifico(modalData[1]);
-    }
-    if(!nombreComun){
-      setNombreComun(modalData[2]);
-    }
-    console.log("pasamos los if");
-    e.preventDefault();
-    console.log("Entre a la funcion editar");
     try {
-        const data = await UpdateArbol(nombre, nombreCientifico, nombreComun, IdArbol);
-        if(data.success){
-          console.log("SUCCESS");
-          setEditar(true);
-          //Alert succes  
-        }else{
-          setError(data.message);
-          console.log('Error al actualizar datos: ',error);
-        }
-        //Incompleta
+      await axios.get("http://localhost:8800/eliminar/"+id);
+      setEliminar(true);
     } catch (error) {
-      console.log(error, " catch");
+      console.log('Error al eliminar: ' + error);
+    }
+  };
+
+  const editarnombres = async (e) => {
+    e.preventDefault();
+    setError('');
+    try {
+      const data = await UpdateArbol(nombre, nombreCientifico, nombreComun, IdArbol);
+      if (data.success) {
+        setEditar(true);
+      } else {
+        setError(data.message);
+      }
+    } catch (error) {
       setError('Error editar in. Please try again later.');
     }
   };
 
   const editarespecif = async (e) => {
-    setError("");
-    console.log("editar especificaciones");
-    if(!familia){
-      setFamilia(modalData[3]);
-      console.log(familia);
-    }
-    if(!altura){
-      setAltura(modalData[4]);
-      console.log(altura);
-    }
-    if(!diametro){
-      setDiametro(modalData[5]);
-      console.log(diametro);
-    }
-    if(!copa){
-      setCopa(modalData[6]);
-      console.log(copa);
-    }
-    if(!corteza){
-      setCorteza(modalData[7]);
-      console.log(corteza+modalData[7]);
-    }
-    console.log("pasamos los if");
     e.preventDefault();
-    console.log("Entre a la funcion editar E");
+    setError('');
     try {
-        const data = await UpdateArbolE(familia, altura, diametro, copa, corteza ,IdArbol);
-        if(data.success){
-          console.log("SUCCESS");
-          setEditar(true);
-          //Alert succes  
-        }else{
-          setError(data.message);
-          console.log('Error al actualizar datos: ',error);
-        }
-        //Incompleta
+      const data = await UpdateArbolE(familia, altura, diametro, copa, corteza, IdArbol);
+      if (data.success) {
+        setEditar(true);
+      } else {
+        setError(data.message);
+      }
     } catch (error) {
-      console.log(error, " catch");
       setError('Error editar in. Please try again later.');
     }
   };
 
   const editarflor = async (e) => {
-    setError("");
-    //e.preventDefault();
-    console.log("Entre a la funcion editar");
+    e.preventDefault();
+    setError('');
     try {
-        const data = await UpdateArbolFlor(colorflor, tipoflor, epoca, IdArbol);
-        if(data.success){
-          console.log("SUCCESS");
-          setEditar(true);
-          //Alert succes  
-        }else{
-          setError(data.message);
-          console.log('Error al actualizar datos: ',error);
-        }
-        //Incompleta
+      const data = await UpdateArbolFlor(colorflor, tipoflor, epoca, IdArbol);
+      if (data.success) {
+        setEditar(true);
+      } else {
+        setError(data.message);
+      }
     } catch (error) {
-      console.log(error, " catch");
       setError('Error editar in. Please try again later.');
     }
   };
 
-
-  function openModal(){
-    setIsOpen(true);
-  }
-
-  function afterOpenModal() {
-    // references are now sync'd and can be accessed.
-    subtitle.style.color = '#f00';
-  }
-
-  function closeModal() {
-    setIsOpen(false);
-    
-  }
-
-    const renderDetailsButton = (params) => {
-      return (
-          <strong>
-              <Button
-                  variant="contained"
-                  size="small"
-                  style={{backgroundColor: verdeF  }}
-                  onClick={() => {
-                    navigate('/'+params.row.Nombre);
-                    console.log(params.row.Nombre)
-                  }}
-              >
-                  Mas info
-              </Button>
-          </strong>
-      )
+  const editarfruto = async (e) => {
+    e.preventDefault();
+    setError('');
+    try {
+      const data = await UpdateArbolFruto(tipofruto, forma, tamanio, colorfruto, IdArbol);
+      if (data.success) {
+        setEditar(true);
+      } else {
+        setError(data.message);
+      }
+    } catch (error) {
+      setError('Error editar in. Please try again later.');
     }
+  };
 
-    const renderEditarButton =  (params) => {
-        return (
-            <strong>
-                <Button
-                    style={{ backgroundColor: verdeF}}
-                    variant="contained"
-                    color= "secondary"
-                    size="small"
-                    onClick={async()=>{
-                      const res =  await axios.get("http://localhost:8800/nombres/"+params.row.IdArbol);
-                      setModalData(Object.values(res.data));
-                      setNombre(modalData[0]);
-                      setNombreCientifico(modalData[1]);
-                      setNombreComun(modalData[2]);
-                      setFamilia(modalData[3]);
-                      setAltura(modalData[4]);
-                      setDiametro(modalData[5]);
-                      setCopa(modalData[6]);
-                      setCorteza(modalData[7]);
-                      setColorflor(modalData[8]);
-                      setTipoflor(modalData[9]);
-                      setEpoca(modalData[10]);
-                      setTipoFruto(modalData[11]);
-                      setForma(modalData[12]);
-                      setTamanio(modalData[13]);
-                      setColorfruto(modalData[14]);
-                      setDistribucion(modalData[15]);
-                      setClima(modalData[16]);
-                      setAltitud(modalData[17]);
-                      setSuelo(modalData[18]);
-                      setTipohoja(modalData[19]);
-                      setLongitud(modalData[20]);
-                      setFollaje(modalData[21]);
-                      setMadera(modalData[22]);
-                      setForraje(modalData[23]);
-                      setMedicinal(modalData[24]);
-                      setOrna(modalData[25]);
-                      setIdArbol(params.row.IdArbol);
-                      console.log("1.Boton Editar: "+IdArbol)
-                      openModal();
-                    }}
-                >
-                    Editar
-                </Button>
-            </strong>
-        )
+  const editarhabitat = async (e) => {
+    e.preventDefault();
+    setError('');
+    try {
+      const data = await UpdateArbolHabitat(distribucion, clima, altitud, suelo, IdArbol);
+      if (data.success) {
+        setEditar(true);
+      } else {
+        setError(data.message);
       }
+    } catch (error) {
+      setError('Error editar in. Please try again later.');
+    }
+  };
 
-
-    const renderDeleteButton = (params) => {
-        return (
-            <strong>
-                <Button
-                    variant="outlined" 
-                    startIcon={<DeleteIcon />}
-                    color="error"
-                    size="small"
-                    //style={{ marginLeft: 16 }}
-                    onClick={() =>eliminar(params.row.IdArbol)}
-                >
-                    Eliminar
-                </Button>
-            </strong>
-        )
+  const editarhojas = async (e) => {
+    e.preventDefault();
+    setError('');
+    try {
+      const data = await UpdateArbolHojas(tipohoja, longitud, follaje, IdArbol);
+      if (data.success) {
+        setEditar(true);
+      } else {
+        setError(data.message);
       }
+    } catch (error) {
+      setError('Error editar in. Please try again later.');
+    }
+  };
 
+  const editarusos = async (e) => {
+    e.preventDefault();
+    setError('');
+    try {
+      const data = await UpdateArbolU(madera, forraje, medicinal, orna, IdArbol);
+      if (data.success) {
+        setEditar(true);
+      } else {
+        setError(data.message);
+      }
+    } catch (error) {
+      setError('Error editar in. Please try again later.');
+    }
+  };
 
-    const columns = [
-      { field: 'IdArbol', headerName: 'ID', width: 70 },
-      { field: 'Nombre', headerName: 'Nombre', width: 130 },
-      {
-        field: 'ButonVisualizar',
-        headerName: 'Visualizar',
-        width: 150,
-        renderCell: renderDetailsButton,
-        disableClickEventBubbling: true,
-      },
-      {
-        field: 'ButonEditar',
-        headerName: 'Editar',
-        width: 150,
-        renderCell: renderEditarButton,
-        disableClickEventBubbling: true,
-      },
-      {
-        field: 'ButonElimiar',
-        headerName: 'Eliminar',
-        width: 150,
-        renderCell: renderDeleteButton,
-        disableClickEventBubbling: true,
-      },
-    ];
+  const openModal = async (idArbol) => {
+    try {
+      const res = await axios.get("http://localhost:8800/nombres/"+idArbol);
+      const data = Object.values(res.data);
+      setModalData(data);
+      setNombre(data[0]);
+      setNombreCientifico(data[1]);
+      setNombreComun(data[2]);
+      setFamilia(data[3]);
+      setAltura(data[4]);
+      setDiametro(data[5]);
+      setCopa(data[6]);
+      setCorteza(data[7]);
+      setColorflor(data[8]);
+      setTipoflor(data[9]);
+      setEpoca(data[10]);
+      setTipoFruto(data[11]);
+      setForma(data[12]);
+      setTamanio(data[13]);
+      setColorfruto(data[14]);
+      setDistribucion(data[15]);
+      setClima(data[16]);
+      setAltitud(data[17]);
+      setSuelo(data[18]);
+      setTipohoja(data[19]);
+      setLongitud(data[20]);
+      setFollaje(data[21]);
+      setMadera(data[22]);
+      setForraje(data[23]);
+      setMedicinal(data[24]);
+      setOrna(data[25]);
+      setIdArbol(idArbol);
+      setIsOpen(true);
+    } catch (err) {
+      console.log('Error al abrir el modal: ' + err);
+    }
+  };
 
-    
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+
+  const renderDetailsButton = (params) => (
+    <strong>
+      <Button
+        variant="contained"
+        size="small"
+        style={{ backgroundColor: verdeF }}
+        onClick={() => navigate('/' + params.row.Nombre)}
+      >
+        Más info
+      </Button>
+    </strong>
+  );
+
+  const renderEditarButton = (params) => (
+    <strong>
+      <Button
+        style={{ backgroundColor: verdeF }}
+        variant="contained"
+        color="secondary"
+        size="small"
+        onClick={() => openModal(params.row.IdArbol)}
+      >
+        Editar
+      </Button>
+    </strong>
+  );
+
+  const renderDeleteButton = (params) => (
+    <strong>
+      <Button
+        variant="outlined"
+        startIcon={<DeleteIcon />}
+        color="error"
+        size="small"
+        onClick={() => eliminar(params.row.IdArbol)}
+      >
+        Eliminar
+      </Button>
+    </strong>
+  );
+
+  const columns = [
+    { field: 'IdArbol', headerName: 'ID', width: 70 },
+    { field: 'Nombre', headerName: 'Nombre', width: 130 },
+    {
+      field: 'ButonVisualizar',
+      headerName: 'Visualizar',
+      width: 150,
+      renderCell: renderDetailsButton,
+      disableClickEventBubbling: true,
+    },
+    {
+      field: 'ButonEditar',
+      headerName: 'Editar',
+      width: 150,
+      renderCell: renderEditarButton,
+      disableClickEventBubbling: true,
+    },
+    {
+      field: 'ButonEliminar',
+      headerName: 'Eliminar',
+      width: 150,
+      renderCell: renderDeleteButton,
+      disableClickEventBubbling: true,
+    },
+  ];
 
   return (
-      <>
-        <div style={{ height: 400, width: '60%'}}>
-          <DataGrid
-            rows={plantas}
-            getRowId={(plantas) => plantas.IdArbol}
-            columns={columns}
-            initialState={{
-              pagination: {
-                paginationModel: { page: 0, pageSize: 5 },
-              },
-            }}
-            pageSizeOptions={[5, 10]}
-            checkboxSelection
-          />
-        </div>
-        <Modal
+    <div style={{ height: 400, width: '50%' }}>
+      <DataGrid
+        rows={plantas}
+        columns={columns}
+        pageSize={5}
+        rowsPerPageOptions={[5]}
+        getRowId={(plantas) => plantas.IdArbol}
+      />
+      <Modal
         isOpen={modalIsOpen}
-        onAfterOpen={afterOpenModal}
         onRequestClose={closeModal}
         style={customStyles}
-        contentLabel="Example Modal"
+        contentLabel="Editar Modal"
       >
-        <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Editar: {modalData[0]} - {modalData[1]} </h2>
-        <button onClick={closeModal}>close</button>
-        <div>Selecciona la seccion que deseas modificar: </div>
-          <Stack spacing={2}>
-            <Box sx={{ width: '100%', typography: 'body1' }}>
-              <TabContext value={valueTab}>
-                <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                  <TabList onChange={handleChangeTab} aria-label="lab API tabs example">
-                    <Tab label="Nombres" value="1" />
-                    <Tab label="Especificaciones" value="2" />
-                    <Tab label="Flores" value="3" />
-                    <Tab label="Frutos" value="4" />
-                    <Tab label="Habitat" value="5" />
-                    <Tab label="Hojas" value="6" />
-                    <Tab label="Usos" value="7" />
-                  </TabList>
-                </Box>
-                <TabPanel value="1">
-                  <form onSubmit={editarnombres}>
-                    <Grid container spacing={2}>
-                      <Grid>
-                        <TextField 
-                              id="nombre" 
-                              label="Nombre" 
-                              variant="outlined" 
-                              defaultValue={modalData[0]} 
-                              helperText="Obligatorio" 
-                              onChange={(e) => setNombre(e.target.value)}
-                              required/>
-                      </Grid>
-                      <Grid>
-                        <TextField 
-                              id="nombrecie" 
-                              label="Nombre cientifico" 
-                              defaultValue={modalData[1]} 
-                              helperText="Obligatorio"
-                              onChange={(e) => setNombreCientifico(e.target.value)} 
-                              required/>
-                      </Grid>
-                      <Grid>
-                        <TextField 
-                              id="nombrecom"
-                              label="Nombre comun" 
-                              defaultValue={modalData[2]} 
-                              helperText="Obligatorio" 
-                              onChange={(e) => setNombreComun(e.target.value)} 
-                              required/>
-                      </Grid>
-                    </Grid>
-                    <Button
-                            type='submit'
-                            variant="contained" 
-                            endIcon={<SendIcon />}
-                            size="small"
-                            style={{ marginTop: 10 }}>
-                      Enviar
-                    </Button>
-                  </form>
-                </TabPanel>
-                <TabPanel value="2">
-                  <form onSubmit={editarespecif}>
-                    <Grid container spacing={2}>
-                      <Grid>
-                        <TextField 
-                            id="familia" 
-                            label="Familia" 
-                            variant="outlined" 
-                            defaultValue={modalData[3]} 
-                            helperText="Obligatorio" 
-                            onChange={(e) => setFamilia(e.target.value)}/>
-                      </Grid>
-                      <Grid>
-                        <TextField 
-                            id="altura" 
-                            label="Altura" 
-                            defaultValue={modalData[4]} 
-                            helperText="Obligatorio" 
-                            onChange={(e) => setAltura(e.target.value)} />
-                      </Grid>
-                      <Grid>
-                        <TextField 
-                            id="diametro" 
-                            label="Diametro tronco" 
-                            defaultValue={modalData[5]} 
-                            helperText="Obligatorio" 
-                            onChange={(e) => setDiametro(e.target.value)} />
-                      </Grid>
-                    </Grid>
-                    <Grid container spacing={2}>
-                      <Grid>
-                          <TextField 
-                              id="copa" 
-                              label="Copa" 
-                              defaultValue={modalData[6]} 
-                              helperText="Obligatorio" 
-                              onChange={(e) => setCopa(e.target.value)} />
-                      </Grid>
-                      <Grid>
-                        <TextField 
-                              id="corteza" 
-                              label="Corteza" 
-                              defaultValue={modalData[7]} 
-                              helperText="Obligatorio" 
-                              onChange={(e) => setCorteza(e.target.value)} />
-                      </Grid>
-                    </Grid>
-                    <Button
-                            type='submit'
-                            variant="contained" 
-                            endIcon={<SendIcon />}
-                            size="small"
-                            style={{ marginTop: 10 }}
-                        >
-                      Enviar
-                    </Button>
-                  </form>
-                </TabPanel>
-                <TabPanel value="3">
-                  <form onSubmit={editarflor}>
-                    <Grid container spacing={2}>
-                      <Grid>
-                        <TextField id="colorflor" label="Color" variant="outlined" defaultValue={modalData[8]} helperText="Obligatorio" onChange={(e) => setColorflor(e.target.value)}/>
-                      </Grid>
-                      <Grid>
-                        <TextField id="tipoflor" label="Tipo" defaultValue={modalData[9]} helperText="Obligatorio" onChange={(e) => setTipoflor(e.target.value)} />
-                      </Grid>
-                      <Grid>
-                        <TextField id="epoca" label="Epoca floracion" defaultValue={modalData[10]} helperText="Obligatorio" onChange={(e) => setEpoca(e.target.value)} />
-                      </Grid>
-                    </Grid>
-                    <Button
-                            type='submit'
-                            variant="contained" 
-                            endIcon={<SendIcon />}
-                            size="small"
-                            style={{ marginTop: 10 }}
-                        >
-                      Enviar
-                    </Button>
-                  </form>
-                </TabPanel>
-                <TabPanel value="4">
-                    <Grid container spacing={2}>
-                      <Grid>
-                        <TextField id="tipofruto" label="Tipo" variant="outlined" defaultValue={modalData[11]} helperText="Obligatorio" onChange={(e) => setNombre(e.target.value)}/>
-                      </Grid>
-                      <Grid>
-                        <TextField id="forma" label="Forma" defaultValue={modalData[12]} helperText="Obligatorio" onChange={(e) => setNombreCientifico(e.target.value)} />
-                      </Grid>
-                      <Grid>
-                        <TextField id="tamanio" label="Tamaño" defaultValue={modalData[13]} helperText="Obligatorio" onChange={(e) => setNombreComun(e.target.value)} />
-                      </Grid>
-                    </Grid>
-                    <Grid container spacing={2}>
-                      <Grid>
-                        <TextField id="colorfruto" label="Color" variant="outlined" defaultValue={modalData[14]} helperText="Obligatorio" onChange={(e) => setNombre(e.target.value)}/>
-                      </Grid>
-                    </Grid>
-                    <Button
-                            type='submit'
-                            variant="contained" 
-                            endIcon={<SendIcon />}
-                            size="small"
-                            style={{ marginTop: 10 }}
-                        >
-                      Enviar
-                    </Button>
-                </TabPanel>
-                <TabPanel value="5">
-                    <Grid container
-                        direction='column'
-                        spacing={2}>
-                      <Grid>
-                        <TextField fullWidth id="distribucion" label="Distribución" variant="outlined" defaultValue={modalData[15]} helperText="Obligatorio" onChange={(e) => setNombre(e.target.value)}/>
-                      </Grid>
-                      <Grid >
-                        <TextField fullWidth id="clima" label="Clima" variant="outlined" defaultValue={modalData[16]} helperText="Obligatorio" onChange={(e) => setNombre(e.target.value)}/>
-                      </Grid>
-                      <Grid>
-                        <TextField fullWidth id="altitud" label="Altitud" variant="outlined" defaultValue={modalData[17]} helperText="Obligatorio" onChange={(e) => setNombre(e.target.value)}/>
-                      </Grid>
-                      <Grid>
-                        <TextField fullWidth id="suelo" label="Suelo" variant="outlined" defaultValue={modalData[18]} helperText="Obligatorio" onChange={(e) => setNombre(e.target.value)}/>
-                      </Grid>
-                    </Grid>
-                    <Button
-                            type='submit'
-                            variant="contained" 
-                            endIcon={<SendIcon />}
-                            size="small"
-                            style={{ marginTop: 10 }}
-                        >
-                        Enviar
-                      </Button>
-                </TabPanel>
-                <TabPanel value="6">
-                <Grid container spacing={2}>
-                      <Grid>
-                        <TextField id="tipohoja" label="Tipo" variant="outlined" defaultValue={modalData[19]} helperText="Obligatorio" onChange={(e) => setNombre(e.target.value)}/>
-                      </Grid>
-                      <Grid>
-                        <TextField id="longitud" label="Longitud" defaultValue={modalData[20]} helperText="Obligatorio" onChange={(e) => setNombreCientifico(e.target.value)} />
-                      </Grid>
-                    </Grid>
-                    <Grid container direction='column' spacing={2}>
-                      <Grid>
-                        <TextField fullWidth id="follaje" label="Follaje" variant="outlined" defaultValue={modalData[21]} helperText="Obligatorio" onChange={(e) => setNombre(e.target.value)}/>
-                      </Grid>
-                    </Grid>
-                    <Button
-                            type='submit'
-                            variant="contained" 
-                            endIcon={<SendIcon />}
-                            size="small"
-                            style={{ marginTop: 10 }}
-                        >
-                      Enviar
-                    </Button>
-                </TabPanel>
-                <TabPanel value="7">
-                <Grid container
-                        direction='column'
-                        spacing={2}>
-                      <Grid>
-                        <TextField fullWidth id="madera" label="Madera" variant="outlined" defaultValue={modalData[22]} helperText="Obligatorio" onChange={(e) => setNombre(e.target.value)}/>
-                      </Grid>
-                      <Grid >
-                        <TextField fullWidth id="forraje" label="Forraje" variant="outlined" defaultValue={modalData[23]} helperText="Obligatorio" onChange={(e) => setNombre(e.target.value)}/>
-                      </Grid>
-                      <Grid>
-                        <TextField fullWidth id="medicinal" label="Medicinal" variant="outlined" defaultValue={modalData[24]} helperText="Obligatorio" onChange={(e) => setNombre(e.target.value)}/>
-                      </Grid>
-                      <Grid>
-                        <TextField fullWidth id="ornamental" label="Ornamental" variant="outlined" defaultValue={modalData[25]} helperText="Obligatorio" onChange={(e) => setNombre(e.target.value)}/>
-                      </Grid>
-                    </Grid>
-                    <Button
-                            type='submit'
-                            variant="contained" 
-                            endIcon={<SendIcon />}
-                            size="small"
-                            style={{ marginTop: 10 }}
-                        >
-                        Enviar
-                      </Button>
-                </TabPanel>
-              </TabContext>
+        <Box>
+          <h2>Editar información de {nombre}</h2>
+          <TabContext value={valueTab}>
+            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+              <TabList onChange={handleChangeTab} aria-label="tabs">
+                <Tab label="Nombres" value="1" />
+                <Tab label="Especificaciones" value="2" />
+                <Tab label="Flor" value="3" />
+                <Tab label="Fruto" value="4" />
+                <Tab label="Habitat" value="5" />
+                <Tab label="Hojas" value="6" />
+                <Tab label="Usos" value="7" />
+              </TabList>
             </Box>
-            
-          </Stack>
+            <TabPanel value="1">
+              <form onSubmit={editarnombres}>
+                <Stack direction="column" spacing={2}>
+                  <TextField
+                    label="Nombre"
+                    value={nombre}
+                    onChange={(e) => setNombre(e.target.value)}
+                    variant="outlined"
+                  />
+                  <TextField
+                    label="Nombre Cientifico"
+                    value={nombreCientifico}
+                    onChange={(e) => setNombreCientifico(e.target.value)}
+                    variant="outlined"
+                  />
+                  <TextField
+                    label="Nombre Comun"
+                    value={nombreComun}
+                    onChange={(e) => setNombreComun(e.target.value)}
+                    variant="outlined"
+                  />
+                  <Button variant="contained" type="submit" style={{ backgroundColor: verdeF }}>
+                    Editar Nombres
+                  </Button>
+                  {error && <p style={{ color: 'red' }}>{error}</p>}
+                </Stack>
+              </form>
+            </TabPanel>
+            <TabPanel value="2">
+              <form onSubmit={editarespecif}>
+                <Stack direction="column" spacing={2}>
+                  <TextField
+                    label="Familia"
+                    value={familia}
+                    onChange={(e) => setFamilia(e.target.value)}
+                    variant="outlined"
+                  />
+                  <TextField
+                    label="Altura"
+                    value={altura}
+                    onChange={(e) => setAltura(e.target.value)}
+                    variant="outlined"
+                  />
+                  <TextField
+                    label="Diametro"
+                    value={diametro}
+                    onChange={(e) => setDiametro(e.target.value)}
+                    variant="outlined"
+                  />
+                  <TextField
+                    label="Copa"
+                    value={copa}
+                    onChange={(e) => setCopa(e.target.value)}
+                    variant="outlined"
+                  />
+                  <TextField
+                    label="Corteza"
+                    value={corteza}
+                    onChange={(e) => setCorteza(e.target.value)}
+                    variant="outlined"
+                  />
+                  <Button variant="contained" type="submit" style={{ backgroundColor: verdeF }}>
+                    Editar Especificaciones
+                  </Button>
+                  {error && <p style={{ color: 'red' }}>{error}</p>}
+                </Stack>
+              </form>
+            </TabPanel>
+            <TabPanel value="3">
+              <form onSubmit={editarflor}>
+                <Stack direction="column" spacing={2}>
+                  <TextField
+                    label="Color Flor"
+                    value={colorflor}
+                    onChange={(e) => setColorflor(e.target.value)}
+                    variant="outlined"
+                  />
+                  <TextField
+                    label="Tipo Flor"
+                    value={tipoflor}
+                    onChange={(e) => setTipoflor(e.target.value)}
+                    variant="outlined"
+                  />
+                  <TextField
+                    label="Epoca"
+                    value={epoca}
+                    onChange={(e) => setEpoca(e.target.value)}
+                    variant="outlined"
+                  />
+                  <Button variant="contained" type="submit" style={{ backgroundColor: verdeF }}>
+                    Editar Flor
+                  </Button>
+                  {error && <p style={{ color: 'red' }}>{error}</p>}
+                </Stack>
+              </form>
+            </TabPanel>
+            <TabPanel value="4">
+              <form onSubmit={editarfruto}>
+                <Stack direction="column" spacing={2}>
+                  <TextField
+                    label="Tipo"
+                    value={tipofruto}
+                    onChange={(e) => setTipoFruto(e.target.value)}
+                    variant="outlined"
+                  />
+                  <TextField
+                    label="Forma"
+                    value={forma}
+                    onChange={(e) => setForma(e.target.value)}
+                    variant="outlined"
+                  />
+                  <TextField
+                    label="Tamaño"
+                    value={tamanio}
+                    onChange={(e) => setTamanio(e.target.value)}
+                    variant="outlined"
+                  />
+                  <TextField
+                    label="Color"
+                    value={colorfruto}
+                    onChange={(e) => setColorfruto(e.target.value)}
+                    variant="outlined"
+                  />
+                  <Button variant="contained" type="submit" style={{ backgroundColor: verdeF }}>
+                    Editar Fruto
+                  </Button>
+                  {error && <p style={{ color: 'red' }}>{error}</p>}
+                </Stack>
+              </form>
+            </TabPanel>
+            <TabPanel value="5">
+              <form onSubmit={editarhabitat}>
+                <Stack direction="column" spacing={2}>
+                  <TextField
+                    label="Distribución"
+                    value={distribucion}
+                    onChange={(e) => setDistribucion(e.target.value)}
+                    variant="outlined"
+                  />
+                  <TextField
+                    label="Clima"
+                    value={clima}
+                    onChange={(e) => setClima(e.target.value)}
+                    variant="outlined"
+                  />
+                  <TextField
+                    label="Altitud"
+                    value={altitud}
+                    onChange={(e) => setAltitud(e.target.value)}
+                    variant="outlined"
+                  />
+                  <TextField
+                    label="Suelo"
+                    value={suelo}
+                    onChange={(e) => setSuelo(e.target.value)}
+                    variant="outlined"
+                  />
+                  <Button variant="contained" type="submit" style={{ backgroundColor: verdeF }}>
+                    Editar Habitat
+                  </Button>
+                  {error && <p style={{ color: 'red' }}>{error}</p>}
+                </Stack>
+              </form>
+            </TabPanel>
+            <TabPanel value="6">
+              <form onSubmit={editarhojas}>
+                <Stack direction="column" spacing={2}>
+                  <TextField
+                    label="Tipo"
+                    value={tipohoja}
+                    onChange={(e) => setTipohoja(e.target.value)}
+                    variant="outlined"
+                  />
+                  <TextField
+                    label="Longitud"
+                    value={longitud}
+                    onChange={(e) => setLongitud(e.target.value)}
+                    variant="outlined"
+                  />
+                  <TextField
+                    label="Follaje"
+                    value={follaje}
+                    onChange={(e) => setFollaje(e.target.value)}
+                    variant="outlined"
+                  />
+                  <Button variant="contained" type="submit" style={{ backgroundColor: verdeF }}>
+                    Editar Hoja
+                  </Button>
+                  {error && <p style={{ color: 'red' }}>{error}</p>}
+                </Stack>
+              </form>
+            </TabPanel>
+            <TabPanel value="7">
+              <form onSubmit={editarusos}>
+                <Stack direction="column" spacing={2}>
+                  <TextField
+                    label="Madera"
+                    value={madera}
+                    onChange={(e) => setMadera(e.target.value)}
+                    variant="outlined"
+                  />
+                  <TextField
+                    label="Forraje"
+                    value={forraje}
+                    onChange={(e) => setForraje(e.target.value)}
+                    variant="outlined"
+                  />
+                  <TextField
+                    label="Medicinal"
+                    value={medicinal}
+                    onChange={(e) => setMedicinal(e.target.value)}
+                    variant="outlined"
+                  />
+                  <TextField
+                    label="Ornamento"
+                    value={orna}
+                    onChange={(e) => setOrna(e.target.value)}
+                    variant="outlined"
+                  />
+                  <Button variant="contained" type="submit" style={{ backgroundColor: verdeF }}>
+                    Editar Usos
+                  </Button>
+                  {error && <p style={{ color: 'red' }}>{error}</p>}
+                </Stack>
+              </form>
+            </TabPanel>
+          </TabContext>
+        </Box>
       </Modal>
-
-      </>
+    </div>
   );
 }
