@@ -60,13 +60,13 @@ const FormNuevoArbol = (props) => {
     return(
         <div style={{width:'50%',}}>
             <form onSubmit={handleOnSubmit}>
-                <Grid  container direction="column" p={3}>
+                <Grid  container direction="column" p={5} spacing={5} >
                 <TextField
+                    style={{marginBottom:15}}
                     type='text' 
                     id="nombre" 
                     label="Nombre" 
                     variant="outlined" 
-                    
                     size='small'
                     value={arbol.nombre}
                     onChange={handleChange} required 
@@ -76,7 +76,7 @@ const FormNuevoArbol = (props) => {
                     id="nombrecie" 
                     label="Nombre cientifico" 
                     variant="outlined" 
-                    
+                    style={{marginBottom:15}}
                     size='small'
                     value={arbol.nombrecie}
                     onChange={handleChange} required 
@@ -86,18 +86,18 @@ const FormNuevoArbol = (props) => {
                     id="nombrecom" 
                     label="Nombre comun" 
                     variant="outlined" 
-                    
+                    style={{marginBottom:15}}
                     size='small'
                     value={arbol.nombrecom}
                     onChange={handleChange} required 
                   />
-                <p>Seccion especificaciones</p>
+                <p>Sección especificaciones</p>
                 <TextField
                     type='text' 
                     id="familia" 
                     label="Familia" 
                     variant="outlined" 
-                    
+                    style={{marginBottom:15}}
                     size='small'
                     value={arbol.familia}
                     onChange={handleChange} required
@@ -107,7 +107,7 @@ const FormNuevoArbol = (props) => {
                     id="altura" 
                     label="Altura" 
                     variant="outlined" 
-                    
+                    style={{marginBottom:15}}
                     size='small'
                     value={arbol.altura}
                     onChange={handleChange} required
@@ -117,7 +117,7 @@ const FormNuevoArbol = (props) => {
                     id="diametro" 
                     label="Diametro tronco" 
                     variant="outlined" 
-                    
+                    style={{marginBottom:15}}
                     size='small'
                     value={arbol.diametro}
                     onChange={handleChange} required
@@ -127,7 +127,7 @@ const FormNuevoArbol = (props) => {
                     id="copa" 
                     label="Copa" 
                     variant="outlined" 
-                    
+                    style={{marginBottom:15}}
                     size='small'
                     value={arbol.copa}
                     onChange={handleChange} required
@@ -137,18 +137,18 @@ const FormNuevoArbol = (props) => {
                     id="corteza" 
                     label="Corteza" 
                     variant="outlined" 
-                    
+                    style={{marginBottom:15}}
                     size='small'
                     value={arbol.corteza}
                     onChange={handleChange} required
                 />
-                <p>Seccion frutas</p>
+                <p>Sección frutas</p>
                 <TextField
                     type='text' 
                     id="tipo_fruta" 
                     label="Tipo" 
                     variant="outlined" 
-                    
+                    style={{marginBottom:15}}
                     size='small'
                     value={arbol.tipo_fruta}
                     onChange={handleChange} required
@@ -158,7 +158,7 @@ const FormNuevoArbol = (props) => {
                     id="forma" 
                     label="Forma" 
                     variant="outlined" 
-                    
+                    style={{marginBottom:15}}
                     size='small'
                     value={arbol.forma}
                     onChange={handleChange} required
@@ -168,7 +168,7 @@ const FormNuevoArbol = (props) => {
                     id="tamanio" 
                     label="Tamaño" 
                     variant="outlined" 
-                    
+                    style={{marginBottom:15}}
                     size='small'
                     value={arbol.tamanio}
                     onChange={handleChange} required
@@ -178,18 +178,18 @@ const FormNuevoArbol = (props) => {
                     id="color_fruta" 
                     label="Color" 
                     variant="outlined" 
-                    
+                    style={{marginBottom:15}}
                     size='small'
                     value={arbol.color_fruta}
                     onChange={handleChange} required
                 />
-                <p>Seccion hojas</p>
+                <p>Sección hojas</p>
                 <TextField
                     type='text' 
                     id="tipo_hoja" 
                     label="Tipo" 
                     variant="outlined" 
-                    
+                    style={{marginBottom:15}}
                     size='small'
                     value={arbol.tipo_hoja}
                     onChange={handleChange} required
@@ -199,7 +199,7 @@ const FormNuevoArbol = (props) => {
                     id="longitud" 
                     label="Longitud" 
                     variant="outlined" 
-                    
+                    style={{marginBottom:15}}
                     size='small'
                     value={arbol.longitud}
                     onChange={handleChange} required
@@ -209,18 +209,18 @@ const FormNuevoArbol = (props) => {
                     id="follaje" 
                     label="Follaje" 
                     variant="outlined" 
-                    
+                    style={{marginBottom:15}}
                     size='small'
                     value={arbol.follaje}
                     onChange={handleChange} required
                 />
-                <p>Seccion flores</p>
+                <p>Sección flores</p>
                 <TextField
                     type='text' 
                     id="color_flor" 
                     label="Color" 
                     variant="outlined" 
-                    
+                    style={{marginBottom:15}}
                     size='small'
                     value={arbol.color_flor}
                     onChange={handleChange} required
@@ -230,7 +230,7 @@ const FormNuevoArbol = (props) => {
                     id="tipo_flor" 
                     label="Tipo" 
                     variant="outlined" 
-                    
+                    style={{marginBottom:15}}
                     size='small'
                     value={arbol.tipo_flor}
                     onChange={handleChange} required
@@ -240,18 +240,18 @@ const FormNuevoArbol = (props) => {
                     id="epoca" 
                     label="Epoca floracion" 
                     variant="outlined" 
-                    
+                    style={{marginBottom:15}}
                     size='small'
                     value={arbol.epoca}
                     onChange={handleChange} required
                 />
-                <p>Seccion habitat</p>
+                <p>Sección habitat</p>
                 <TextField
                     type='text' 
                     id="distribucion" 
                     label="Distribucion" 
                     variant="outlined" 
-                    
+                    style={{marginBottom:15}}
                     size='small'
                     value={arbol.distribucion}
                     onChange={handleChange} required
@@ -261,7 +261,7 @@ const FormNuevoArbol = (props) => {
                     id="clima" 
                     label="Clima" 
                     variant="outlined" 
-                    
+                    style={{marginBottom:15}}
                     size='small'
                     value={arbol.clima}
                     onChange={handleChange} required
@@ -271,7 +271,7 @@ const FormNuevoArbol = (props) => {
                     id="altitud" 
                     label="Altitud" 
                     variant="outlined" 
-                    
+                    style={{marginBottom:15}}
                     size='small'
                     value={arbol.altitud}
                     onChange={handleChange} required
@@ -281,18 +281,18 @@ const FormNuevoArbol = (props) => {
                     id="suelo" 
                     label="Suelo" 
                     variant="outlined" 
-                    
+                    style={{marginBottom:15}}
                     size='small'
                     value={arbol.suelo}
                     onChange={handleChange} required
                 />
-                <p>Seccion usos</p>
+                <p>Sección usos</p>
                 <TextField
                     type='text' 
                     id="madera" 
                     label="Madera" 
                     variant="outlined" 
-                    
+                    style={{marginBottom:15}}
                     size='small'
                     value={arbol.madera}
                     onChange={handleChange} required
@@ -302,7 +302,7 @@ const FormNuevoArbol = (props) => {
                     id="forraje" 
                     label="Forraje" 
                     variant="outlined" 
-                    
+                    style={{marginBottom:15}}
                     size='small'
                     value={arbol.forraje}
                     onChange={handleChange} required
@@ -312,7 +312,7 @@ const FormNuevoArbol = (props) => {
                     id="medicinal" 
                     label="Medicinal" 
                     variant="outlined" 
-                    
+                    style={{marginBottom:15}}
                     size='small'
                     value={arbol.medicinal}
                     onChange={handleChange} required
@@ -322,7 +322,7 @@ const FormNuevoArbol = (props) => {
                     id="ornamental" 
                     label="Ornamental" 
                     variant="outlined" 
-                    
+                    style={{marginBottom:15}}
                     size='small'
                     value={arbol.ornamental}
                     onChange={handleChange} required
