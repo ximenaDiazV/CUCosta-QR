@@ -5,10 +5,6 @@ import jwt from "jsonwebtoken"
 import dotenv from "dotenv"
 import path from "path"; 
 import { fileURLToPath } from 'url';
-import { faMillSign } from "@fortawesome/free-solid-svg-icons"
-import { ViewKanban } from "@mui/icons-material"
-import { or } from "sequelize"
-
 dotenv.config();
 
 const app = express()

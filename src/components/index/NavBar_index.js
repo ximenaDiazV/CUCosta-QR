@@ -15,13 +15,14 @@ import {
     Icon,
     IconClose,
 } from "./NavBar_Elements";
+import {SearchResults} from "./SearchResults"
 import Modal from "react-modal";
 import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
 import {login} from './Auth'
 import { useNavigate } from "react-router-dom";
 import Alert from '@mui/material/Alert';
 
-const Navbar = ({ setUser, setToken, user}) => {
+const Navbar = ({ setUser, setToken, user, plants}) => {
 
     const navigate = useNavigate();
     //User
@@ -33,6 +34,26 @@ const Navbar = ({ setUser, setToken, user}) => {
     const [isOpenDropdown, setIsOpenDropdown] = useState(false);
     const menuRef = useRef(null);
     const [icon, setIcon] = useState(TiArrowSortedDown);
+    
+    //Buscador
+    const [input,setInput] = useState("");
+    const [results, setResults] = useState([]);
+
+    const fetchData = (value)=>{
+        fetch('http://localhost:8800/plantas')
+            .then((response) => response.json())
+            .then((json) => {
+                const resultsj  = json.filter((planta) => {
+                    return (value && planta && planta.Nombre && planta.Nombre.toLowerCase().includes(value)); 
+                });
+                setResults(resultsj);
+            });             
+    };
+
+    const handleChange = (value) => {
+        setInput(value);
+        fetchData(value);
+    }
     
     const toggleMenuDropdown = () => {
         setIsOpenDropdown(!isOpenDropdown);
@@ -126,14 +147,15 @@ const Navbar = ({ setUser, setToken, user}) => {
                 <Logo to="/">
                     <img src="/logoCUC.png" alt="Logo" />
                 </Logo>
-
+                <div style={{flexDirection:'column'}}>
                 <SearchBarWrapper>
-                    <SearchBar type="text" placeholder="Buscar..." />
+                    <SearchBar type="text" placeholder="Buscar..."  value={input}  onChange={(e)=>handleChange(e.target.value)}/>
                     <SearchIcon>
                         <img src="/lupa.png" alt="SearchIcon" />
                     </SearchIcon>
                 </SearchBarWrapper>
-
+                <SearchResults results={results}/>
+                </div>
                 <NavMenu>
                     <div ref={menuRef}>
                         <NavBtnLink to="#" onClick={toggleMenuDropdown} >

@@ -56,7 +56,7 @@ function App() {
 
     return (
         <Router>
-            <Navbar setUser={setUser}  setToken={setToken} user={user} />
+            <Navbar setUser={setUser}  setToken={setToken} user={user} plantas={plants}/>
             <Routes>
                 <Route path="/" element={<Principal />} />
                 <Route path="/acerca" element={<Acerca />} />

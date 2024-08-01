@@ -66,7 +66,7 @@ const FormNuevoArbol = (props) => {
                     id="nombre" 
                     label="Nombre" 
                     variant="outlined" 
-                    helperText="Obligatorio"
+                    
                     size='small'
                     value={arbol.nombre}
                     onChange={handleChange} required 
@@ -76,7 +76,7 @@ const FormNuevoArbol = (props) => {
                     id="nombrecie" 
                     label="Nombre cientifico" 
                     variant="outlined" 
-                    helperText="Obligatorio"
+                    
                     size='small'
                     value={arbol.nombrecie}
                     onChange={handleChange} required 
@@ -86,7 +86,7 @@ const FormNuevoArbol = (props) => {
                     id="nombrecom" 
                     label="Nombre comun" 
                     variant="outlined" 
-                    helperText="Obligatorio"
+                    
                     size='small'
                     value={arbol.nombrecom}
                     onChange={handleChange} required 
@@ -97,7 +97,7 @@ const FormNuevoArbol = (props) => {
                     id="familia" 
                     label="Familia" 
                     variant="outlined" 
-                    helperText="Obligatorio"
+                    
                     size='small'
                     value={arbol.familia}
                     onChange={handleChange} required
@@ -107,7 +107,7 @@ const FormNuevoArbol = (props) => {
                     id="altura" 
                     label="Altura" 
                     variant="outlined" 
-                    helperText="Obligatorio"
+                    
                     size='small'
                     value={arbol.altura}
                     onChange={handleChange} required
@@ -117,7 +117,7 @@ const FormNuevoArbol = (props) => {
                     id="diametro" 
                     label="Diametro tronco" 
                     variant="outlined" 
-                    helperText="Obligatorio"
+                    
                     size='small'
                     value={arbol.diametro}
                     onChange={handleChange} required
@@ -127,7 +127,7 @@ const FormNuevoArbol = (props) => {
                     id="copa" 
                     label="Copa" 
                     variant="outlined" 
-                    helperText="Obligatorio"
+                    
                     size='small'
                     value={arbol.copa}
                     onChange={handleChange} required
@@ -137,7 +137,7 @@ const FormNuevoArbol = (props) => {
                     id="corteza" 
                     label="Corteza" 
                     variant="outlined" 
-                    helperText="Obligatorio"
+                    
                     size='small'
                     value={arbol.corteza}
                     onChange={handleChange} required
@@ -148,7 +148,7 @@ const FormNuevoArbol = (props) => {
                     id="tipo_fruta" 
                     label="Tipo" 
                     variant="outlined" 
-                    helperText="Obligatorio"
+                    
                     size='small'
                     value={arbol.tipo_fruta}
                     onChange={handleChange} required
@@ -158,7 +158,7 @@ const FormNuevoArbol = (props) => {
                     id="forma" 
                     label="Forma" 
                     variant="outlined" 
-                    helperText="Obligatorio"
+                    
                     size='small'
                     value={arbol.forma}
                     onChange={handleChange} required
@@ -168,7 +168,7 @@ const FormNuevoArbol = (props) => {
                     id="tamanio" 
                     label="Tamaño" 
                     variant="outlined" 
-                    helperText="Obligatorio"
+                    
                     size='small'
                     value={arbol.tamanio}
                     onChange={handleChange} required
@@ -178,7 +178,7 @@ const FormNuevoArbol = (props) => {
                     id="color_fruta" 
                     label="Color" 
                     variant="outlined" 
-                    helperText="Obligatorio"
+                    
                     size='small'
                     value={arbol.color_fruta}
                     onChange={handleChange} required
@@ -189,7 +189,7 @@ const FormNuevoArbol = (props) => {
                     id="tipo_hoja" 
                     label="Tipo" 
                     variant="outlined" 
-                    helperText="Obligatorio"
+                    
                     size='small'
                     value={arbol.tipo_hoja}
                     onChange={handleChange} required
@@ -199,7 +199,7 @@ const FormNuevoArbol = (props) => {
                     id="longitud" 
                     label="Longitud" 
                     variant="outlined" 
-                    helperText="Obligatorio"
+                    
                     size='small'
                     value={arbol.longitud}
                     onChange={handleChange} required
@@ -209,7 +209,7 @@ const FormNuevoArbol = (props) => {
                     id="follaje" 
                     label="Follaje" 
                     variant="outlined" 
-                    helperText="Obligatorio"
+                    
                     size='small'
                     value={arbol.follaje}
                     onChange={handleChange} required
@@ -220,7 +220,7 @@ const FormNuevoArbol = (props) => {
                     id="color_flor" 
                     label="Color" 
                     variant="outlined" 
-                    helperText="Obligatorio"
+                    
                     size='small'
                     value={arbol.color_flor}
                     onChange={handleChange} required
@@ -230,7 +230,7 @@ const FormNuevoArbol = (props) => {
                     id="tipo_flor" 
                     label="Tipo" 
                     variant="outlined" 
-                    helperText="Obligatorio"
+                    
                     size='small'
                     value={arbol.tipo_flor}
                     onChange={handleChange} required
@@ -240,7 +240,7 @@ const FormNuevoArbol = (props) => {
                     id="epoca" 
                     label="Epoca floracion" 
                     variant="outlined" 
-                    helperText="Obligatorio"
+                    
                     size='small'
                     value={arbol.epoca}
                     onChange={handleChange} required
@@ -251,7 +251,7 @@ const FormNuevoArbol = (props) => {
                     id="distribucion" 
                     label="Distribucion" 
                     variant="outlined" 
-                    helperText="Obligatorio"
+                    
                     size='small'
                     value={arbol.distribucion}
                     onChange={handleChange} required
@@ -261,7 +261,7 @@ const FormNuevoArbol = (props) => {
                     id="clima" 
                     label="Clima" 
                     variant="outlined" 
-                    helperText="Obligatorio"
+                    
                     size='small'
                     value={arbol.clima}
                     onChange={handleChange} required
@@ -271,7 +271,7 @@ const FormNuevoArbol = (props) => {
                     id="altitud" 
                     label="Altitud" 
                     variant="outlined" 
-                    helperText="Obligatorio"
+                    
                     size='small'
                     value={arbol.altitud}
                     onChange={handleChange} required
@@ -281,7 +281,7 @@ const FormNuevoArbol = (props) => {
                     id="suelo" 
                     label="Suelo" 
                     variant="outlined" 
-                    helperText="Obligatorio"
+                    
                     size='small'
                     value={arbol.suelo}
                     onChange={handleChange} required
@@ -292,7 +292,7 @@ const FormNuevoArbol = (props) => {
                     id="madera" 
                     label="Madera" 
                     variant="outlined" 
-                    helperText="Obligatorio"
+                    
                     size='small'
                     value={arbol.madera}
                     onChange={handleChange} required
@@ -302,7 +302,7 @@ const FormNuevoArbol = (props) => {
                     id="forraje" 
                     label="Forraje" 
                     variant="outlined" 
-                    helperText="Obligatorio"
+                    
                     size='small'
                     value={arbol.forraje}
                     onChange={handleChange} required
@@ -312,7 +312,7 @@ const FormNuevoArbol = (props) => {
                     id="medicinal" 
                     label="Medicinal" 
                     variant="outlined" 
-                    helperText="Obligatorio"
+                    
                     size='small'
                     value={arbol.medicinal}
                     onChange={handleChange} required
@@ -322,7 +322,7 @@ const FormNuevoArbol = (props) => {
                     id="ornamental" 
                     label="Ornamental" 
                     variant="outlined" 
-                    helperText="Obligatorio"
+                    
                     size='small'
                     value={arbol.ornamental}
                     onChange={handleChange} required
